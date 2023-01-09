@@ -24,18 +24,20 @@ class CategoryResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([]);
+            ->schema([
+
+            ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
+                TextColumn::make('team.name'),
+                TextColumn::make('categoryType.name')
             ])
             ->filters([
-                Filter::make('category_type_id')->default()
-                    ->query(fn (Builder $query): Builder => $query->where('category_type_id', auth()->user()->id)),
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
