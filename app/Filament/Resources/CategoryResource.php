@@ -61,8 +61,13 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('team.name'),
-                TextColumn::make('categoryType.name')->searchable()->sortable(),
+                TextColumn::make('categoryType.name')
+                    ->label('Categoría')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('players_count')
+                    ->label('Jugadores en plantilla')
+                    ->counts('players'),
             ])
             ->filters([])
             ->actions([
@@ -76,7 +81,6 @@ class CategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
         ];
     }
 
