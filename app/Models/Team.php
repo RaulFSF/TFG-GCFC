@@ -27,6 +27,10 @@ class Team extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function categories(){
+        return $this->hasMany(Category::class,);
+    }
+
     protected function shieldUrl(): Attribute {
         return Attribute::make(
             get: fn () => Storage::url($this->shield_url),

@@ -12,6 +12,7 @@ class Player extends Model
     protected $fillable = [
         'user_id',
         'category_id',
+        'team_id',
         'history',
     ];
 
@@ -20,10 +21,14 @@ class Player extends Model
     ];
 
     public function user(){
-        return $this->belongsTo('User');
+        return $this->belongsTo(User::class);
     }
-    
+
+    public function team(){
+        return $this->belongsTo(Team::class);
+    }
+
     public function category(){
-        return $this->belongsTo('Category');
+        return $this->belongsTo(Category::class);
     }
 }

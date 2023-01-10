@@ -49,4 +49,17 @@ class User extends Authenticatable implements FilamentUser
     {
         return ($this->role === 'admin' || $this->role === 'president');
     }
+
+    public static function coach($count)
+    {
+        for ($i = 1; $i <= $count; $i++) {
+            User::create([
+                'name' => fake()->name(),
+                'email' => fake()->unique()->safeEmail(),
+                'email_verified_at' => now(),
+                'password' => bcrypt('1234'), // password
+                'role' => 'coach',
+            ]);
+        };
+    }
 }

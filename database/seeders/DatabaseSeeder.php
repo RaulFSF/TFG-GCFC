@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             TeamSeeder::class,
             CategoryTypeSeeder::class,
             CategorySeeder::class,
+            PlayerSeeder::class,
         ]);
     }
 }

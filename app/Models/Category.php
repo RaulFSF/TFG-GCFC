@@ -25,6 +25,10 @@ class Category extends Model
         return $this->belongsTo(Team::class);
     }
 
+    public function players(){
+        return $this->hasMany(Player::class);
+    }
+
     public function categoryType(){
         return $this->belongsTo(CategoryType::class);
     }
@@ -32,7 +36,6 @@ class Category extends Model
     protected static function booted()
     {
         static::addGlobalScope('owner', function (Builder $builder) {
-            $team = Team::where('administrator_id', auth()->user()->id)->first();
             $builder->where('team_id',  Team::where('administrator_id', auth()->user()->id)->first()['id']);
         });
     }

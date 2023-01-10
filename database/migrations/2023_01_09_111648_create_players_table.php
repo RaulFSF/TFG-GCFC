@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('players', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('category_id');
+            $table->foreignId('category_id')->nullable();
+            $table->foreignId('team_id');
             $table->json('history')->nullable();
             $table->timestamps();
         });
