@@ -38,7 +38,7 @@ class CategoryTypeResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label('Categorías')
+                    ->label('Categorías'),
             ])
             ->filters([
                 //

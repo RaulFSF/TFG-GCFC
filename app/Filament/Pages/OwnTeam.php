@@ -12,9 +12,16 @@ use Filament\Resources\Table;
 
 class OwnTeam extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'heroicon-o-pencil';
 
     protected static string $view = 'filament.pages.own-team';
+
+    protected static ?string $title = 'Información';
+
+    protected static ?string $navigationLabel = 'Información del club';
+
+    protected static string $pluralLabel = 'Información del club';
+
 
     protected static function shouldRegisterNavigation(): bool
     {
@@ -58,6 +65,5 @@ class OwnTeam extends Page
         $this->team['shield'] = $this->shield;
 
         $this->team->save();
-
     }
 }

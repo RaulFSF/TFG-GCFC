@@ -21,23 +21,28 @@ class Category extends Model
         'players' => 'array',
     ];
 
-    public function team(){
+    public function team()
+    {
         return $this->belongsTo(Team::class);
     }
 
-    public function players(){
+    public function players()
+    {
         return $this->hasMany(Player::class);
     }
 
-    public function categoryType(){
+    public function categoryType()
+    {
         return $this->belongsTo(CategoryType::class);
     }
 
     protected static function booted()
     {
-        static::addGlobalScope('owner', function (Builder $builder) {
-            $builder->where('team_id',  Team::where('administrator_id', auth()->user()->id)->first()['id']);
-        });
+        $user = User::where('id', auth()->id())->first();
+        if ($user->role !== 'admin') {
+            static::addGlobalScope('owner', function (Builder $builder) {
+                $builder->where('team_id',  Team::where('administrator_id', auth()->user()->id)->first()['id']);
+            });
+        }
     }
-
 }

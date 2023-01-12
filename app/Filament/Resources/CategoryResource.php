@@ -10,6 +10,7 @@ use App\Models\Player;
 use App\Models\Team;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Pages\Actions;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Resources\Form;
@@ -23,6 +24,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class CategoryResource extends Resource
 {
@@ -37,20 +39,25 @@ class CategoryResource extends Resource
         foreach ($categories as $category) {
             array_push($team_category_types, $category);
         };
+
+        // dd(Player::where('category_id', null)
+        // ->where('team_id', Team::where('administrator_id', auth()->user()->id)->first()['id'])->get()->pluck('user.name', 'user_id')->toArray());
+        // $options = Player::where('category_id', null)->where('team_id', Team::where('administrator_id', auth()->user()->id)->first()['id'])->get()->pluck('user.name', 'user_id')->toArray();
         return $form
             ->schema([
                 Select::make('category_type_id')
                     ->options(
                         CategoryType::whereNotIn('id', $team_category_types)->get()->pluck('name', 'id')
-                        )
+                    )
                     ->hiddenOn('edit')
                     ->preload(),
-                Select::make('players')
-                    ->multiple()
-                    ->options(Player::where('team_id', Team::where('administrator_id', auth()->user()->id)->first()['id'])->get()->pluck('user.name', 'user_id')->toArray())
-                    ->preload()
-                    ->searchable()
-                    ->columnSpan('full'),
+                // Select::make('players')
+                //     ->multiple()
+                //     ->relationship('players', '')
+                //     ->options($options)
+                //     ->preload()
+                //     ->searchable()
+                //     ->columnSpan('full'),
                 // Select::make('coach')
                 //     ->options(User::where('role', 'coach')->pluck('name', 'id'))
                 //     ->disablePlaceholderSelection(),
@@ -72,15 +79,22 @@ class CategoryResource extends Resource
             ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('hola')->action('hola')->icon('heroicon-s-x-circle')->color('danger'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
+    public function hola(): void
+    {
+        dd('hola');
+    }
+
     public static function getRelations(): array
     {
         return [
+            RelationManagers\PlayersRelationManager::class,
         ];
     }
 

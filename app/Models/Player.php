@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,4 +32,15 @@ class Player extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
+
+    protected static function booted()
+    {
+        $user = User::where('id', auth()->id())->first();
+        if($user->role != 'admin'){
+            static::addGlobalScope('owner', function (Builder $builder) {
+                 $builder->where('team_id',  Team::where('administrator_id', auth()->user()->id)->first()['id']);
+            });
+        };
+    }
+
 }
