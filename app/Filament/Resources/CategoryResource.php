@@ -79,16 +79,10 @@ class CategoryResource extends Resource
             ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\Action::make('hola')->action('hola')->icon('heroicon-s-x-circle')->color('danger'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }
-
-    public function hola(): void
-    {
-        dd('hola');
     }
 
     public static function getRelations(): array

@@ -17,14 +17,8 @@ class EditCategory extends EditRecord
     protected function getActions(): array
     {
         return [
-            Actions\Action::make('hola')->action('hola'),
             Actions\DeleteAction::make(),
         ];
-    }
-
-    public function hola(): void
-    {
-        dd('hola');
     }
 
     protected function handleRecordUpdate(Model $record, array $data): Model

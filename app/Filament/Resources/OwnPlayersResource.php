@@ -24,6 +24,10 @@ class OwnPlayersResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Jugadores';
 
+    protected static ?string $modelLabel = 'jugador';
+
+
+
 
     public static function form(Form $form): Form
     {
@@ -48,6 +52,7 @@ class OwnPlayersResource extends Resource
                     ->label('Categoría'),
                 TextColumn::make('team.name')
                     ->searchable()
+                    ->default('Sin equipo')
                     ->sortable()
                     ->visible(auth()->user()->role==='admin'),
             ])
@@ -57,7 +62,11 @@ class OwnPlayersResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()->visible(auth()->user()->role==='admin'),
-
+                Tables\Actions\Action::make('eliminar del club')
+                    ->action(function (Player $record) : void {
+                        $record->team_id = null;
+                        $record->save();
+                })->icon('heroicon-s-x-circle')->color('danger')->visible(auth()->user()->role==='president'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
