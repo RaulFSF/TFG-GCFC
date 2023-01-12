@@ -28,7 +28,11 @@ class Team extends Model
     }
 
     public function categories(){
-        return $this->hasMany(Category::class,);
+        return $this->hasMany(Category::class);
+    }
+
+    public function players(){
+        return $this->hasMany(Player::class);
     }
 
     protected function shieldUrl(): Attribute {

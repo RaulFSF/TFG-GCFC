@@ -20,7 +20,7 @@ class OwnPlayersResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
-    protected static ?string $navigationLabel = 'Jugadores del club';
+    protected static ?string $navigationLabel = 'Jugadores';
 
     protected static ?string $pluralModelLabel = 'Jugadores';
 
@@ -41,7 +41,7 @@ class OwnPlayersResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('user.name')
+                TextColumn::make('name')
                     ->searchable()
                     ->sortable()
                     ->label('Nombre de jugador'),
@@ -51,6 +51,7 @@ class OwnPlayersResource extends Resource
                     ->label('Categoría'),
                 TextColumn::make('team.name')
                     ->searchable()
+                    ->label('Equipo')
                     ->default('Sin equipo')
                     ->sortable()
                     ->visible(auth()->user()->role==='admin'),

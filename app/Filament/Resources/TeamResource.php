@@ -21,6 +21,10 @@ class TeamResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $navigationLabel = 'Equipos';
+
+    protected static ?string $pluralModelLabel = 'Equipos';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -43,6 +47,12 @@ class TeamResource extends Resource
                     ->label('Escudo'),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nombre'),
+                Tables\Columns\TextColumn::make('categories_count')
+                    ->label('Número de categorías')
+                    ->counts('categories'),
+                Tables\Columns\TextColumn::make('players_count')
+                    ->label('Número de jugadores')
+                    ->counts('players'),
             ])
             ->filters([
                 //

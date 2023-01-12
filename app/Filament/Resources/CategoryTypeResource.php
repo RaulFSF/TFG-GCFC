@@ -21,6 +21,12 @@ class CategoryTypeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $navigationLabel = 'Categorías Disponibles';
+
+    protected static ?string $pluralModelLabel = 'Categorías';
+
+    protected static ?string $modelLabel = 'Categoría';
+
     public static function form(Form $form): Form
     {
         return $form

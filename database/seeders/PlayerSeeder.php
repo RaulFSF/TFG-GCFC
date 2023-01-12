@@ -17,13 +17,17 @@ class PlayerSeeder extends Seeder
      */
     public function run()
     {
-        $players = User::where('role', 'player')->get()->toArray();
         $teamsCount = Team::all()->count();
-        foreach($players as $player){
-            Player::create([
-                'user_id' => $player['id'],
-                'team_id' => random_int(1, $teamsCount),
-            ]);
-        }
+        Player::create([
+            'name' => 'Paco Sánchez Falcón',
+            'email' => 'paco@gmail.com',
+            'team_id' => random_int(1, $teamsCount),
+        ]);
+        Player::create([
+            'name' => 'David Sánchez Falcón',
+            'email' => 'david@gmail.com',
+            'team_id' => random_int(1, $teamsCount),
+        ]);
+        Player::factory()->count(10)->create();
     }
 }

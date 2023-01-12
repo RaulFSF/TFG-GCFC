@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\CategoryResource\RelationManagers;
 
-use App\Models\Team;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -15,15 +14,16 @@ class PlayersRelationManager extends RelationManager
 {
     protected static string $relationship = 'players';
 
-    protected static ?string $recordTitleAttribute = 'user_id';
+    protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $inverseRelationship = 'category'; // Since the inverse related model is `Category`, this is normally `category`, not `section`.
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
+                Forms\Components\TextInput::make('id')
                     ->required()
                     ->maxLength(255),
             ]);
@@ -33,16 +33,14 @@ class PlayersRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')
-                    ->label('Nombre de jugador'),
+                Tables\Columns\TextColumn::make('name')->label('Nombre de jugador'),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
                 Tables\Actions\AssociateAction::make()
-                    ->preloadRecordSelect()
-                    ->recordSelectOptionsQuery(fn (Builder $query) => $query->where('team_id', Team::where('administrator_id', auth()->id())->first()->id)),
+                    ->preloadRecordSelect(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -52,5 +50,4 @@ class PlayersRelationManager extends RelationManager
                 Tables\Actions\DissociateBulkAction::make(),
             ]);
     }
-
 }

@@ -23,21 +23,18 @@ class EditCategory extends EditRecord
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
+        $players = Player::where('category_id', $record->id)->get();
+        foreach($players as $player){
+            $player->category_id = null;
+            $player->save();
+        }
         $record->update($data);
 
-        // $players = Player::where('category_id', $record->id)->get();
-        // foreach($players as $player){
-        //     if(!in_array($player->id, $record->players)){
-        //         $player->category_id=null;
-        //         $player->save();
-        //     }
-        // }
-
-        // foreach($record->players as $player_id){
-        //     $player = Player::where('user_id', $player_id)->first();
-        //     $player->category_id = $record->id;
-        //     $player->save();
-        // };
+        foreach($record->players as $player_id){
+            $player = Player::where('user_id', $player_id)->first();
+            $player->category_id = $record->id;
+            $player->save();
+        };
 
         return $record;
     }

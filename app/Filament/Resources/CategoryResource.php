@@ -40,9 +40,7 @@ class CategoryResource extends Resource
             array_push($team_category_types, $category);
         };
 
-        // dd(Player::where('category_id', null)
-        // ->where('team_id', Team::where('administrator_id', auth()->user()->id)->first()['id'])->get()->pluck('user.name', 'user_id')->toArray());
-        // $options = Player::where('category_id', null)->where('team_id', Team::where('administrator_id', auth()->user()->id)->first()['id'])->get()->pluck('user.name', 'user_id')->toArray();
+        $options = Player::where('category_id', null)->get()->pluck('user.name', 'user_id')->toArray();
         return $form
             ->schema([
                 Select::make('category_type_id')
@@ -53,7 +51,15 @@ class CategoryResource extends Resource
                     ->preload(),
                 // Select::make('players')
                 //     ->multiple()
-                //     ->relationship('players', '')
+                //     ->afterStateHydrated(function (Select $component, $state) {
+                //             $players = [];
+                //             foreach($state as $player){
+                //                 if($player){
+                //                     array_push($players, User::where('id', $player)->first()->pluck('name', 'id'));
+                //                 }
+                //             }
+                //             $component->state($players);
+                //         })
                 //     ->options($options)
                 //     ->preload()
                 //     ->searchable()
