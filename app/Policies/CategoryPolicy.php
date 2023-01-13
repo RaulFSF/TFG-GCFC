@@ -42,7 +42,6 @@ class CategoryPolicy
     public function create(User $user)
     {
         return $user->role === 'president';
-
     }
 
     /**

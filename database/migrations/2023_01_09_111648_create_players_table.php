@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('team_id')->nullable();
             $table->string('birthdate');
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->json('history')->nullable();
             $table->timestamps();
         });

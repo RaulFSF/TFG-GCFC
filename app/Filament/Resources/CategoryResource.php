@@ -32,6 +32,12 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $navigationLabel = 'Categorías';
+
+    protected static ?string $pluralModelLabel = 'Categorías';
+
+    protected static ?string $modelLabel = 'categoría';
+
     public static function form(Form $form): Form
     {
         $categories = Category::where('team_id', Team::where('administrator_id', auth()->user()->id)->first()['id'])->get()->pluck('category_type_id');

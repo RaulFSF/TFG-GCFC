@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->foreignId('player_id')->nullable();
+            // $table->foreignId('player_id')->nullable();
             $table->string('role');
             $table->string('password');
             $table->rememberToken();

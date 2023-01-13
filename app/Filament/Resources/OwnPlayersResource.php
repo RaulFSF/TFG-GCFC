@@ -5,7 +5,10 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\OwnPlayersResource\Pages;
 use App\Filament\Resources\OwnPlayersResource\RelationManagers;
 use App\Models\Player;
+use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -27,14 +30,22 @@ class OwnPlayersResource extends Resource
 
     protected static ?string $modelLabel = 'jugador';
 
-
-
-
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                TextInput::make('name')
+                    ->required()
+                    ->label('Nombre de jugador'),
+                DatePicker::make('birthdate')
+                    ->required()
+                    ->label('Fecha de nacimiento'),
+                TextInput::make('email')
+                    ->required()
+                    ->label('Correo electrónico')
+                    ->columnSpan('full')
+                    ->email()
+                    ->unique(ignoreRecord: true),
             ]);
     }
 
@@ -75,7 +86,7 @@ class OwnPlayersResource extends Resource
                                 ->title($record->name . ' ha sido eliminado del club correctamente')
                                 ->success()
                                 ->send();
-                        } else{
+                        } else {
                             Notification::make()
                                 ->title('Error al eliminar del club')
                                 ->danger()

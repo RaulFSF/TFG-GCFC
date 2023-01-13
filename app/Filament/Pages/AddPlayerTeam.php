@@ -2,10 +2,14 @@
 
 namespace App\Filament\Pages;
 
+use App\Mail\AddPlayerTeamMail;
 use App\Models\Player;
+use App\Models\Team;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Illuminate\Support\Facades\Mail;
 
 class AddPlayerTeam extends Page
 {
@@ -13,12 +17,16 @@ class AddPlayerTeam extends Page
 
     protected static string $view = 'filament.pages.add-player-team';
 
+    protected static ?string $title = 'Añadir jugador existente al club';
+
+    protected static ?string $navigationLabel = 'Añadir jugador al club';
+
     protected static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->role === 'president';
     }
 
-    public string $searchedId = '';
+    public $searchedId;
     public Player $searchedPlayer;
 
     public function mount(): void
@@ -30,7 +38,7 @@ class AddPlayerTeam extends Page
     {
         return [
             Select::make('searchedId')
-                ->options(Player::withoutGlobalScope('owner')->whereNull('team_id')->get()->pluck('user.email', 'user_id'))
+                ->options(Player::withoutGlobalScope('owner')->whereNull('team_id')->get()->pluck('email', 'id'))
                 ->preload()
                 ->label('Correo electrónico del jugador')
                 ->placeholder('Buscar jugador por correo electrónico...')
@@ -41,10 +49,34 @@ class AddPlayerTeam extends Page
     public function save()
     {
         $this->validate();
+        $user = Player::withoutGlobalScope('owner')->where('id', $this->searchedId)->first();
 
-        dd($this->searchedId . ' es el id del USUARIO que se quiere añadir. Enviar correo al jugador para que acepte. Por el momento se podrá agregar directamente.');
+        if (Mail::to($user->email)->send(new AddPlayerTeamMail($user))) {
+            Notification::make()
+                ->title('Correo enviado a ' . $user->email . ' correctamente')
+                ->success()
+                ->send();
+        } else {
+            Notification::make()
+                ->title('Error al enviar correo')
+                ->danger()
+                ->send();
+            $this->halt();
+        };
 
-        $this->team->save();
+        $user->team_id = Team::where('administrator_id', auth()->id())->first()->id;
+
+        if ($user->save()) {
+            Notification::make()
+                ->title($user->name . ' añadido correcctamente al equipo. ')
+                ->success()
+                ->send();
+        } else {
+            Notification::make()
+                ->title('Error al añadir jugador al equipo')
+                ->danger()
+                ->send();
+            $this->halt();
+        };
     }
-
 }

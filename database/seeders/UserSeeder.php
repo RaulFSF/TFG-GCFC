@@ -33,6 +33,12 @@ class UserSeeder extends Seeder
             'role' => 'president',
             'password' => bcrypt('1234'),
         ]);
+        User::create([
+            'name' => 'Adrian Santana Santana',
+            'email' => 'prueba@gmail.com',
+            'role' => 'player',
+            'password' => bcrypt('1234'),
+        ]);
        // Crea usuarios rol coach pero no hay funcionalidades para coach aún
         // User::coach(2);
 

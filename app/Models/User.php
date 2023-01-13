@@ -24,7 +24,7 @@ class User extends Authenticatable implements FilamentUser
         'email',
         'role',
         'password',
-        'player_id',
+        // 'player_id',
     ];
 
     /**
@@ -49,7 +49,7 @@ class User extends Authenticatable implements FilamentUser
     public function player(){
         return $this->hasOne(Player::class);
     }
-    
+
     public function canAccessFilament(): bool
     {
         return ($this->role === 'admin' || $this->role === 'president');

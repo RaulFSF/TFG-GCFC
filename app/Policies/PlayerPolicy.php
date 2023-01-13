@@ -41,7 +41,7 @@ class PlayerPolicy
      */
     public function create(User $user)
     {
-        return $user->role === 'admin' ;
+        return $user->role === 'admin' || $user->role === 'president';
     }
 
     /**
