@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable();
             $table->foreignId('category_id')->nullable();
             $table->foreignId('team_id')->nullable();
+            $table->string('birthdate');
             $table->string('name');
             $table->string('email');
             $table->json('history')->nullable();

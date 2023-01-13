@@ -34,6 +34,7 @@ class PlayersRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->label('Nombre de jugador'),
+                Tables\Columns\TextColumn::make('age')->label('Edad'),
             ])
             ->filters([
                 //

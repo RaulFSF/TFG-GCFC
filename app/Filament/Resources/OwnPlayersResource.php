@@ -6,6 +6,7 @@ use App\Filament\Resources\OwnPlayersResource\Pages;
 use App\Filament\Resources\OwnPlayersResource\RelationManagers;
 use App\Models\Player;
 use Filament\Forms;
+use Filament\Notifications\Notification;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -49,24 +50,38 @@ class OwnPlayersResource extends Resource
                     ->searchable()
                     ->default('Por asignar')
                     ->label('Categoría'),
+                TextColumn::make('age')
+                    ->label('Edad'),
+
                 TextColumn::make('team.name')
                     ->searchable()
                     ->label('Equipo')
                     ->default('Sin equipo')
                     ->sortable()
-                    ->visible(auth()->user()->role==='admin'),
+                    ->visible(auth()->user()->role === 'admin'),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()->visible(auth()->user()->role==='admin'),
+                Tables\Actions\DeleteAction::make()->visible(auth()->user()->role === 'admin'),
                 Tables\Actions\Action::make('eliminar del club')
-                    ->action(function (Player $record) : void {
+                    ->action(function (Player $record): void {
                         $record->team_id = null;
-                        $record->save();
-                })->icon('heroicon-s-x-circle')->color('danger')->visible(auth()->user()->role==='president'),
+
+                        if ($record->save()) {
+                            Notification::make()
+                                ->title($record->name . ' ha sido eliminado del club correctamente')
+                                ->success()
+                                ->send();
+                        } else{
+                            Notification::make()
+                                ->title('Error al eliminar del club')
+                                ->danger()
+                                ->send();
+                        }
+                    })->icon('heroicon-s-x-circle')->color('danger')->visible(auth()->user()->role === 'president'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

@@ -17,11 +17,11 @@ class PlayerFactory extends Factory
      */
     public function definition()
     {
-        $teamsCount = Team::all()->count();
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'team_id' => random_int(1, $teamsCount),
+            'team_id' => random_int(1, Team::all()->count()),
+            'birthdate' => fake()->dateTimeBetween('-40 years', '-10 years')->format('Y-m-d'),
         ];
     }
 }

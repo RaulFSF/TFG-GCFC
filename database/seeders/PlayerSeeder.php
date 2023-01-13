@@ -22,11 +22,13 @@ class PlayerSeeder extends Seeder
             'name' => 'Paco Sánchez Falcón',
             'email' => 'paco@gmail.com',
             'team_id' => random_int(1, $teamsCount),
+            'birthdate' => '2000-10-03',
         ]);
         Player::create([
             'name' => 'David Sánchez Falcón',
             'email' => 'david@gmail.com',
             'team_id' => random_int(1, $teamsCount),
+            'birthdate' => '1997-03-20',
         ]);
         Player::factory()->count(10)->create();
     }
