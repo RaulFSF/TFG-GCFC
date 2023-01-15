@@ -16,4 +16,21 @@ class EditTeam extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $data['fieldName'] = $data['field'][0]['name'];
+        $data['address'] = $data['field'][0]['address'];
+        return $data;
+    }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['field'] = [
+            'name' => $data['fieldName'],
+            'address' => $data['address'],
+        ];
+        unset($data['fieldName'], $data['address']);
+        return $data;
+    }
 }

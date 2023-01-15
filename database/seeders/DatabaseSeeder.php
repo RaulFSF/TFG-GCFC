@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             CategoryTypeSeeder::class,
             CategorySeeder::class,
             PlayerSeeder::class,
+            PrompterSeeder::class,
         ]);
     }
 }

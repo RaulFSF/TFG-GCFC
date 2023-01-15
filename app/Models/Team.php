@@ -17,10 +17,12 @@ class Team extends Model
         'description',
         'shield',
         'categories',
+        'field',
     ];
 
     protected $casts = [
         'categories' => 'array',
+        'field' => 'array',
     ];
 
     public function administrator(){

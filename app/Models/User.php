@@ -50,9 +50,13 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasOne(Player::class);
     }
 
+    public function prompter(){
+        return $this->hasOne(Prompter::class);
+    }
+
     public function canAccessFilament(): bool
     {
-        return ($this->role === 'admin' || $this->role === 'president');
+        return ($this->role === 'admin' || $this->role === 'president' || $this->role === 'prompter');
     }
 
     public static function coach($count)

@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('teams', function (Blueprint $table) {
+        Schema::create('prompters', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('administrator_id');
-            $table->string('name');
-            $table->string('description');
-            $table->string('shield');
-            $table->json('field');
-            $table->json('categories')->nullable();
+            $table->foreignId('user_id');
+            $table->json('category_matches')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teams');
+        Schema::dropIfExists('prompters');
     }
 };

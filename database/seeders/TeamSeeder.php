@@ -19,14 +19,16 @@ class TeamSeeder extends Seeder
             'administrator_id' => 2,
             'name' => 'Montaña Los Vélez',
             'description' => 'Equipo 1',
-            'shield' => 'yYKj0BnmTywXxtHZ6LyYd7llTjA3dB-metaRm90byBjYXJuZXQucG5n-.png',
+            'shield' => 'NBQl6gFQCy2pvDd8Ro5oZdwZ7G13du-metabG9zVmVsZXoucG5n-.png',
+            'field' => json_decode('[{"name" : "Campo de Fútbol Montaña los Velez", "address" : "https://goo.gl/maps/dzYow9C9yVWjYU1N9"}]'),
         ]);
 
         Team::create([
             'administrator_id' => 3,
             'name' => 'Doramas',
             'description' => 'Equipo 2',
-            'shield' => 'yYKj0BnmTywXxtHZ6LyYd7llTjA3dB-metaRm90byBjYXJuZXQucG5n-.png',
+            'shield' => 'JF4nAeApRcX97nB6W0rcFrFoEtRzrO-metaMTAweDEwMGRvcmFtYXMucG5n-.png',
+            'field' => json_decode('[{"name" : "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" : "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"}]'),
         ]);
 
     }

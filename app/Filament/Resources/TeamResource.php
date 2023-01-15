@@ -6,6 +6,11 @@ use App\Filament\Resources\TeamResource\Pages;
 use App\Filament\Resources\TeamResource\RelationManagers;
 use App\Models\Team;
 use Filament\Forms;
+use Filament\Forms\Components\Builder as ComponentsBuilder;
+use Filament\Forms\Components\Builder\Block;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -30,12 +35,28 @@ class TeamResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name'),
-                Forms\Components\TextInput::make('description'),
-                Forms\Components\FileUpload::make('shield')
-                    ->image(),
                 Forms\Components\Select::make('administrator_id')
                     ->relationship('administrator', 'name')
                     ->preload(),
+                Section::make('Información del campo')
+                    ->schema([
+                        TextInput::make('fieldName')
+                            ->label('Nombre')
+                            ->required(),
+                        TextInput::make('address')
+                            ->label('Dirección')
+                            ->helperText('Introduzca la url que ofrece google maps.')
+                            ->required()
+                            ->url(),
+                    ])
+                    ->columnSpan(1)
+                    ->label('Información del campo'),
+                Forms\Components\FileUpload::make('shield')
+                    ->image()
+                    ->label('Escudo'),
+                Forms\Components\Textarea::make('description')
+                    ->label('Descripción')
+                    ->columnSpan(2),
             ]);
     }
 
