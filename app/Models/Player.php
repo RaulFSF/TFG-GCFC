@@ -21,7 +21,6 @@ class Player extends Model
         'history',
     ];
 
-
     protected $casts = [
         'history' => 'array',
     ];

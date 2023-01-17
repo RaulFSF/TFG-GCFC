@@ -22,7 +22,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => bcrypt('1234'), // password
-            'role' => 'player',
+            'role' => 'prompter',
         ];
     }
 

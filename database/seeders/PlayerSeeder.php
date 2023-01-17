@@ -17,19 +17,20 @@ class PlayerSeeder extends Seeder
      */
     public function run()
     {
-        $teamsCount = Team::all()->count();
-        Player::create([
-            'name' => 'Paco Sánchez Falcón',
-            'email' => 'paco@gmail.com',
-            'team_id' => random_int(1, $teamsCount),
-            'birthdate' => '2000-10-03',
-        ]);
-        Player::create([
-            'name' => 'David Sánchez Falcón',
-            'email' => 'david@gmail.com',
-            'team_id' => random_int(1, $teamsCount),
-            'birthdate' => '1997-03-20',
-        ]);
-        Player::factory()->count(10)->create();
+        $teams = Team::all();
+        foreach ($teams as $team) {
+            foreach ($team->categories as $category) {
+
+                for($i = 1; $i <= random_int(16,24); $i++){
+                    Player::create([
+                        'name' => fake()->name(),
+                        'email' => fake()->unique()->safeEmail(),
+                        'team_id' => $category->team->id,
+                        'category_id' => $category->id,
+                        'birthdate' => fake()->dateTimeBetween('-40 years', '-10 years')->format('Y-m-d'),
+                    ]);
+                }
+            }
+        }
     }
 }

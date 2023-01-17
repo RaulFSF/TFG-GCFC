@@ -16,12 +16,10 @@ class Team extends Model
         'name',
         'description',
         'shield',
-        'categories',
         'field',
     ];
 
     protected $casts = [
-        'categories' => 'array',
         'field' => 'array',
     ];
 

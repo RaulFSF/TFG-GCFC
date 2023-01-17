@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('description');
             $table->string('shield');
             $table->json('field');
-            $table->json('categories')->nullable();
             $table->timestamps();
         });
     }

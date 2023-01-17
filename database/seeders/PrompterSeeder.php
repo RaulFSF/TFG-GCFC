@@ -22,6 +22,5 @@ class PrompterSeeder extends Seeder
                 'user_id' => $prompter->id,
             ]);
         };
-
     }
 }

@@ -21,5 +21,19 @@ class CategoryTypeSeeder extends Seeder
         CategoryType::create([
             'name' => 'Alevín'
         ]);
+        CategoryType::create([
+            'name' => 'Infantil'
+        ]);
+        CategoryType::create([
+            'name' => 'Cadete'
+        ]);
+        CategoryType::create([
+            'name' => 'Juvenil'
+        ]);
+        CategoryType::create([
+            'name' => 'Regional'
+        ]);
+
+
     }
 }
