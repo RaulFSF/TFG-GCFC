@@ -45,7 +45,7 @@ class CategoriesRelationManager extends RelationManager
                     Tables\Actions\CreateAction::make(),
                     Tables\Actions\AssociateAction::make()
                     ->recordSelectOptionsQuery(function (Builder $query, RelationManager $livewire) {
-                        return $query->where('category_type_id', $livewire->ownerRecord->category_type_id);
+                        return $query->where('category_type_id', $livewire->ownerRecord->category_type_id)->whereNull('league_id');
                     })
                     ->preloadRecordSelect(),
             ])

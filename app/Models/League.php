@@ -14,6 +14,7 @@ class League extends Model
         'category_type_id',
         'classification',
         'season',
+        'start_date',
     ];
 
     protected $casts = [

@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Models\CategoryType;
 use App\Models\League;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
@@ -44,6 +46,11 @@ class LeagueResource extends Resource
                     ->preload()
                     ->required()
                     ->disabledOn('edit'),
+                DatePicker::make('start_date')
+                    ->label('Fecha de inicio')
+                    ->minDate(now())
+                    ->maxDate(now()->addYear(2))
+                    ->helperText('La primera jornada de la liga será el Viernes siguiente a la fecha introducida'),
             ]);
     }
 

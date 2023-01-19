@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('category_type_id');
             $table->json('classification')->nullable();
-            $table->string('season');
+            $table->string('season')->nullable();
+            $table->datetime('start_date')->nullable();
             $table->timestamps();
         });
     }

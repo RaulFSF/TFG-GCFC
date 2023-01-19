@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('local_id');
             $table->foreignId('visitor_id')->nullable();
             $table->foreignId('prompter_id');
-            $table->json('report');
+            $table->json('report')->nullable();
             $table->string('date');
             $table->timestamps();
         });
