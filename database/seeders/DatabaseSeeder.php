@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             PlayerSeeder::class,
             PrompterSeeder::class,
+            LeagueSeeder::class,
         ]);
     }
 }

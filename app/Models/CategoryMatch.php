@@ -10,6 +10,7 @@ class CategoryMatch extends Model
     use HasFactory;
 
     protected $fillable = [
+        'match_day_id',
         'local_id',
         'visitor_id',
         'prompter_id',
@@ -20,6 +21,10 @@ class CategoryMatch extends Model
     protected $casts = [
         'report' => 'array',
     ];
+
+    public function matchDay(){
+        return $this->belongsTo(MatchDay::class);
+    }
 
     public function local(){
         return $this->belongsTo(Category::class);

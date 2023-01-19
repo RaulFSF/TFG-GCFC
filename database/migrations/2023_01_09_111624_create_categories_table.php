@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('team_id');
             $table->foreignId('category_type_id');
+            $table->foreignId('league_id')->nullable();
             $table->json('players')->nullable();
             $table->string('coach')->nullable();
             $table->timestamps();

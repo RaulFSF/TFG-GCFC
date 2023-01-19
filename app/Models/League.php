@@ -10,14 +10,25 @@ class League extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category_type_name',
+        'name',
+        'category_type_id',
         'classification',
-        'matchday',
         'season',
     ];
 
     protected $casts = [
-        'matchday' => 'array',
         'classification' => 'array',
     ];
+
+    public function categoryType(){
+        return $this->hasOne(CategoryType::class);
+    }
+
+    public function categories(){
+        return $this->hasMany(Category::class);
+    }
+
+    public function matchDays(){
+        return $this->hasMany(MatchDay::class);
+    }
 }

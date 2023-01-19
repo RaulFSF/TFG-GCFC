@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category_matches', function (Blueprint $table) {
+        Schema::create('match_days', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('match_day_id');
-            $table->foreignId('local_id');
-            $table->foreignId('visitor_id')->nullable();
-            $table->foreignId('prompter_id');
-            $table->json('report');
-            $table->string('date');
+            $table->foreignId('league_id');
+            $table->integer('number');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_matches');
+        Schema::dropIfExists('match_days');
     }
 };

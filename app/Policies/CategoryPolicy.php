@@ -18,7 +18,7 @@ class CategoryPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->role === 'president';
+        return $user->role === 'president' || $user->role === 'admin';
     }
 
     /**
@@ -30,7 +30,6 @@ class CategoryPolicy
      */
     public function view(User $user, Category $category)
     {
-        //
     }
 
     /**
@@ -53,7 +52,7 @@ class CategoryPolicy
      */
     public function update(User $user, Category $category)
     {
-        return $user->role === 'president';
+        return $user->role === 'president' || $user->role === 'admin';
     }
 
     /**

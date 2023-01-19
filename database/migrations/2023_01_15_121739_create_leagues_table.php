@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('leagues', function (Blueprint $table) {
             $table->id();
-            $table->string('category_type_name');
-            $table->json('classification');
-            $table->json('matchday');
+            $table->string('name');
+            $table->foreignId('category_type_id');
+            $table->json('classification')->nullable();
             $table->string('season');
             $table->timestamps();
         });

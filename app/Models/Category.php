@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,11 +16,23 @@ class Category extends Model
         'category_type_id',
         'players',
         'coach',
+        'league_id',
     ];
 
     protected $casts = [
         'players' => 'array',
     ];
+
+    protected $appends = [
+        'name',
+    ];
+
+    public function name() : Attribute
+    {
+        return Attribute::make(
+			get: fn () => $this->team->name . ' - ' . $this->categoryType->name,
+		);
+    }
 
     public function team()
     {
@@ -34,6 +47,11 @@ class Category extends Model
     public function categoryType()
     {
         return $this->belongsTo(CategoryType::class);
+    }
+
+    public function league()
+    {
+        return $this->belongsTo(League::class);
     }
 
     protected static function booted()

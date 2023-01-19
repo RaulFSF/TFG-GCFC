@@ -22,6 +22,7 @@ class CategorySeeder extends Seeder
         foreach($categoryType as $category){
             foreach($teams as $team){
                 Category::create([
+                    // 'league_id' => 1,
                     'team_id' => $team->id,
                     'category_type_id' => $category->id,
                 ]);

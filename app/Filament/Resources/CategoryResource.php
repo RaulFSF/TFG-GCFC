@@ -78,12 +78,19 @@ class CategoryResource extends Resource
 
     public static function table(Table $table): Table
     {
+        
         return $table
             ->columns([
+                TextColumn::make('name')
+                    ->label('Categoría')
+                    ->hidden(auth()->user()->role === 'president')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('categoryType.name')
                     ->label('Categoría')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->hidden(auth()->user()->role === 'admin'),
                 TextColumn::make('players_count')
                     ->label('Jugadores en plantilla')
                     ->counts('players'),
