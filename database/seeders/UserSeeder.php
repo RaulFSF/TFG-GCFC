@@ -142,5 +142,12 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
         ]);
         User::factory()->count(20)->create();
+
+        User::create([
+            'name' => 'Prueba Valido Sánchez',
+            'email' => 'velez@gmail.com',
+            'role' => 'president',
+            'password' => bcrypt('1234'),
+        ]);
     }
 }

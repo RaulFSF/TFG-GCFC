@@ -24,7 +24,9 @@ class LeagueResource extends Resource
 {
     protected static ?string $model = League::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationGroup = 'Gestión de ligas';
+
+    protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
 
     protected static ?string $navigationLabel = 'Ligas';
 

@@ -19,6 +19,8 @@ class CategoryTypeResource extends Resource
 {
     protected static ?string $model = CategoryType::class;
 
+    protected static ?string $navigationGroup = 'Configuraciones';
+
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $navigationLabel = 'Categorías Disponibles';

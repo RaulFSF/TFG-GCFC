@@ -15,6 +15,8 @@ class AddPlayerTeam extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
+    protected static ?string $navigationGroup = 'Gestión de equipos y jugadores';
+
     protected static string $view = 'filament.pages.add-player-team';
 
     protected static ?string $title = 'Añadir jugador existente al club';

@@ -14,6 +14,8 @@ class OwnTeam extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-pencil';
 
+    protected static ?string $navigationGroup = 'Club';
+
     protected static string $view = 'filament.pages.own-team';
 
     protected static ?string $title = 'Información';

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TeamResource\Pages;
 use App\Filament\Resources\TeamResource\RelationManagers;
 use App\Models\Team;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Builder as ComponentsBuilder;
 use Filament\Forms\Components\Builder\Block;
@@ -24,20 +25,40 @@ class TeamResource extends Resource
 {
     protected static ?string $model = Team::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationGroup = 'Gestión de equipos y jugadores';
+
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     protected static ?string $navigationLabel = 'Equipos';
 
     protected static ?string $pluralModelLabel = 'Equipos';
 
+    protected static ?string $modelLabel = 'Equipo';
+
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name'),
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->label('Nombre'),
                 Forms\Components\Select::make('administrator_id')
-                    ->relationship('administrator', 'name')
-                    ->preload(),
+                    ->preload()
+                    ->label('Administrador')
+                    ->options(
+                        function (Team $record) {
+                            $users = User::where('role', 'president')->whereNotIn('id', Team::all()->pluck('administrator_id')->toArray())->union(User::where('id', $record->administrator->id))->get()->pluck('name', 'id')->toArray();
+                            return $users;
+                        }
+                    )
+                    ->disablePlaceholderSelection()
+                    ->hiddenOn('create'),
+                Forms\Components\Select::make('administrator_id')
+                    ->preload()
+                    ->options(User::where('role', 'president')->whereNotIn('id', Team::all()->pluck('administrator_id')->toArray())->get()->pluck('name', 'id'))
+                    ->required()
+                    ->hiddenOn('edit'),
                 Section::make('Información del campo')
                     ->schema([
                         TextInput::make('fieldName')

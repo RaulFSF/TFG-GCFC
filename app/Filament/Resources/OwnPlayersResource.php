@@ -22,7 +22,9 @@ class OwnPlayersResource extends Resource
 {
     protected static ?string $model = Player::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'heroicon-o-user-circle';
+
+    protected static ?string $navigationGroup = 'Gestión de equipos y jugadores';
 
     protected static ?string $navigationLabel = 'Jugadores';
 
