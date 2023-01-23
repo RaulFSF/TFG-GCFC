@@ -13,11 +13,4 @@ class CreateLeague extends CreateRecord
 {
     protected static string $resource = LeagueResource::class;
 
-    // protected function mutateFormDataBeforeCreate(array $data): array
-    // {
-
-    //     // $data['season'] = Carbon::now()->year . '/' . Carbon::now()->year+1;
-
-    //     return $data;
-    // }
 }

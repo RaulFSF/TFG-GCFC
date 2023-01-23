@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\CategoryType;
 use App\Models\League;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,16 +17,14 @@ class LeagueSeeder extends Seeder
      */
     public function run()
     {
-        League::create([
-            'name' => 'Benjamín',
-            'category_type_id' => 1,
-            'season' => '2023/2024',
-        ]);
-
-        League::create([
-            'name' => 'Alevín',
-            'category_type_id' => 2,
-            'season' => '2023/2024',
-        ]);
+        $category_types = CategoryType::all();
+        foreach($category_types as $category_type){
+            League::create([
+                'name' => 'Liga ' . $category_type->name,
+                'category_type_id' => $category_type->id,
+                'season' => '2023/2024',
+                'start_date' => Carbon::now()->addMonth(1)->toDate(),
+            ]);
+        }
     }
 }

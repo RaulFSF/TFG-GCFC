@@ -18,10 +18,11 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             TeamSeeder::class,
             CategoryTypeSeeder::class,
+            LeagueSeeder::class,
             CategorySeeder::class,
             PlayerSeeder::class,
             PrompterSeeder::class,
-            LeagueSeeder::class,
+            MatchDaySeeder::class,
         ]);
     }
 }
