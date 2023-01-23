@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,6 +24,15 @@ class CategoryMatch extends Model
         'report' => 'array',
     ];
 
+    protected $appends = [
+        'formated_date'
+
+    ];
+
+    public function getFormatedDateAttribute(){
+        return Carbon::parse($this->date)->format('H:i d-m-Y');
+    }
+
     public function matchDay(){
         return $this->belongsTo(MatchDay::class);
     }
@@ -35,6 +46,16 @@ class CategoryMatch extends Model
     }
 
     public function prompter(){
-        return $this->hasOne(Prompter::class);
+        return $this->belongsTo(Prompter::class);
+    }
+
+    protected static function booted()
+    {
+        $user = User::where('id', auth()->id())->first();
+        if(isset($user) && $user->role === 'prompter'){
+            static::addGlobalScope('prompter_category_day', function (Builder $builder) {
+                 $builder->where('prompter_id', auth()->user()->prompter->id);
+            });
+        };
     }
 }

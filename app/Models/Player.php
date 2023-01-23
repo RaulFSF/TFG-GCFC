@@ -48,7 +48,7 @@ class Player extends Model
     protected static function booted()
     {
         $user = User::where('id', auth()->id())->first();
-        if(isset($user) && $user->role != 'admin'){
+        if(isset($user) && $user->role != 'admin' && $user->role !== 'prompter'){
             static::addGlobalScope('owner', function (Builder $builder) {
                  $builder->where('team_id',  Team::where('administrator_id', auth()->user()->id)->first()['id']);
             });
