@@ -13,7 +13,6 @@ class EditCategoryMatch extends EditRecord
     protected function getActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
         ];
     }
 
@@ -26,4 +25,18 @@ class EditCategoryMatch extends EditRecord
 
         return $data;
     }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        dd($data);
+
+
+        $data['league'] = $this->record->matchDay->league->name;
+        $data['local_team'] = $this->record->local->team->name;
+        $data['visitor_team'] = $this->record->visitor->team->name;
+
+
+        return $data;
+    }
+
 }

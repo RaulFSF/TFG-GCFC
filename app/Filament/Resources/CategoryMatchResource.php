@@ -22,6 +22,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Route;
 
 class CategoryMatchResource extends Resource
 {
@@ -31,63 +32,8 @@ class CategoryMatchResource extends Resource
 
     public static function form(Form $form): Form
     {
-
-        if (request()->record) {
-            $local_players = Player::where('category_id', Category::where('id', CategoryMatch::where('id', request()->record)->first()->local_id)->first()->id)->get();
-            $visitor_players = Player::where('category_id', Category::where('id', CategoryMatch::where('id', request()->record)->first()->visitor_id)->first()->id)->get();
-            $players = array_flip(array_merge($local_players->pluck('id', 'name')->toArray(), $visitor_players->pluck('id', 'name')->toArray()));
-        }
-
         return $form
             ->schema([
-                Tabs::make('Heading')
-                    ->columnSpanFull()
-                    ->tabs([
-                        Tabs\Tab::make('Información general')
-                            ->schema([
-                                Grid::make(2)
-                                    ->schema([
-                                        TextInput::make('league')->disabled(),
-                                        TextInput::make('date')->disabled(),
-
-
-                                        TextInput::make('local_team')->label('Local')->disabled(),
-                                        TextInput::make('visitor_team')->label('Local')->disabled(),
-                                    ]),
-                            ]),
-                        Tabs\Tab::make('Alineaciones')
-                            ->schema([
-                                Select::make('local_players')
-                                    ->label('Jugadores de equipo local')
-                                    ->multiple()
-                                    ->options($local_players->pluck('name', 'id')),
-                                Select::make('visitor_players')
-                                    ->label('Jugadores de equipo visitante')
-                                    ->multiple()
-                                    ->options($visitor_players->pluck('name', 'id')),
-                            ]),
-                        Tabs\Tab::make('Eventos del partido')
-                            ->schema([
-                                Select::make('goal_player')
-                                    ->label('Gol')
-                                    ->options($players)
-                                    ->multiple(),
-                                Select::make('goal_assist')
-                                    ->label('Asistencia')
-                                    ->options($players)
-                                    ->multiple(),
-                                Select::make('yellow_card')
-                                    ->label('Tarjetas amarillas')
-                                    ->options($players)
-                                    ->multiple(),
-                                Select::make('red_card')
-                                    ->label('Tarjetas rojas')
-                                    ->options($players)
-                                    ->multiple(),
-
-                            ]),
-                    ])
-
             ]);
     }
 
@@ -104,11 +50,19 @@ class CategoryMatchResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('informe')->icon('heroicon-s-pencil')->url(function (CategoryMatch $record){
+                    return CategoryMatchResource::getUrl('report', ['record' => $record]);
+                }),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
     }
 
     public static function getRelations(): array
@@ -124,6 +78,7 @@ class CategoryMatchResource extends Resource
             'index' => Pages\ListCategoryMatches::route('/'),
             'create' => Pages\CreateCategoryMatch::route('/create'),
             'edit' => Pages\EditCategoryMatch::route('/{record}/edit'),
+            'report' => Pages\MatchReport::route('/{record}/report'),
         ];
     }
 }
