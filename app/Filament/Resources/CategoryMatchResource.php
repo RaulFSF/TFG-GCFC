@@ -7,6 +7,7 @@ use App\Filament\Resources\CategoryMatchResource\RelationManagers;
 use App\Models\Category;
 use App\Models\CategoryMatch;
 use App\Models\Player;
+use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Components\Builder as ComponentsBuilder;
 use Filament\Forms\Components\Grid;
@@ -30,11 +31,22 @@ class CategoryMatchResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $modelLabel = 'Mis partidos';
+
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->role === 'prompter';
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->orderBy('date');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-            ]);
+            ->schema([]);
     }
 
     public static function table(Table $table): Table
@@ -50,10 +62,13 @@ class CategoryMatchResource extends Resource
                 //
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
-                Tables\Actions\Action::make('informe')->icon('heroicon-s-pencil')->url(function (CategoryMatch $record){
-                    return CategoryMatchResource::getUrl('report', ['record' => $record]);
-                }),
+                Tables\Actions\Action::make('informe')->icon('heroicon-s-pencil')
+                    ->hidden(function (CategoryMatch $record) {
+                        return $record->date > Carbon::now() ? false : true;
+                    })
+                    ->url(function (CategoryMatch $record) {
+                        return CategoryMatchResource::getUrl('report', ['record' => $record]);
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

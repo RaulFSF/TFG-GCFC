@@ -76,6 +76,7 @@ class LeagueResource extends Resource
     public static function getRelations(): array
     {
         return [
+            RelationManagers\MatchDaysRelationManager::class,
             RelationManagers\CategoriesRelationManager::class,
         ];
     }
@@ -86,6 +87,7 @@ class LeagueResource extends Resource
             'index' => Pages\ListLeagues::route('/'),
             'create' => Pages\CreateLeague::route('/create'),
             'edit' => Pages\EditLeague::route('/{record}/edit'),
+            'match-day' => Pages\ViewLeagueMatchDay::route('/{record}/match-day'),
         ];
     }
 }

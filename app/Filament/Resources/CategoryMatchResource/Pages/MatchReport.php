@@ -66,10 +66,14 @@ class MatchReport extends Page
                             Select::make('local_players')
                                 ->label('Jugadores de equipo local')
                                 ->multiple()
+                                ->minItems(11)
+                                ->maxItems(18)
                                 ->options($local_players->pluck('name', 'id')),
                             Select::make('visitor_players')
                                 ->label('Jugadores de equipo visitante')
                                 ->multiple()
+                                ->minItems(11)
+                                ->maxItems(18)
                                 ->options($visitor_players->pluck('name', 'id')),
                         ]),
                     Tabs\Tab::make('Eventos del partido')
@@ -117,127 +121,138 @@ class MatchReport extends Page
                 ->danger()
                 ->seconds(5)
                 ->send();
+        } else {
 
-            $this->halt();
-        }
-
-        $goals = array();
-        $yellowCards = array();
-        $redCards = array();
-        foreach ($this->content as $content) {
-            if ($content['type'] === 'goals') {
-                array_push($goals, $content['data']);
-            } else {
-                array_push($yellowCards, $content['data']['yellow_cards']);
-                array_push($redCards, $content['data']['red_cards']);
-            }
-        }
-
-        $this->match->report = json_encode([
-            'local_players' => $this->local_players,
-            'visitor_players' => $this->visitor_players,
-            'goals' => $goals,
-            'yellow_cards' => $yellowCards,
-            'red_cards' => $redCards,
-        ]);
-
-        //falla al crear un informe para jugadores nuevos no se por que
-
-        //actualizar el history de cada player añadiendole sus cosas
-        if ($this->match->save()) {
-
-            $players = array_merge($this->local_players, $this->visitor_players);
-
-            //partido jugado
-            foreach ($players as $player_id) {
-                //comprobar historial si tiene el de la categoria y añadirle datos a ese historial
-                $player = Player::where('id', $player_id)->first();
-
-                //historial con equipo activo
-                if ($player->history && $player->history[$player->category_id]) {
-                    $history = $player->history[$player->category_id];
-                    $history = [
-                        'played' => $history['played']++,
-                        'goals' => $history['goals'],
-                        'yellowCards' => $history['yelloCards'],
-                        'redCards' => $history['redCards'],
-                    ];
-                    $player->history[$player->category_id] = $history;
-                    $player->save();
-
-                    //si no tiene historial con el equipo se lo creo
+            $goals = array();
+            $yellowCards = array();
+            $redCards = array();
+            foreach ($this->content as $content) {
+                if ($content['type'] === 'goals') {
+                    array_push($goals, $content['data']);
                 } else {
-
-                    //esta guardando mal
-                    $history = json_encode([
-                        $player->category_id => [
-                            'played' => 1,
-                            'goals' => 0,
-                            'yellowCards' => 0,
-                            'redCards' => 0,
-                        ]
-                    ]);
-                    $player->history = $history;
-                    $player->save();
-
-                    //usar esta forma para leer los datos y luego guardarlos
-                    $id = $player->category_id . '';
-                    $prueba = json_decode(Player::where('id', $player->id)->first()->history, true);
-                    dd($prueba[$id]['played']);
+                    array_push($yellowCards, $content['data']['yellow_cards']);
+                    array_push($redCards, $content['data']['red_cards']);
                 }
             }
-            //goles
-            foreach ($goals as $goal) {
-                //marca
-                $goal_player = Player::where('id', $goal['goal_player'])->first();
-                $history = $goal_player->history[$goal_player->category_id];
-                dd($goal_player->history);
-                $history = [
-                    'played' => $history['played'],
-                    'goals' => $history['goals']++,
-                    'yelloCards' => $history['yellowCards'],
-                    'redCards' => $history['redCards'],
-                ];
-                $goal_player->history[$goal_player->category_id] = $history;
-                $goal_player->save();
-                //asistencia
-                $assit_player = Player::where('id', $goal['goal_assist'])->first();
-                $assit_player->history[$assit_player->category_id]['goals']++;
-                $assit_player->save();
+
+            $this->match->report = json_encode([
+                'local_players' => $this->local_players,
+                'visitor_players' => $this->visitor_players,
+                'goals' => $goals,
+                'yellow_cards' => $yellowCards,
+                'red_cards' => $redCards,
+            ]);
+
+            //falla al crear un informe para jugadores nuevos no se por que
+
+            //actualizar el history de cada player añadiendole sus cosas
+            if ($this->match->save()) {
+
+                $players = array_merge($this->local_players, $this->visitor_players);
+
+                //partido jugado
+                foreach ($players as $player_id) {
+                    //comprobar historial si tiene el de la categoria y añadirle datos a ese historial
+                    $player = Player::where('id', $player_id)->first();
+
+                    //historial con equipo activo
+                    if ($player->history && $player->history[$player->category_id]) {
+                        $history = json_decode($player->history, true);
+
+                        $history[$player->category_id] = [
+                            'played' => ++$history[$player->category_id]['played'],
+                            'goals' => $history[$player->category_id]['goals'],
+                            'assits' => $history[$player->category_id]['assits'],
+                            'yellowCards' => $history[$player->category_id]['yellowCards'],
+                            'redCards' => $history[$player->category_id]['redCards'],
+                        ];
+
+                        $player->history = json_encode($history);
+                        $player->save();
+
+                        //si no tiene historial con el equipo se lo creo
+                    } else {
+                        $history = json_encode([
+                            $player->category_id => [
+                                'played' => 1,
+                                'goals' => 0,
+                                'assits' => 0,
+                                'yellowCards' => 0,
+                                'redCards' => 0,
+                            ]
+                        ]);
+                        $player->history = $history;
+                        $player->save();
+                    }
+                }
+                //goles
+                foreach ($goals as $goal) {
+                    //marca
+                    $goal_player = Player::where('id', $goal['goal_player'])->first();
+                    $history = json_decode($goal_player->history, true);
+
+                    $history[$goal_player->category_id] = [
+                        'played' => $history[$goal_player->category_id]['played'],
+                        'goals' => ++$history[$goal_player->category_id]['goals'],
+                        'assits' => $history[$goal_player->category_id]['assits'],
+                        'yellowCards' => $history[$goal_player->category_id]['yellowCards'],
+                        'redCards' => $history[$goal_player->category_id]['redCards'],
+                    ];
+                    $goal_player->history = json_encode($history);
+                    $goal_player->save();
+
+                    //asistencia
+                    $assit_player = Player::where('id', $goal['goal_assist'])->first();
+                    $history = json_decode($assit_player->history, true);
+
+                    $history[$assit_player->category_id] = [
+                        'played' => $history[$assit_player->category_id]['played'],
+                        'goals' => $history[$assit_player->category_id]['goals'],
+                        'assits' => ++$history[$assit_player->category_id]['assits'],
+                        'yellowCards' => $history[$assit_player->category_id]['yellowCards'],
+                        'redCards' => $history[$assit_player->category_id]['redCards'],
+                    ];
+                    $assit_player->history = json_encode($history);
+                    $assit_player->save();
+                }
+
+                //amarillas
+                foreach ($yellowCards as $card) {
+                    $player = Player::where('id', $card)->first();
+                    $history = json_decode($player->history, true);
+                    $history[$player->category_id] = [
+                        'played' => $history[$player->category_id]['played'],
+                        'goals' => $history[$player->category_id]['goals'],
+                        'assits' => $history[$player->category_id]['assits'],
+                        'yellowCards' => ++$history[$player->category_id]['yellowCards'],
+                        'redCards' => $history[$player->category_id]['redCards'],
+                    ];
+                    $player->history = json_encode($history);
+                    $player->save();
+                }
+                //rojas
+                foreach ($redCards as $card) {
+                    $player = Player::where('id', $card)->first();
+                    $history = json_decode($player->history, true);
+                    $history[$player->category_id] = [
+                        'played' => $history[$player->category_id]['played'],
+                        'goals' => $history[$player->category_id]['goals'],
+                        'assits' => $history[$player->category_id]['assits'],
+                        'yellowCards' => $history[$player->category_id]['yellowCards'],
+                        'redCards' => ++$history[$player->category_id]['redCards'],
+                    ];
+                    $player->history = json_encode($history);
+                    $player->save();
+                }
             }
 
-            //amarillas
-            foreach ($yellowCards as $card) {
-                $player = Player::where('id', $card)->first();
-                $history = $goal_player->history[$goal_player->category_id];
-                $history = [
-                    'played' => $history['played'],
-                    'goals' => $history['goals'],
-                    'yelloCards' => $history['yellowCards']++,
-                    'redCards' => $history['redCards'],
-                ];
-                $goal_player->history[$goal_player->category_id] = $history;
-                $player->save();
-            }
-            //rojas
-            foreach ($redCards as $card) {
-                $player = Player::where('id', $card)->first();
-                $history = $goal_player->history[$goal_player->category_id];
-                $history = [
-                    'played' => $history['played'],
-                    'goals' => $history['goals'],
-                    'yelloCards' => $history['yellowCards'],
-                    'redCards' => $history['redCards']++,
-                ];
-                $goal_player->history[$goal_player->category_id] = $history;
-                $player->save();
-            }
-        }
+            Notification::make()
+                ->title('Informe guardado con éxito')
+                ->success()
+                ->seconds(5)
+                ->send();
 
-        Notification::make()
-            ->title('Informe guardado con éxito')
-            ->success()
-            ->seconds(5)
-            ->send();
+            }
+            redirect()->to('/admin/category-matches');
     }
 }
