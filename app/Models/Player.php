@@ -18,7 +18,6 @@ class Player extends Model
         'category_id',
         'birthdate',
         'team_id',
-        'history',
     ];
 
     protected $casts = [
@@ -43,6 +42,10 @@ class Player extends Model
 
     public function category(){
         return $this->belongsTo(Category::class);
+    }
+
+    public function history(){
+        return $this->hasMany(PlayerHistory::class);
     }
 
     protected static function booted()

@@ -40,7 +40,7 @@ class CategoryMatchResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->orderBy('date');
+        return parent::getEloquentQuery()->whereNull('report')->orderBy('date');
     }
 
     public static function form(Form $form): Form

@@ -6,6 +6,7 @@ use App\Filament\Resources\CategoryMatchResource;
 use App\Models\Category;
 use App\Models\CategoryMatch;
 use App\Models\Player;
+use App\Models\PlayerHistory;
 use Filament\Forms\Components\Actions\Modal\Actions\Action;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Grid;
@@ -143,106 +144,59 @@ class MatchReport extends Page
                 'red_cards' => $redCards,
             ]);
 
-            //falla al crear un informe para jugadores nuevos no se por que
-
             //actualizar el history de cada player añadiendole sus cosas
             if ($this->match->save()) {
-
                 $players = array_merge($this->local_players, $this->visitor_players);
 
                 //partido jugado
                 foreach ($players as $player_id) {
                     //comprobar historial si tiene el de la categoria y añadirle datos a ese historial
                     $player = Player::where('id', $player_id)->first();
+                    $player_history = PlayerHistory::where('player_id', $player_id)->where('category_id', $player->category_id)->first();
 
                     //historial con equipo activo
-                    if ($player->history && $player->history[$player->category_id]) {
-                        $history = json_decode($player->history, true);
-
-                        $history[$player->category_id] = [
-                            'played' => ++$history[$player->category_id]['played'],
-                            'goals' => $history[$player->category_id]['goals'],
-                            'assits' => $history[$player->category_id]['assits'],
-                            'yellowCards' => $history[$player->category_id]['yellowCards'],
-                            'redCards' => $history[$player->category_id]['redCards'],
-                        ];
-
-                        $player->history = json_encode($history);
-                        $player->save();
+                    if ($player_history) {
+                        $player_history->played++;
+                        $player_history->save();
 
                         //si no tiene historial con el equipo se lo creo
                     } else {
-                        $history = json_encode([
-                            $player->category_id => [
-                                'played' => 1,
-                                'goals' => 0,
-                                'assits' => 0,
-                                'yellowCards' => 0,
-                                'redCards' => 0,
-                            ]
+                        PlayerHistory::create([
+                            'player_id' => $player_id,
+                            'category_id' => $player->category_id,
+                            'league_id' => $player->category->league->id,
+                            'played' => 1,
                         ]);
-                        $player->history = $history;
-                        $player->save();
                     }
                 }
                 //goles
                 foreach ($goals as $goal) {
                     //marca
                     $goal_player = Player::where('id', $goal['goal_player'])->first();
-                    $history = json_decode($goal_player->history, true);
-
-                    $history[$goal_player->category_id] = [
-                        'played' => $history[$goal_player->category_id]['played'],
-                        'goals' => ++$history[$goal_player->category_id]['goals'],
-                        'assits' => $history[$goal_player->category_id]['assits'],
-                        'yellowCards' => $history[$goal_player->category_id]['yellowCards'],
-                        'redCards' => $history[$goal_player->category_id]['redCards'],
-                    ];
-                    $goal_player->history = json_encode($history);
-                    $goal_player->save();
+                    $player_history = PlayerHistory::where('player_id', $goal['goal_player'])->where('category_id', $goal_player->category_id)->first();
+                    $player_history->goals++;
+                    $player_history->save();
 
                     //asistencia
                     $assit_player = Player::where('id', $goal['goal_assist'])->first();
-                    $history = json_decode($assit_player->history, true);
-
-                    $history[$assit_player->category_id] = [
-                        'played' => $history[$assit_player->category_id]['played'],
-                        'goals' => $history[$assit_player->category_id]['goals'],
-                        'assits' => ++$history[$assit_player->category_id]['assits'],
-                        'yellowCards' => $history[$assit_player->category_id]['yellowCards'],
-                        'redCards' => $history[$assit_player->category_id]['redCards'],
-                    ];
-                    $assit_player->history = json_encode($history);
-                    $assit_player->save();
+                    $player_history = PlayerHistory::where('player_id', $goal['goal_assist'])->where('category_id', $assit_player->category_id)->first();
+                    $player_history->assits++;
+                    $player_history->save();
                 }
 
                 //amarillas
                 foreach ($yellowCards as $card) {
                     $player = Player::where('id', $card)->first();
-                    $history = json_decode($player->history, true);
-                    $history[$player->category_id] = [
-                        'played' => $history[$player->category_id]['played'],
-                        'goals' => $history[$player->category_id]['goals'],
-                        'assits' => $history[$player->category_id]['assits'],
-                        'yellowCards' => ++$history[$player->category_id]['yellowCards'],
-                        'redCards' => $history[$player->category_id]['redCards'],
-                    ];
-                    $player->history = json_encode($history);
-                    $player->save();
+                    $player_history = PlayerHistory::where('player_id', $card)->where('category_id', $player->category_id)->first();
+                    $player_history->yellow_cards++;
+                    $player_history->save();
                 }
                 //rojas
                 foreach ($redCards as $card) {
                     $player = Player::where('id', $card)->first();
-                    $history = json_decode($player->history, true);
-                    $history[$player->category_id] = [
-                        'played' => $history[$player->category_id]['played'],
-                        'goals' => $history[$player->category_id]['goals'],
-                        'assits' => $history[$player->category_id]['assits'],
-                        'yellowCards' => $history[$player->category_id]['yellowCards'],
-                        'redCards' => ++$history[$player->category_id]['redCards'],
-                    ];
-                    $player->history = json_encode($history);
-                    $player->save();
+                    $player_history = PlayerHistory::where('player_id', $card)->where('category_id', $player->category_id)->first();
+                    $player_history->red_cards++;
+                    $player_history->save();
                 }
             }
 

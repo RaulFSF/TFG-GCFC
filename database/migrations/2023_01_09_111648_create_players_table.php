@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('birthdate');
             $table->string('name');
             $table->string('email')->unique();
-            $table->json('history')->nullable();
             $table->timestamps();
         });
     }
