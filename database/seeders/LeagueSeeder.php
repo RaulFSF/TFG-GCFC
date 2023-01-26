@@ -22,8 +22,13 @@ class LeagueSeeder extends Seeder
             League::create([
                 'name' => 'Liga ' . $category_type->name,
                 'category_type_id' => $category_type->id,
-                'season' => '2023/2024',
-                'start_date' => Carbon::now()->addMonth(1)->toDate(),
+                'season_id' => 1,
+            ]);
+
+            League::create([
+                'name' => 'Liga ' . $category_type->name,
+                'category_type_id' => $category_type->id,
+                'season_id' => 2,
             ]);
         }
     }

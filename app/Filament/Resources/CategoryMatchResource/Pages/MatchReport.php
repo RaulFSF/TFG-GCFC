@@ -164,7 +164,7 @@ class MatchReport extends Page
                         PlayerHistory::create([
                             'player_id' => $player_id,
                             'category_id' => $player->category_id,
-                            'league_id' => $player->category->league->id,
+                            'league_id' => $this->match->matchDay->league->id,
                             'played' => 1,
                         ]);
                     }

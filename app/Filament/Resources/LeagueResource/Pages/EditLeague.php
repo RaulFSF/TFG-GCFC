@@ -24,6 +24,7 @@ class EditLeague extends EditRecord
                 ->requiresConfirmation()
                 ->modalHeading('Generar jornadas')
                 ->modalSubheading('¿Está seguro que quiere generar las jornadas de esta liga? Perderá todos los datos actuales de la liga incluyendo los partidos y jornadas'),
+            //cambiar delete por la nueva tabla pivote
             Actions\DeleteAction::make()->before(function (League $record) {
                 foreach ($record->categories as $category_id) {
                     $category = Category::where('id', $category_id->id)->first();

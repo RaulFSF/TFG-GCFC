@@ -13,13 +13,17 @@ class League extends Model
         'name',
         'category_type_id',
         'classification',
-        'season',
+        'season_id',
         'start_date',
     ];
 
     protected $casts = [
         'classification' => 'array',
     ];
+
+    public function season(){
+        return $this->belongsTo(Season::class);
+    }
 
     public function categoryType(){
         return $this->hasOne(CategoryType::class);

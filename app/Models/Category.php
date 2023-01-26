@@ -54,9 +54,9 @@ class Category extends Model
         return $this->hasMany(CategoryMatch::class);
     }
 
-    public function league()
+    public function leagues()
     {
-        return $this->belongsTo(League::class);
+        return $this->belongsToMany(League::class);
     }
 
     protected static function booted()

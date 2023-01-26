@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             TeamSeeder::class,
             CategoryTypeSeeder::class,
+            SeasonSeeder::class,
             LeagueSeeder::class,
             CategorySeeder::class,
             PlayerSeeder::class,

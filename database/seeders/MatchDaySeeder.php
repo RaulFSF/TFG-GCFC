@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\CategoryMatch;
 use App\Models\League;
 use App\Models\MatchDay;
@@ -9,6 +10,7 @@ use App\Models\Prompter;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class MatchDaySeeder extends Seeder
 {
@@ -20,15 +22,15 @@ class MatchDaySeeder extends Seeder
     public function run()
     {
         foreach (League::all() as $league) {
-            $firstMatchDay = Carbon::parse($league->start_date . ' next friday')->toDateString();
+            $firstMatchDay = Carbon::parse($league->season->start_date . ' next friday')->toDateString();
             $emparejamientos = array();
 
             $teams = array();
-            foreach ($league->categories as $category) {
-                array_push($teams, $category->id);
+            foreach(DB::table('league_category')->where('league_id', $league->id)->get() as $record){
+                array_push($teams, $record->category_id);
             }
 
-            $teamNum = count($league->categories);
+            $teamNum = DB::table('league_category')->where('league_id', $league->id)->get()->count();
 
             if ($teamNum % 2 == 0) {
                 //Equipos Pares
