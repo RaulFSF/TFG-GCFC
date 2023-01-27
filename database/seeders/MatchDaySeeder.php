@@ -26,11 +26,11 @@ class MatchDaySeeder extends Seeder
             $emparejamientos = array();
 
             $teams = array();
-            foreach(DB::table('league_category')->where('league_id', $league->id)->get() as $record){
+            foreach(DB::table('category_league')->where('league_id', $league->id)->get() as $record){
                 array_push($teams, $record->category_id);
             }
 
-            $teamNum = DB::table('league_category')->where('league_id', $league->id)->get()->count();
+            $teamNum = DB::table('category_league')->where('league_id', $league->id)->get()->count();
 
             if ($teamNum % 2 == 0) {
                 //Equipos Pares

@@ -48,11 +48,6 @@ class LeagueResource extends Resource
                     ->preload()
                     ->required()
                     ->disabledOn('edit'),
-                DatePicker::make('start_date')
-                    ->label('Fecha de inicio')
-                    ->minDate(now())
-                    ->maxDate(now()->addYear(2))
-                    ->helperText('La primera jornada de la liga será el Viernes siguiente a la fecha introducida'),
             ]);
     }
 
@@ -60,7 +55,8 @@ class LeagueResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label('Nombre'),
+                TextColumn::make('season.name')->label('Temporada')->searchable()->sortable(),
+                TextColumn::make('name')->label('Nombre')->searchable(),
             ])
             ->filters([
                 //
@@ -88,6 +84,7 @@ class LeagueResource extends Resource
             'create' => Pages\CreateLeague::route('/create'),
             'edit' => Pages\EditLeague::route('/{record}/edit'),
             'match-day' => Pages\ViewLeagueMatchDay::route('/{record}/match-day'),
+            'category-player' => Pages\ViewCategoryPlayers::route('/{record}/category-player'),
         ];
     }
 }

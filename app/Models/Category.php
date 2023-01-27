@@ -16,7 +16,6 @@ class Category extends Model
         'category_type_id',
         'players',
         'coach',
-        'league_id',
     ];
 
     protected $casts = [
@@ -56,7 +55,7 @@ class Category extends Model
 
     public function leagues()
     {
-        return $this->belongsToMany(League::class);
+        return $this->belongsToMany(League::class, 'category_league', 'league_id', 'category_id')->withPivot('id','created_at', 'updated_at');
     }
 
     protected static function booted()

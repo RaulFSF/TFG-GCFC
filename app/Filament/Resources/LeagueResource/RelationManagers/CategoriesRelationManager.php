@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\LeagueResource\RelationManagers;
 
+use App\Filament\Resources\LeagueResource;
+use App\Models\Category;
 use App\Models\League;
 use Closure;
 use Filament\Forms;
@@ -20,7 +22,12 @@ class CategoriesRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $inverseRelationship = 'league'; // Since the inverse related model is `Category`, this is normally `category`, not `section`.
+    protected static ?string $inverseRelationship = 'leagues';
+
+    protected static ?string $modelLabel = 'Categoría';
+
+    protected static ?string $pluralModelLabel = 'Categorías';
+
 
     public static function form(Form $form): Form
     {
@@ -50,8 +57,12 @@ class CategoriesRelationManager extends RelationManager
                     ->preloadRecordSelect(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\Action::make('Ver jugadores')->icon('heroicon-o-information-circle')
+                    ->url(function (Category $record) {
+                        return LeagueResource::getUrl('category-player', ['record' => $record]);
+                    }),
+                // Tables\Actions\EditAction::make(),
+                // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DissociateBulkAction::make(),

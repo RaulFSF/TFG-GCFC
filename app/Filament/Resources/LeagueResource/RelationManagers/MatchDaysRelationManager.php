@@ -18,6 +18,10 @@ class MatchDaysRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'id';
 
+    protected static ?string $modelLabel = 'Jornada';
+
+    protected static ?string $pluralModelLabel = 'Jornadas';
+
     public static function form(Form $form): Form
     {
         return $form

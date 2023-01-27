@@ -30,7 +30,7 @@ class League extends Model
     }
 
     public function categories(){
-        return $this->hasMany(Category::class);
+        return $this->belongsToMany(Category::class, 'category_league', 'league_id', 'category_id')->withPivot('id','created_at', 'updated_at');
     }
 
     public function matchDays(){
