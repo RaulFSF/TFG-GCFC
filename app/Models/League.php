@@ -12,7 +12,6 @@ class League extends Model
     protected $fillable = [
         'name',
         'category_type_id',
-        'classification',
         'season_id',
         'start_date',
     ];
@@ -32,7 +31,7 @@ class League extends Model
     public function categories(){
         return $this->belongsToMany(Category::class, 'category_league', 'league_id', 'category_id')->withPivot('id','created_at', 'updated_at');
     }
-
+    
     public function matchDays(){
         return $this->hasMany(MatchDay::class);
     }

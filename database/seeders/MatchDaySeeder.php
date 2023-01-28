@@ -117,6 +117,8 @@ class MatchDaySeeder extends Seeder
                         'prompter_id' => Prompter::where('id', random_int(1, Prompter::all()->count()))->first()->id,
                         'date' => $matchDayDate . ' 21:00',
                     ]);
+
+                    //AQUI añadir report para partidos viejos y tener un mejor seeder. Puede ser un una llamada a un método o hacerlo a lo bruto aquí
                 }
                 $matchDayDate = Carbon::parse($matchDayDate . ' next friday')->toDateString();
                 $iterator++;

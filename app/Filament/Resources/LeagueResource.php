@@ -62,6 +62,10 @@ class LeagueResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('Ver clasificación')->icon('heroicon-s-information-circle')
+                    ->url(function (League $record) {
+                        return LeagueResource::getUrl('classification', ['record' => $record]);
+                    }),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -85,6 +89,7 @@ class LeagueResource extends Resource
             'edit' => Pages\EditLeague::route('/{record}/edit'),
             'match-day' => Pages\ViewLeagueMatchDay::route('/{record}/match-day'),
             'category-player' => Pages\ViewCategoryPlayers::route('/{record}/category-player'),
+            'classification' => Pages\ViewClassification::route('/{record}/classification'),
         ];
     }
 }

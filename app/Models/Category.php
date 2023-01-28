@@ -55,7 +55,7 @@ class Category extends Model
 
     public function leagues()
     {
-        return $this->belongsToMany(League::class, 'category_league', 'league_id', 'category_id')->withPivot('id','created_at', 'updated_at');
+        return $this->belongsToMany(League::class, 'category_league', 'league_id', 'category_id')->withPivot('id','points', 'played','wins', 'draws','losts', 'goals_scored','goals_against','created_at', 'updated_at');
     }
 
     protected static function booted()

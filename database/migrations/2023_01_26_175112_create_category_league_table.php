@@ -17,6 +17,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('league_id');
             $table->foreignId('category_id');
+            $table->integer('points')->default(0);
+            $table->integer('played')->default(0);
+            $table->integer('wins')->default(0);
+            $table->integer('draws')->default(0);
+            $table->integer('losts')->default(0);
+            $table->integer('goals_scored')->default(0);
+            $table->integer('goals_against')->default(0);
             $table->timestamps();
         });
     }
