@@ -36,6 +36,8 @@ class ViewLeagueMatchDay extends Page implements Tables\Contracts\HasTable
         return [
             Tables\Columns\TextColumn::make('local.name')
                 ->label('Local'),
+            Tables\Columns\TextColumn::make('match_result')
+                ->label('Resultado'),
             Tables\Columns\TextColumn::make('visitor.name')
                 ->label('Visitante'),
             Tables\Columns\TextColumn::make('formated_date')

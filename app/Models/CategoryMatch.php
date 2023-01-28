@@ -14,7 +14,9 @@ class CategoryMatch extends Model
     protected $fillable = [
         'match_day_id',
         'local_id',
+        'local_score',
         'visitor_id',
+        'visitor_score',
         'prompter_id',
         'report',
         'date',
@@ -25,9 +27,16 @@ class CategoryMatch extends Model
     ];
 
     protected $appends = [
-        'formated_date'
-
+        'formated_date',
+        'match_result',
     ];
+
+    public function getMatchResultAttribute(){
+        if($this->local_score > -1 && $this->visitor_score > -1){
+            return $this->local_score . ' - ' . $this->visitor_score;
+        }
+        return "Sin resultado";
+    }
 
     public function getFormatedDateAttribute(){
         return Carbon::parse($this->date)->format('H:i d-m-Y');

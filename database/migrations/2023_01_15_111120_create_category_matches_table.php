@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('match_day_id');
             $table->foreignId('local_id');
+            $table->integer('local_score')->nullable();
+            $table->integer('visitor_score')->nullable();
             $table->foreignId('visitor_id')->nullable();
             $table->foreignId('prompter_id');
             $table->json('report')->nullable();

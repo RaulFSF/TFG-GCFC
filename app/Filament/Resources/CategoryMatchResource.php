@@ -64,7 +64,7 @@ class CategoryMatchResource extends Resource
             ->actions([
                 Tables\Actions\Action::make('informe')->icon('heroicon-s-pencil')
                     ->hidden(function (CategoryMatch $record) {
-                        return $record->date > Carbon::now() ? false : true;
+                        return !($record->date < Carbon::now());
                     })
                     ->url(function (CategoryMatch $record) {
                         return CategoryMatchResource::getUrl('report', ['record' => $record]);

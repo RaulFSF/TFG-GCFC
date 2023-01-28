@@ -9,6 +9,7 @@ use App\Models\Player;
 use App\Models\PlayerHistory;
 use Filament\Forms\Components\Actions\Modal\Actions\Action;
 use Filament\Forms\Components\Builder;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
@@ -59,6 +60,22 @@ class MatchReport extends Page
 
                                     TextInput::make('local_team')->label('Local')->disabled(),
                                     TextInput::make('visitor_team')->label('Local')->disabled(),
+
+                                    Fieldset::make('Resultado')
+                                        ->schema([
+                                            TextInput::make('local_score')
+                                                ->label('Local')
+                                                ->numeric()
+                                                ->default(0)
+                                                ->minValue(0)
+                                                ->maxValue(100),
+                                            TextInput::make('visitor_score')
+                                                ->label('Visitante')
+                                                ->numeric()
+                                                ->default(0)
+                                                ->minValue(0)
+                                                ->maxValue(100),
+                                        ]),
                                 ]),
                         ]),
                     Tabs\Tab::make('Alineaciones')
@@ -122,8 +139,13 @@ class MatchReport extends Page
                 ->danger()
                 ->seconds(5)
                 ->send();
+        } elseif (!ctype_digit($this->local_score) || !ctype_digit($this->visitor_score)) {
+            Notification::make()
+                ->title('Escriba numeros enteros sin decimales')
+                ->danger()
+                ->seconds(5)
+                ->send();
         } else {
-
             $goals = array();
             $yellowCards = array();
             $redCards = array();
@@ -136,77 +158,88 @@ class MatchReport extends Page
                 }
             }
 
-            $this->match->report = json_encode([
-                'local_players' => $this->local_players,
-                'visitor_players' => $this->visitor_players,
-                'goals' => $goals,
-                'yellow_cards' => $yellowCards,
-                'red_cards' => $redCards,
-            ]);
+            if (count($goals) != ($this->local_score + $this->visitor_score)) {
+                Notification::make()
+                    ->title('¡¡ERROR!! La cantidad de goles no es correcta. Rellene correctamente el informe otra vez')
+                    ->danger()
+                    ->seconds(5)
+                    ->send();
+            } else {
+                $this->match->report = json_encode([
+                    'local_players' => $this->local_players,
+                    'visitor_players' => $this->visitor_players,
+                    'goals' => $goals,
+                    'yellow_cards' => $yellowCards,
+                    'red_cards' => $redCards,
+                ]);
 
-            //actualizar el history de cada player añadiendole sus cosas
-            if ($this->match->save()) {
-                $players = array_merge($this->local_players, $this->visitor_players);
+                //Añadir resultado al partido
+                $this->match->local_score = $this->local_score;
+                $this->match->visitor_score = $this->visitor_score;
 
-                //partido jugado
-                foreach ($players as $player_id) {
-                    //comprobar historial si tiene el de la categoria y añadirle datos a ese historial
-                    $player = Player::where('id', $player_id)->first();
-                    $player_history = PlayerHistory::where('player_id', $player_id)->where('category_id', $player->category_id)->first();
+                //actualizar el history de cada player añadiendole sus cosas
+                if ($this->match->save()) {
+                    $players = array_merge($this->local_players, $this->visitor_players);
 
-                    //historial con equipo activo
-                    if ($player_history) {
-                        $player_history->played++;
+                    //partido jugado
+                    foreach ($players as $player_id) {
+                        //comprobar historial si tiene el de la categoria y añadirle datos a ese historial
+                        $player = Player::where('id', $player_id)->first();
+                        $player_history = PlayerHistory::where('player_id', $player_id)->where('category_id', $player->category_id)->first();
+
+                        //historial con equipo activo
+                        if ($player_history) {
+                            $player_history->played++;
+                            $player_history->save();
+
+                            //si no tiene historial con el equipo se lo creo
+                        } else {
+                            PlayerHistory::create([
+                                'player_id' => $player_id,
+                                'category_id' => $player->category_id,
+                                'league_id' => $this->match->matchDay->league->id,
+                                'played' => 1,
+                            ]);
+                        }
+                    }
+                    //goles
+                    foreach ($goals as $goal) {
+                        //marca
+                        $goal_player = Player::where('id', $goal['goal_player'])->first();
+                        $player_history = PlayerHistory::where('player_id', $goal['goal_player'])->where('category_id', $goal_player->category_id)->first();
+                        $player_history->goals++;
                         $player_history->save();
 
-                        //si no tiene historial con el equipo se lo creo
-                    } else {
-                        PlayerHistory::create([
-                            'player_id' => $player_id,
-                            'category_id' => $player->category_id,
-                            'league_id' => $this->match->matchDay->league->id,
-                            'played' => 1,
-                        ]);
+                        //asistencia
+                        $assit_player = Player::where('id', $goal['goal_assist'])->first();
+                        $player_history = PlayerHistory::where('player_id', $goal['goal_assist'])->where('category_id', $assit_player->category_id)->first();
+                        $player_history->assits++;
+                        $player_history->save();
+                    }
+
+                    //amarillas
+                    foreach ($yellowCards as $card) {
+                        $player = Player::where('id', $card)->first();
+                        $player_history = PlayerHistory::where('player_id', $card)->where('category_id', $player->category_id)->first();
+                        $player_history->yellow_cards++;
+                        $player_history->save();
+                    }
+                    //rojas
+                    foreach ($redCards as $card) {
+                        $player = Player::where('id', $card)->first();
+                        $player_history = PlayerHistory::where('player_id', $card)->where('category_id', $player->category_id)->first();
+                        $player_history->red_cards++;
+                        $player_history->save();
                     }
                 }
-                //goles
-                foreach ($goals as $goal) {
-                    //marca
-                    $goal_player = Player::where('id', $goal['goal_player'])->first();
-                    $player_history = PlayerHistory::where('player_id', $goal['goal_player'])->where('category_id', $goal_player->category_id)->first();
-                    $player_history->goals++;
-                    $player_history->save();
 
-                    //asistencia
-                    $assit_player = Player::where('id', $goal['goal_assist'])->first();
-                    $player_history = PlayerHistory::where('player_id', $goal['goal_assist'])->where('category_id', $assit_player->category_id)->first();
-                    $player_history->assits++;
-                    $player_history->save();
-                }
-
-                //amarillas
-                foreach ($yellowCards as $card) {
-                    $player = Player::where('id', $card)->first();
-                    $player_history = PlayerHistory::where('player_id', $card)->where('category_id', $player->category_id)->first();
-                    $player_history->yellow_cards++;
-                    $player_history->save();
-                }
-                //rojas
-                foreach ($redCards as $card) {
-                    $player = Player::where('id', $card)->first();
-                    $player_history = PlayerHistory::where('player_id', $card)->where('category_id', $player->category_id)->first();
-                    $player_history->red_cards++;
-                    $player_history->save();
-                }
+                Notification::make()
+                    ->title('Informe guardado con éxito')
+                    ->success()
+                    ->seconds(5)
+                    ->send();
             }
-
-            Notification::make()
-                ->title('Informe guardado con éxito')
-                ->success()
-                ->seconds(5)
-                ->send();
-
-            }
-            redirect()->to('/admin/category-matches');
+        }
+        redirect()->to('/admin/category-matches');
     }
 }

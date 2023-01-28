@@ -17,7 +17,7 @@ class ViewCategoryPlayers extends Page implements Tables\Contracts\HasTable
 
     protected static string $view = 'filament.resources.league-resource.pages.view-category-players';
 
-    protected static ?string $title = 'Jornada';
+    protected static ?string $title = 'Jugadores';
 
     public Category $category;
 

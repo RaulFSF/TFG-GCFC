@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\CategoryMatchResource\Pages;
 
 use App\Filament\Resources\CategoryMatchResource;
+use App\Models\CategoryMatch;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
 
