@@ -15,25 +15,11 @@ class CategoryTypeSeeder extends Seeder
      */
     public function run()
     {
-        CategoryType::create([
-            'name' => 'Benjamín'
-        ]);
-        CategoryType::create([
-            'name' => 'Alevín'
-        ]);
-        CategoryType::create([
-            'name' => 'Infantil'
-        ]);
-        CategoryType::create([
-            'name' => 'Cadete'
-        ]);
-        CategoryType::create([
-            'name' => 'Juvenil'
-        ]);
-        CategoryType::create([
-            'name' => 'Regional'
-        ]);
-
-
+        $types = ['Infantil','Cadete','Juvenil','Regional'];
+        foreach($types as $type){
+            CategoryType::create([
+                'name' => $type,
+            ]);
+        }
     }
 }

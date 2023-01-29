@@ -25,7 +25,21 @@ class Classification extends Model
 
     protected $appends = [
         'goals_difference',
+        'position',
     ];
+
+    public function getPositionAttribute()
+    {
+        $categories = Classification::where('league_id', $this->league_id)->orderByDesc('points')->orderByDesc('wins')->orderByDesc('goals_scored')->orderBy('goals_against')->get();
+        $iterator = 1;
+        foreach($categories as $category){
+            if($category->category_id === $this->category_id){
+                return $iterator;
+            }
+            $iterator++;
+        }
+        return '-1';
+    }
 
     public function getGoalsDifferenceAttribute()
     {

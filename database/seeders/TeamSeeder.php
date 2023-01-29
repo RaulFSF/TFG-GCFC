@@ -159,12 +159,12 @@ class TeamSeeder extends Seeder
             'field' => json_decode('[{"name" : "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" : "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"}]'),
         ]);
 
-        Team::create([
-            'administrator_id' => 20,
-            'name' => 'Guiniguada',
-            'description' => 'Equipo 19',
-            'shield' => 'teams/guiniguada.png',
-            'field' => json_decode('[{"name" : "Campo de Fútbol Montaña los Velez", "address" : "https://goo.gl/maps/dzYow9C9yVWjYU1N9"}]'),
-        ]);
+        // Team::create([
+        //     'administrator_id' => 20,
+        //     'name' => 'Guiniguada',
+        //     'description' => 'Equipo 19',
+        //     'shield' => 'teams/guiniguada.png',
+        //     'field' => json_decode('[{"name" : "Campo de Fútbol Montaña los Velez", "address" : "https://goo.gl/maps/dzYow9C9yVWjYU1N9"}]'),
+        // ]);
     }
 }

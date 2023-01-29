@@ -24,8 +24,8 @@ class SeasonSeeder extends Seeder
 
         Season::create([
             'name' => 'Temporada 22/23',
-            'start_date' => Carbon::createFromFormat('Y-m-d', '2022-09-05')->toDateString(),
-            'end_date' => Carbon::createFromFormat('Y-m-d', '2023-06-10')->toDateString(),
+            'start_date' => Carbon::createFromFormat('Y-m-d', '2022-09-10')->toDateString(),
+            'end_date' => Carbon::createFromFormat('Y-m-d', '2023-07-10')->toDateString(),
         ]);
     }
 }

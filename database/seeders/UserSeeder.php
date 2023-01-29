@@ -129,12 +129,12 @@ class UserSeeder extends Seeder
             'role' => 'president',
             'password' => bcrypt('1234'),
         ]);
-        User::create([
-            'name' => 'Guiniguada Pres',
-            'email' => 'guiniguada@gmail.com',
-            'role' => 'president',
-            'password' => bcrypt('1234'),
-        ]);
+        // User::create([
+        //     'name' => 'Guiniguada Pres',
+        //     'email' => 'guiniguada@gmail.com',
+        //     'role' => 'president',
+        //     'password' => bcrypt('1234'),
+        // ]);
         User::create([
             'name' => 'Javi Apuntador Sánchez ',
             'email' => 'apuntador@gmail.com',

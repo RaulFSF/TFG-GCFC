@@ -148,6 +148,7 @@ class EditLeague extends EditRecord
         }
         $matchDayDate = $firstMatchDay;
         $iterator = 1;
+        //Partidos de ida
         foreach ($emparejamientos as $round) {
             $matchDay = MatchDay::create([
                 'league_id' => $this->record->id,
@@ -159,6 +160,25 @@ class EditLeague extends EditRecord
                     'match_day_id' => $matchDay->id,
                     'local_id' => $match['local'],
                     'visitor_id' => $match['visitante'],
+                    'prompter_id' => Prompter::where('id', random_int(1, Prompter::all()->count()))->first()->id,
+                    'date' => $matchDayDate . ' 21:00',
+                ]);
+            }
+            $matchDayDate = Carbon::parse($matchDayDate . ' next friday')->toDateString();
+            $iterator++;
+        }
+        //Partidos de vuelta
+        foreach ($emparejamientos as $round) {
+            $matchDay = MatchDay::create([
+                'league_id' => $this->record->id,
+                'number' => $iterator,
+            ]);
+
+            foreach ($round as $match) {
+                CategoryMatch::create([
+                    'match_day_id' => $matchDay->id,
+                    'local_id' => $match['visitante'],
+                    'visitor_id' => $match['local'],
                     'prompter_id' => Prompter::where('id', random_int(1, Prompter::all()->count()))->first()->id,
                     'date' => $matchDayDate . ' 21:00',
                 ]);

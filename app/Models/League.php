@@ -13,11 +13,6 @@ class League extends Model
         'name',
         'category_type_id',
         'season_id',
-        'start_date',
-    ];
-
-    protected $casts = [
-        'classification' => 'array',
     ];
 
     public function season(){
@@ -31,7 +26,7 @@ class League extends Model
     public function categories(){
         return $this->belongsToMany(Category::class, 'category_league', 'league_id', 'category_id')->withPivot('id','created_at', 'updated_at');
     }
-    
+
     public function matchDays(){
         return $this->hasMany(MatchDay::class);
     }

@@ -30,14 +30,16 @@ class ViewClassification extends Page implements Tables\Contracts\HasTable
 
     protected function getTableQuery()
     {
-        return Classification::where('league_id', $this->league->id)->orderByDesc('points')->orderByDesc('wins');
+        return Classification::where('league_id', $this->league->id)->orderByDesc('points')->orderByDesc('wins')->orderByDesc('goals_scored')->orderBy('goals_against');
     }
 
     protected function getTableColumns(): array
     {
         return [
+            Tables\Columns\TextColumn::make('position')
+                ->label('Puesto'),
             Tables\Columns\TextColumn::make('category.name')
-                ->label('Nombre'),
+                ->label('Equipo'),
                 Tables\Columns\TextColumn::make('points')
                 ->label('PTS'),
                 Tables\Columns\TextColumn::make('played')
