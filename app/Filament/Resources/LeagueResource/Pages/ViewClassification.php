@@ -3,9 +3,11 @@
 namespace App\Filament\Resources\LeagueResource\Pages;
 
 use App\Filament\Resources\LeagueResource;
+use App\Models\Category;
 use App\Models\Classification;
 use App\Models\League;
 use App\Models\PlayerHistory;
+use App\Models\Scopes\CategoryOwnerScope;
 use Filament\Resources\Pages\Page;
 use Filament\Tables;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +26,7 @@ class ViewClassification extends Page implements Tables\Contracts\HasTable
 
     public function mount($record): void
     {
-        abort_unless(auth()->user()->role === 'admin', 403);
+        abort_unless(auth()->user()->role === 'admin' || auth()->user()->role === 'president', 403);
         $this->league = League::where('id', $record)->first();
     }
 
@@ -39,10 +41,14 @@ class ViewClassification extends Page implements Tables\Contracts\HasTable
             Tables\Columns\TextColumn::make('position')
                 ->label('Puesto'),
             Tables\Columns\TextColumn::make('category.name')
+                ->formatStateUsing(function ($record) {
+                    $category = Category::withoutGlobalScope('owner')->where('id', $record->category_id)->first();
+                    return __($category->name);
+                })
                 ->label('Equipo'),
-                Tables\Columns\TextColumn::make('points')
+            Tables\Columns\TextColumn::make('points')
                 ->label('PTS'),
-                Tables\Columns\TextColumn::make('played')
+            Tables\Columns\TextColumn::make('played')
                 ->label('J'),
             Tables\Columns\TextColumn::make('wins')
                 ->label('G'),
@@ -52,9 +58,9 @@ class ViewClassification extends Page implements Tables\Contracts\HasTable
                 ->label('P'),
             Tables\Columns\TextColumn::make('goals_scored')
                 ->label('GF'),
-                Tables\Columns\TextColumn::make('goals_against')
+            Tables\Columns\TextColumn::make('goals_against')
                 ->label('GC'),
-                Tables\Columns\TextColumn::make('goals_difference')
+            Tables\Columns\TextColumn::make('goals_difference')
                 ->label('GC'),
 
         ];
