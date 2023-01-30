@@ -82,6 +82,7 @@ class OwnPlayersResource extends Resource
                 Tables\Actions\Action::make('eliminar del club')
                     ->action(function (Player $record): void {
                         $record->team_id = null;
+                        $record->category_id = null;
 
                         if ($record->save()) {
                             Notification::make()
@@ -94,7 +95,7 @@ class OwnPlayersResource extends Resource
                                 ->danger()
                                 ->send();
                         }
-                    })->icon('heroicon-s-x-circle')->color('danger')->visible(auth()->user()->role === 'president'),
+                    })->icon('heroicon-s-x-circle')->color('danger')->visible(auth()->user()->role === 'president')->requiresConfirmation(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

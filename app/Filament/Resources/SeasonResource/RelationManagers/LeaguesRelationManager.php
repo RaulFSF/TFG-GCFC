@@ -65,7 +65,7 @@ class LeaguesRelationManager extends RelationManager
                     ->url(function (League $record) {
                         return LeagueResource::getUrl('edit', ['record' => $record]);
                     }),
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

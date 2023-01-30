@@ -32,6 +32,11 @@ class LeagueResource extends Resource
 
     protected static ?string $modelLabel = 'Liga';
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->role === 'admin';
+    }
+
     public static function form(Form $form): Form
     {
         return $form

@@ -6,6 +6,7 @@ use App\Filament\Resources\SeasonResource\Pages;
 use App\Filament\Resources\SeasonResource\RelationManagers;
 use App\Models\Season;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
@@ -41,8 +42,8 @@ class SeasonResource extends Resource
                 Grid::make('3')
                     ->schema([
                         TextInput::make('name')->label('Nombre'),
-                        TextInput::make('start_date')->label('Fecha de inicio'),
-                        TextInput::make('end_date')->label('Fecha de fin'),
+                        DatePicker::make('start_date')->label('Fecha de inicio'),
+                        DatePicker::make('end_date')->label('Fecha de fin'),
                     ]),
             ]);
     }

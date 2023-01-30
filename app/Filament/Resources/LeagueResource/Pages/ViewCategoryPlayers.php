@@ -46,7 +46,7 @@ class ViewCategoryPlayers extends Page implements Tables\Contracts\HasTable
             Tables\Columns\TextColumn::make('yellow_cards')
                 ->label('Tarjetas amarillas'),
             Tables\Columns\TextColumn::make('red_cards')
-                ->label('Tarkjetas rojas'),
+                ->label('Tarjetas rojas'),
 
         ];
     }
