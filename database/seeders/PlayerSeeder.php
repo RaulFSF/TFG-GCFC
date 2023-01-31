@@ -38,14 +38,9 @@ class PlayerSeeder extends Seeder
                         DB::table('player_scout')->insert([
                             'player_id' => $player->id,
                             'scout_id' => $scout->id,
-                            'follow' => random_int(0, 1),
-                            'ratings' => json_encode([
-                                0 => [
-                                    'date' => Carbon::now()->subDays(rand(1, 55)),
-                                    'stars' => random_int(1, 5),
-                                    'comment' => fake()->sentence(),
-                                ],
-                            ]),
+                            'date' => Carbon::now()->subDays(rand(1, 55)),
+                            'stars' => random_int(1, 5),
+                            'comment' => fake()->sentence(),
                         ]);
                     }
                 }

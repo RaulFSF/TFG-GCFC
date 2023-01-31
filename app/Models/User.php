@@ -24,7 +24,6 @@ class User extends Authenticatable implements FilamentUser
         'email',
         'role',
         'password',
-        // 'player_id',
     ];
 
     /**
@@ -52,6 +51,10 @@ class User extends Authenticatable implements FilamentUser
 
     public function prompter(){
         return $this->hasOne(Prompter::class);
+    }
+
+    public function scout(){
+        return $this->hasOne(Scout::class);
     }
 
     public function canAccessFilament(): bool

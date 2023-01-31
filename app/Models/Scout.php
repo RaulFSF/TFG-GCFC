@@ -14,6 +14,10 @@ class Scout extends Model
     ];
 
     public function players(){
-        return $this->belongsToMany(Player::class, 'player_scout', 'player_id', 'scout_id')->withPivot('id', 'ratings', 'follow', 'created_at', 'updated_at');
+        return $this->belongsToMany(Player::class, 'player_scout', 'player_id', 'scout_id')->withPivot('id', 'date' , 'comment', 'stars', 'created_at', 'updated_at');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }
