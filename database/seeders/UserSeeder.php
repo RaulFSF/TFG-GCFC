@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Scout;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -149,5 +150,18 @@ class UserSeeder extends Seeder
             'role' => 'president',
             'password' => bcrypt('1234'),
         ]);
+
+        for($i = 1; $i < 11; $i++){
+            $scout = User::create([
+                'name' => 'Ojeador ' . $i,
+                'email' => 'ojeador' . $i . '@gmail.com',
+                'role' => 'scout',
+                'password' => bcrypt('1234'),
+            ]);
+
+            Scout::create([
+                'user_id' => $scout->id,
+            ]);
+        }
     }
 }

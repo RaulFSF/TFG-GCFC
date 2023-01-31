@@ -48,6 +48,10 @@ class Player extends Model
         return $this->hasMany(PlayerHistory::class);
     }
 
+    public function scouts(){
+        return $this->belongsToMany(Scout::class, 'player_scout', 'player_id', 'scout_id')->withPivot('id', 'ratings', 'follow', 'created_at', 'updated_at');
+    }
+
     protected static function booted()
     {
         $user = User::where('id', auth()->id())->first();
