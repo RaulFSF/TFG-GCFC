@@ -42,12 +42,13 @@ class CategoryResource extends Resource
 
     public static function form(Form $form): Form
     {
-        $categories = Category::where('team_id', Team::where('administrator_id', auth()->user()->id)->first()['id'])->get()->pluck('category_type_id');
         $team_category_types = [];
-        foreach ($categories as $category) {
-            array_push($team_category_types, $category);
-        };
-
+        if(auth()->user()->role != 'admin'){
+            $categories = Category::where('team_id', Team::where('administrator_id', auth()->user()->id)->first()['id'])->get()->pluck('category_type_id');
+            foreach ($categories as $category) {
+                array_push($team_category_types, $category);
+            };
+        }
         $options = Player::where('category_id', null)->get()->pluck('user.name', 'user_id')->toArray();
         return $form
             ->schema([
@@ -56,25 +57,8 @@ class CategoryResource extends Resource
                         CategoryType::whereNotIn('id', $team_category_types)->get()->pluck('name', 'id')
                     )
                     ->hiddenOn('edit')
-                    ->preload(),
-                // Select::make('players')
-                //     ->multiple()
-                //     ->afterStateHydrated(function (Select $component, $state) {
-                //             $players = [];
-                //             foreach($state as $player){
-                //                 if($player){
-                //                     array_push($players, User::where('id', $player)->first()->pluck('name', 'id'));
-                //                 }
-                //             }
-                //             $component->state($players);
-                //         })
-                //     ->options($options)
-                //     ->preload()
-                //     ->searchable()
-                //     ->columnSpan('full'),
-                // Select::make('coach')
-                //     ->options(User::where('role', 'coach')->pluck('name', 'id'))
-                //     ->disablePlaceholderSelection(),
+                    ->preload()
+                    ->hidden(auth()->user()->role === 'admin'),
             ]);
     }
 

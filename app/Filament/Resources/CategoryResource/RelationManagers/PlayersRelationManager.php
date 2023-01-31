@@ -2,7 +2,11 @@
 
 namespace App\Filament\Resources\CategoryResource\RelationManagers;
 
+use App\Filament\Resources\OwnPlayersResource;
+use App\Models\Player;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
@@ -23,9 +27,18 @@ class PlayersRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('id')
+                TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
+                    ->label('Nombre de jugador'),
+                DatePicker::make('birthdate')
+                    ->required()
+                    ->label('Fecha de nacimiento'),
+                TextInput::make('email')
+                    ->required()
+                    ->label('Correo electrónico')
+                    ->columnSpan('full')
+                    ->email()
+                    ->unique(ignoreRecord: true),
             ]);
     }
 
@@ -45,6 +58,10 @@ class PlayersRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('Ver historial')->icon('heroicon-s-information-circle')
+                    ->url(function (Player $record) {
+                        return OwnPlayersResource::getUrl('player-history', ['record' => $record]);
+                    }),
                 Tables\Actions\DissociateAction::make(),
             ])
             ->bulkActions([

@@ -78,6 +78,10 @@ class OwnPlayersResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('Ver historial')->icon('heroicon-s-information-circle')
+                    ->url(function (Player $record) {
+                        return OwnPlayersResource::getUrl('player-history', ['record' => $record]);
+                    }),
                 Tables\Actions\DeleteAction::make()->visible(auth()->user()->role === 'admin'),
                 Tables\Actions\Action::make('eliminar del club')
                     ->action(function (Player $record): void {
@@ -115,6 +119,7 @@ class OwnPlayersResource extends Resource
             'index' => Pages\ListOwnPlayers::route('/'),
             'create' => Pages\CreateOwnPlayers::route('/create'),
             'edit' => Pages\EditOwnPlayers::route('/{record}/edit'),
+            'player-history' => Pages\ViewPlayerHistory::route('/{record}/player-history'),
         ];
     }
 }

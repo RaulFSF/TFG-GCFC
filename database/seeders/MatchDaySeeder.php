@@ -178,7 +178,8 @@ class MatchDaySeeder extends Seeder
         foreach ($match_players as $player) {
             //comprobar historial si tiene el de la categoria y añadirle datos a ese historial
             $player = Player::where('id', $player['id'])->first();
-            $player_history = PlayerHistory::where('player_id',  $player['id'])->where('category_id', $player['category_id'])->first();
+
+            $player_history = PlayerHistory::where('player_id',  $player['id'])->where('category_id', $player['category_id'])->where('league_id', $match->matchDay->league->id)->first();
 
             //historial con equipo activo
             if ($player_history) {
@@ -199,13 +200,13 @@ class MatchDaySeeder extends Seeder
         //Añadir goles y asistencias a equipo local
         for ($i = 0; $i <= $local_score; $i++) {
             $player = $local_players[random_int(0, count($local_players) - 1)];
-            $player_history = PlayerHistory::where('player_id', $player['id'])->where('category_id', $player['category_id'])->first();
+            $player_history = PlayerHistory::where('player_id', $player['id'])->where('category_id', $player['category_id'])->where('league_id', $match->matchDay->league->id)->first();
 
             $player_history->goals++;
             $player_history->save();
 
             $player_assits = $local_players[random_int(0, count($local_players) - 1)];
-            $player_assits_history = PlayerHistory::where('player_id', $player_assits['id'])->where('category_id', $player_assits['category_id'])->first();
+            $player_assits_history = PlayerHistory::where('player_id', $player_assits['id'])->where('category_id', $player_assits['category_id'])->where('league_id', $match->matchDay->league->id)->first();
 
             $player_assits_history->assits++;
             $player_assits_history->save();
@@ -215,13 +216,13 @@ class MatchDaySeeder extends Seeder
         //Añadir goles y asistencias a equipo visitante
         for ($i = 0; $i <= $visitor_score; $i++) {
             $player = $visitor_players[random_int(0, count($visitor_players) - 1)];
-            $player_history = PlayerHistory::where('player_id', $player['id'])->where('category_id', $player['category_id'])->first();
+            $player_history = PlayerHistory::where('player_id', $player['id'])->where('category_id', $player['category_id'])->where('league_id', $match->matchDay->league->id)->first();
 
             $player_history->goals++;
             $player_history->save();
 
             $player_assits = $visitor_players[random_int(0, count($visitor_players) - 1)];
-            $player_assits_history = PlayerHistory::where('player_id', $player_assits['id'])->where('category_id', $player_assits['category_id'])->first();
+            $player_assits_history = PlayerHistory::where('player_id', $player_assits['id'])->where('category_id', $player_assits['category_id'])->where('league_id', $match->matchDay->league->id)->first();
 
             $player_assits_history->assits++;
             $player_assits_history->save();
@@ -237,7 +238,7 @@ class MatchDaySeeder extends Seeder
         //Añadir tarjetas amarillas
         for ($i = 0; $i <= $yellow_cards; $i++) {
             $player = $match_players[random_int(0, count($match_players) - 1)];
-            $player_history = PlayerHistory::where('player_id', $player['id'])->where('category_id', $player['category_id'])->first();
+            $player_history = PlayerHistory::where('player_id', $player['id'])->where('category_id', $player['category_id'])->where('league_id', $match->matchDay->league->id)->first();
 
             $player_history->yellow_cards++;
             $player_history->save();
@@ -249,7 +250,7 @@ class MatchDaySeeder extends Seeder
         //Añadir tarjetas rojas
         for ($i = 0; $i <= $red_cards; $i++) {
             $player = $match_players[random_int(0, count($match_players) - 1)];
-            $player_history = PlayerHistory::where('player_id', $player['id'])->where('category_id', $player['category_id'])->first();
+            $player_history = PlayerHistory::where('player_id', $player['id'])->where('category_id', $player['category_id'])->where('league_id', $match->matchDay->league->id)->first();
 
             $player_history->red_cards++;
             $player_history->save();
