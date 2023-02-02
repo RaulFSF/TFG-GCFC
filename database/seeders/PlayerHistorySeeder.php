@@ -20,9 +20,8 @@ class PlayerHistorySeeder extends Seeder
         $matches = CategoryMatch::whereNotNull('report')->get();
 
         foreach($matches as $match){
-            $report = json_decode($match->report);
 
-            $all_players = array_merge($report->local_players, $report->visitor_players);
+            $all_players = array_merge($match->report['local_players'],$match->report['visitor_players']);
             $players = [];
             foreach($all_players as $player_id){
                 $player = Player::where('id', $player_id)->first();
@@ -39,8 +38,8 @@ class PlayerHistorySeeder extends Seeder
             PlayerHistory::upsert($players, ['id'], ['played']);
 
             $players_goal = [];
-            foreach($report->goals as $goal){
-                $player = Player::where('id', $goal->goal_player)->first();
+            foreach($match->report['goals'] as $goal){
+                $player = Player::where('id', $goal['goal_player'])->first();
                 $player_history = PlayerHistory::where('player_id', $player->id)->where('category_id', $player->category_id)->where('league_id', $match->matchDay->league->id)->first();
 
                 $players_goal[] = [
@@ -53,7 +52,7 @@ class PlayerHistorySeeder extends Seeder
                     'yellow_cards' => $player_history->yellow_cards,
                     'red_cards' => $player_history->red_cards,
                 ];
-                $player = Player::where('id', $goal->goal_assist)->first();
+                $player = Player::where('id', $goal['goal_assist'])->first();
                 $player_history = PlayerHistory::where('player_id', $player->id)->where('category_id', $player->category_id)->where('league_id', $match->matchDay->league->id)->first();
 
                 $players_goal[] = [
@@ -69,7 +68,7 @@ class PlayerHistorySeeder extends Seeder
             }
 
             $players_yellow = [];
-            foreach($report->yellow_cards as $player_id){
+            foreach($match->report['yellow_cards'] as $player_id){
                 $player = Player::where('id', $player_id)->first();
                 $player_history = PlayerHistory::where('player_id', $player->id)->where('category_id', $player->category_id)->where('league_id', $match->matchDay->league->id)->first();
                 $players_yellow[] = [
@@ -85,7 +84,7 @@ class PlayerHistorySeeder extends Seeder
             }
 
             $players_red = [];
-            foreach($report->red_cards as $player_id){
+            foreach($match->report['red_cards'] as $player_id){
                 $player = Player::where('id', $player_id)->first();
                 $player_history = PlayerHistory::where('player_id', $player->id)->where('category_id', $player->category_id)->where('league_id', $match->matchDay->league->id)->first();
                 $players_red[] = [

@@ -19,6 +19,7 @@ class ReportSeeder extends Seeder
     {
         $matches = CategoryMatch::where('date', '<', Carbon::now())->get();
 
+        $reports = [];
         foreach ($matches as $match) {
             //Jugadores de ambos equipos
             $local_players = Player::where('category_id', $match->local_id)->inRandomOrder()->limit(16)->get()->toArray();
@@ -92,7 +93,18 @@ class ReportSeeder extends Seeder
                 'red_cards' => $array_red_cards,
             ]);
 
-            $match->save();
+            $reports[] = [
+                'id' => $match->id,
+                'match_day_id' => $match->match_day_id,
+                'local_id' => $match->local_id,
+                'local_score' => $match->local_score,
+                'visitor_id' => $match->visitor_id,
+                'visitor_score' => $match->visitor_score,
+                'prompter_id' => $match->prompter_id,
+                'report' => $match->report,
+                'date' => $match->date,
+            ];
         }
+        CategoryMatch::upsert($reports, ['id'], ['report', 'local_score', 'visitor_score']);
     }
 }
