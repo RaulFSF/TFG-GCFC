@@ -31,6 +31,8 @@ class PlayerSeeder extends Seeder
                         'team_id' => $category->team->id,
                         'category_id' => $category->id,
                         'birthdate' => fake()->dateTimeBetween('-40 years', '-10 years')->format('Y-m-d'),
+                        'created_at' => now(),
+                        'updated_at' => now(),
                     ];
                 }
             }
