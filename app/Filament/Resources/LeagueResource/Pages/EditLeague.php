@@ -153,6 +153,7 @@ class EditLeague extends EditRecord
             $matchDay = MatchDay::create([
                 'league_id' => $this->record->id,
                 'number' => $iterator,
+                'date' => $matchDayDate,
             ]);
 
             foreach ($round as $match) {
@@ -172,6 +173,7 @@ class EditLeague extends EditRecord
             $matchDay = MatchDay::create([
                 'league_id' => $this->record->id,
                 'number' => $iterator,
+                'date' => $matchDayDate,
             ]);
 
             foreach ($round as $match) {

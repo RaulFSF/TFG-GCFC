@@ -114,6 +114,7 @@ class MatchDaySeeder extends Seeder
                 $matchDay = MatchDay::create([
                     'league_id' => $league->id,
                     'number' => $iterator,
+                    'date' => $matchDayDate,
                 ]);
 
                 foreach ($round as $match) {
@@ -135,6 +136,7 @@ class MatchDaySeeder extends Seeder
                 $matchDay = MatchDay::create([
                     'league_id' => $league->id,
                     'number' => $iterator,
+                    'date' => $matchDayDate,
                 ]);
 
                 foreach ($round as $match) {

@@ -12,6 +12,7 @@ class MatchDay extends Model
     protected $fillable = [
         'league_id',
         'number',
+        'date',
     ];
 
     protected $appends = [

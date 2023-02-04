@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('league_id');
             $table->integer('number');
+            $table->date('date');
             $table->timestamps();
         });
     }

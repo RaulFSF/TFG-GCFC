@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             ReportSeeder::class,
             ClassificationSeeder::class,
             PlayerHistorySeeder::class,
+            FollowPlayerSeeder::class,
         ]);
     }
 }

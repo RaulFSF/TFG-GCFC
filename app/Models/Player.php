@@ -52,10 +52,15 @@ class Player extends Model
         return $this->belongsToMany(Scout::class, 'player_scout', 'player_id', 'scout_id')->withPivot('id', 'date' , 'comment', 'stars', 'created_at', 'updated_at');
     }
 
+    public function follows()
+    {
+        return $this->belongsToMany(Scout::class, 'player_follow', 'player_id', 'scout_id')->withPivot('created_at', 'updated_at');
+    }
+
     protected static function booted()
     {
         $user = User::where('id', auth()->id())->first();
-        if(isset($user) && $user->role != 'admin' && $user->role !== 'prompter'){
+        if(isset($user) && $user->role != 'admin' && $user->role !== 'prompter' && $user->role !== 'scout'){
             static::addGlobalScope('owner', function (Builder $builder) {
                  $builder->where('team_id',  Team::where('administrator_id', auth()->user()->id)->first()['id']);
             });

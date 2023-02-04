@@ -20,4 +20,9 @@ class Scout extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function follows()
+    {
+        return $this->belongsToMany(Player::class, 'player_follow', 'player_id', 'scout_id')->withPivot('created_at', 'updated_at');
+    }
 }
