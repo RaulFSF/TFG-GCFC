@@ -17,7 +17,7 @@
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
-    <div class="w-full">
+    <div class="w-full bg-base3">
         @if (Request::route()->getName() != 'login')
             <x-nav />
         @endif

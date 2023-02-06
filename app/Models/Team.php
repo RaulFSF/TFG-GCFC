@@ -37,7 +37,7 @@ class Team extends Model
 
     protected function shieldUrl(): Attribute {
         return Attribute::make(
-            get: fn () => Storage::url($this->shield_url),
+            get: fn () => Storage::url($this->shield),
         );
     }
 }

@@ -8,7 +8,7 @@
             @endif
         @endif
 
-        <div class="w-1/2 mt-10 bg-blue-400">
+        <div class="w-1/2 mt-10">
             <livewire:list-matches />
         </div>
     </div>

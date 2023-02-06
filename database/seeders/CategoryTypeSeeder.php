@@ -15,7 +15,7 @@ class CategoryTypeSeeder extends Seeder
      */
     public function run()
     {
-        $types = ['Regional'];
+        $types = ['Juvenil','Regional'];
         foreach($types as $type){
             CategoryType::create([
                 'name' => $type,

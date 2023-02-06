@@ -61,7 +61,7 @@ class Category extends Model
     protected static function booted()
     {
         $user = User::where('id', auth()->id())->first();
-        if (isset($user) && $user->role !== 'admin' && $user->role !== 'prompter') {
+        if (isset($user) && $user->role !== 'admin' && $user->role !== 'prompter' && $user->role !== 'scout') {
             static::addGlobalScope('owner', function (Builder $builder) {
                 $builder->where('team_id',  Team::where('administrator_id', auth()->user()->id)->first()['id']);
             });

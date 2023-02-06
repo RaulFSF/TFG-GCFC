@@ -1,4 +1,4 @@
-<div class="bg-red-500 py-4">
+<div class="bg-base1 shadow-xl py-4">
     <div class="max-w-5xl mx-auto flex justify-between items-center">
 
         <a href="/">
