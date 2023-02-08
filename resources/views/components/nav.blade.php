@@ -1,12 +1,21 @@
-<div class="bg-base1 shadow-xl py-4">
+<div class="bg-base1 shadow-xl pt-4">
     <div class="max-w-5xl mx-auto flex justify-between items-center">
 
-        <a href="/">
+        <a href="/" class="pb-4">
             <x-application-logo />
         </a>
 
-        @if (Auth::user())
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+        <div>
+            <a href="{{route('league')}}" class="text-baseText text-lg hover:bg-base3 hover:text-base1 duration-200 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Ligas</a>
+        </div>
+        <div>
+            <a href="{{route('league')}}" class="text-baseText text-lg hover:bg-base3 hover:text-base1 duration-200 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Ligas</a>
+        </div>
+        <div>
+            <a href="{{route('league')}}" class="text-baseText text-lg hover:bg-base3 hover:text-base1 duration-200 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Ligas</a>
+        </div>
+        @auth
+            <div class="hidden sm:flex sm:items-center sm:ml-6 pb-4">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
@@ -45,6 +54,6 @@
             <a href="{{ route('login') }}"
                 class="bg-black px-3 py-2 rounded-md hover:scale-105 duration-200 ease-in-out text-white text-md">Iniciar
                 sesión</a>
-        @endif
+        @endauth
     </div>
 </div>

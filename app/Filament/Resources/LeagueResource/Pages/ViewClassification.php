@@ -61,7 +61,7 @@ class ViewClassification extends Page implements Tables\Contracts\HasTable
             Tables\Columns\TextColumn::make('goals_against')
                 ->label('GC'),
             Tables\Columns\TextColumn::make('goals_difference')
-                ->label('GC'),
+                ->label('DF'),
 
         ];
     }
