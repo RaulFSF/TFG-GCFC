@@ -17,7 +17,14 @@ module.exports = {
                 base3: '#CFD1D1',
                 baseText: '#D9DDDE',
             },
-        },
+            backgroundSize: {
+                'size-200': '400% 400%',
+            },
+            backgroundPosition: {
+                'pos-0': '0% 0%',
+                'pos-100': '100% 100%',
+            },
+        }
     },
     plugins: [
         require('@tailwindcss/forms'),

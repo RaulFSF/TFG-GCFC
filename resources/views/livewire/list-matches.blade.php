@@ -6,10 +6,10 @@
 
         <div class="mb-4">
             <select wire:model="search" wire:change="searchLeague"
-                class="w-3/4 border-2 shadow-lg bg-base1 border-base1 italic font-light rounded-lg text-baseText">
-                <option value="-1" selected class="text-baseText text-sm">Todas las ligas</option>
+                class="w-3/4 border-2 shadow-lg select-gradient border-base1 italic font-light rounded-lg text-baseText">
+                <option value="-1" selected class="text-baseText text-sm bg-base1">Todas las ligas</option>
                 @foreach ($options as $option)
-                    <option value="{{ $option->id }}" class="text-baseText text-sm">{{ $option->name }} </option>
+                    <option value="{{ $option->id }}" class="text-baseText text-sm bg-base1">{{ $option->name }} </option>
                 @endforeach
             </select>
         </div>
@@ -31,8 +31,11 @@
             @foreach ($matchDays as $matchDay)
                 <div class="mb-4">
 
-                    <div class="text-center w-full bg-base1 text-baseText rounded-t-lg py-2">
-                        {{ $matchDay->league->name }} - Jornada {{ $matchDay->number }}
+                    <div class="text-center w-full bg-gradient-to-b from-base2 to-base1 text-baseText rounded-t-lg py-2">
+                        <a class="hover:text-lg duration-200 ease-in-out hover:text-white" href="{{route('league.league', ['league' => $matchDay->league_id])}}">
+                            {{ $matchDay->league->name }}
+                        </a>
+                         - Jornada {{ $matchDay->number }}
                     </div>
                     <div class="rounded-b-lg ">
                         @foreach ($matchDay->categoryMatches as $match)

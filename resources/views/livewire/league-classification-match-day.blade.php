@@ -3,9 +3,9 @@
 
         <div class="mb-4 w-3/4 mx-auto">
             <select wire:model="search" wire:change="searchLeague"
-                class="w-full mx-auto border-2 shadow-lg bg-base1 border-base1 italic font-light rounded-lg text-baseText">
+                class="w-full mx-auto border-2 shadow-lg select-gradient border-base1 italic font-light rounded-lg text-baseText">
                 @foreach ($options as $option)
-                    <option value="{{ $option->id }}" class="text-baseText text-sm">{{ $option->name }} </option>
+                    <option value="{{ $option->id }}" class="text-baseText text-sm bg-base1">{{ $option->name }} </option>
                 @endforeach
             </select>
         </div>
@@ -27,7 +27,7 @@
         <div wire:loading.remove wire:target="searchLeague">
             <div class="flex-col space-y-4 w-full shadow-lg">
                 <table class="w-full table-auto text-sm text-left text-gray-500">
-                    <thead class="text-xs text-baseText uppercase bg-base1">
+                    <thead class="text-xs text-baseText uppercase select-gradient">
                         <tr>
                             <th scope="col" class="pl-4 py-3 w-20">
                                 Puesto
@@ -63,16 +63,16 @@
                     </thead>
                     <tbody>
                         @foreach ($league_teams as $team)
-                            <tr class="bg-baseText border-b hover:scale-[1.01] duration-200 ease-in-out">
+                            <tr class="bg-baseText border-b hover:scale-[1.01] duration-200 ease-in-out group">
                                 <td class="text-left pl-4">
                                     {{ $team->position }}
                                 </td>
                                 <td
-                                    class="px-6 py-4 font-medium text-gray-900 hover:scale-105 duration-200 ease-in-out ">
-                                    <a href="/" class="">
-                                        <div class="flex items-center justify-start space-x-5">
+                                    class="px-6 py-4 font-medium text-gray-900 hover:scale-105 duration-200 ease-in-out">
+                                    <a href="/" class="w-full">
+                                        <div class="flex items-center justify-start space-x-5 ">
                                             <img src="{{ asset($team->category->team->shield_url) }}"
-                                                alt="escudo de {{ $team->category->team->name }}" class="w-10 h-full">
+                                                alt="escudo de {{ $team->category->team->name }}" class="w-10 h-full group-hover:animate-bounce">
                                             <p>{{ $team->category->team->name }}</p>
                                         </div>
                                     </a>
@@ -113,9 +113,9 @@
         <div class="w-full mx-auto text-center bg-base3 p-5 rounded-lg shadow-lg">
             <div class="mb-4">
                 <select wire:model="searchMatchDay" wire:change="searchMatchDay"
-                    class="w-3/4 border-2 shadow-lg bg-base1 border-base1 italic font-light rounded-lg text-baseText">
+                    class="w-3/4 border-2 shadow-lg select-gradient border-base1 italic font-light rounded-lg text-baseText">
                     @foreach ($options_matchDays as $option)
-                        <option value="{{ $option->id }}" class="text-baseText text-sm">{{ $option->name }}
+                        <option value="{{ $option->id }}" class="text-baseText text-sm bg-base1">{{ $option->name }}
                         </option>
                     @endforeach
                 </select>

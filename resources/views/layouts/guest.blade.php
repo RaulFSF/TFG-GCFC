@@ -24,6 +24,9 @@
         <div>
             {{ $slot }}
         </div>
+        @if (Request::route()->getName() != 'login')
+            <x-footer />
+        @endif
     </div>
     @livewireScripts
 </body>

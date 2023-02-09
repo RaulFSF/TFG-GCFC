@@ -5,11 +5,11 @@
         </h2>
     </div>
     <div class="w-3/4 mx-auto">
-        <input type="text" wire:model="search" class="rounded h-10 w-full bg-base1 border-base1 shadow-lg text-baseText placeholder:text-white placeholder:italic placeholder:font-light" placeholder="Buscar jugador...">
+        <input type="text" wire:model="search" class="rounded h-10 w-full bg-gradient-to-b from-base2 to-base1 border-base1 shadow-lg text-baseText placeholder:text-white placeholder:italic placeholder:font-light" placeholder="Buscar jugador...">
     </div>
     <div class="flex-col space-y-4 w-full shadow-lg">
         <table class="w-full table-auto text-sm text-left text-gray-500">
-            <thead class="text-xs text-baseText uppercase bg-base1">
+            <thead class="text-xs text-baseText uppercase bg-gradient-to-b from-base2 to-base1">
                 <tr>
                     <th scope="col" class="px-6 py-3">
                         Nombre

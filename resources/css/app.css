@@ -9,6 +9,10 @@
     --main-bg-color: brown;
 }
 
+.select-gradient{
+    background: linear-gradient(180deg, #1B2337 0%, #455881 100%);
+}
+
 
 /* top-left border-radius */
 table tr:first-child th:first-child {

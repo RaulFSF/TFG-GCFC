@@ -1,18 +1,18 @@
-<div class="bg-base1 shadow-xl pt-4">
+<div class="bg-gradient-to-b from-base2 to-base1 shadow-xl pt-4">
     <div class="max-w-5xl mx-auto flex justify-between items-center">
 
-        <a href="/" class="pb-4">
+        <a href="/" class="pb-4 text-baseText hover:text-white duration-200 ease-in-out">
             <x-application-logo />
         </a>
 
         <div>
-            <a href="{{route('league')}}" class="text-baseText text-lg hover:bg-base3 hover:text-base1 duration-200 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Ligas</a>
+            <a href="{{route('league')}}" class="text-baseText text-lg duration-1000 bg-gradient-to-b to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Ligas</a>
         </div>
         <div>
-            <a href="{{route('league')}}" class="text-baseText text-lg hover:bg-base3 hover:text-base1 duration-200 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Ligas</a>
+            <a href="{{route('league')}}" class="text-baseText text-lg duration-1000 bg-gradient-to-b to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Ligas</a>
         </div>
         <div>
-            <a href="{{route('league')}}" class="text-baseText text-lg hover:bg-base3 hover:text-base1 duration-200 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Ligas</a>
+            <a href="{{route('league')}}" class="text-baseText text-lg duration-1000 bg-gradient-to-b to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Ligas</a>
         </div>
         @auth
             <div class="hidden sm:flex sm:items-center sm:ml-6 pb-4">
