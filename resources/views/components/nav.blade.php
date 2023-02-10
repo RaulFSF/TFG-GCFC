@@ -4,17 +4,18 @@
         <a href="/" class="pb-4 text-baseText hover:text-white duration-200 ease-in-out">
             <x-application-logo />
         </a>
-
+        
         <div>
-            <a href="{{route('league')}}" class="text-baseText text-lg duration-1000 bg-gradient-to-b to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Ligas</a>
-        </div>
-        <div>
-            <a href="{{route('league')}}" class="text-baseText text-lg duration-1000 bg-gradient-to-b to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Ligas</a>
-        </div>
-        <div>
-            <a href="{{route('league')}}" class="text-baseText text-lg duration-1000 bg-gradient-to-b to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Ligas</a>
+            <a href="{{ route('league') }}"
+                class="{{ request()->route()->getName() == 'league'? 'bg-baseText text-base1': 'bg-gradient-to-b' }} text-baseText text-lg duration-1000  to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Ligas</a>
         </div>
         @auth
+
+            <div>
+                <a href="{{ route('players') }}"
+                    class="{{ request()->route()->getName() == 'players'? 'bg-baseText text-base1': 'bg-gradient-to-b' }} text-baseText text-lg duration-1000  to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Buscar jugadores</a>
+            </div>
+
             <div class="hidden sm:flex sm:items-center sm:ml-6 pb-4">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">

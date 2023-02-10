@@ -2,13 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\League;
-use App\Models\Player;
 use App\Models\PlayerHistory;
 use App\Models\Scout;
 use App\Models\Season;
-use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 

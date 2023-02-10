@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LeagueController;
+use App\Http\Controllers\PlayersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,8 @@ Route::get('/', [HomeController::class, 'show'])->name('home');
 Route::get('/league', [LeagueController::class, 'show'])->name('league');
 
 Route::get('/league/{league}', [LeagueController::class, 'showLeague'])->name('league.league');
+
+Route::get('/players', [PlayersController::class, 'show'])->name('players');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

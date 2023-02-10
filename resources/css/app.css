@@ -13,6 +13,14 @@
     background: linear-gradient(180deg, #1B2337 0%, #455881 100%);
 }
 
+.unfollow-gradient{
+    background: linear-gradient(180deg, #ED3535 0%, rgba(78, 31, 31, 0.97) 100%);
+}
+
+.card-gradient{
+    background: linear-gradient(180deg, #ABBDE3 0%, #2F4A86 100%);
+}
+
 
 /* top-left border-radius */
 table tr:first-child th:first-child {
