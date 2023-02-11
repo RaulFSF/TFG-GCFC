@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         $users = [];
-        
+
         $users[] = [
             'name' => 'Admin',
             'email' => 'admin@dev.com',
@@ -25,6 +25,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
 
         $users[] = [
@@ -34,6 +35,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
 
         $users[] = [
@@ -43,6 +45,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'Street Canarias Pres',
@@ -51,6 +54,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'Goleta Sub23 Pres',
@@ -59,6 +63,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'Aregranca Pres',
@@ -67,6 +72,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'Talleres Canary Pres',
@@ -75,6 +81,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'Siete Palmas Pres',
@@ -83,6 +90,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'Almenara',
@@ -91,6 +99,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'Abrisajac Pres',
@@ -99,6 +108,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'San Pedro Pres',
@@ -107,6 +117,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'Sardina Pres',
@@ -115,6 +126,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'Barrio Atlántico Pres',
@@ -123,6 +135,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'Telde Pres',
@@ -131,6 +144,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'Mogán Pres',
@@ -139,6 +153,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'La Garita Pres',
@@ -147,6 +162,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'Real Sporting Pres',
@@ -155,6 +171,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'Firgas Pres',
@@ -163,6 +180,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'Pedro Hidalgo Pres',
@@ -171,6 +189,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'Guiniguada Pres',
@@ -179,6 +198,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
         $users[] = [
             'name' => 'Javi Apuntador Sánchez ',
@@ -187,6 +207,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
+            'image' => 'no_photo.png',
         ];
 
         for ($i = 1; $i < 11; $i++) {
@@ -197,6 +218,7 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('1234'),
                 'created_at' => now(),
                 'updated_at' => now(),
+                'image' => 'no_photo.png',
             ];
         }
 

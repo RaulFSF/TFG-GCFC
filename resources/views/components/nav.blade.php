@@ -4,7 +4,7 @@
         <a href="/" class="pb-4 text-baseText hover:text-white duration-200 ease-in-out">
             <x-application-logo />
         </a>
-        
+
         <div>
             <a href="{{ route('league') }}"
                 class="{{ request()->route()->getName() == 'league'? 'bg-baseText text-base1': 'bg-gradient-to-b' }} text-baseText text-lg duration-1000  to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Ligas</a>
@@ -34,8 +34,13 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+
+                        <x-dropdown-link :href="route('own.profile.view')">
                             {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Edit profile') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->

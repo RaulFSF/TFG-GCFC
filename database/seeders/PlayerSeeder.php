@@ -33,6 +33,7 @@ class PlayerSeeder extends Seeder
                         'birthdate' => fake()->dateTimeBetween('-40 years', '-10 years')->format('Y-m-d'),
                         'created_at' => now(),
                         'updated_at' => now(),
+                        'image' => 'no_photo.png',
                     ];
                 }
             }

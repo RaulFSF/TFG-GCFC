@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Player extends Model
 {
@@ -18,6 +20,7 @@ class Player extends Model
         'category_id',
         'birthdate',
         'team_id',
+        'image',
     ];
 
     protected $casts = [
@@ -65,6 +68,12 @@ class Player extends Model
                  $builder->where('team_id',  Team::where('administrator_id', auth()->user()->id)->first()['id']);
             });
         };
+    }
+
+    protected function imageUrl(): Attribute {
+        return Attribute::make(
+            get: fn () => Storage::url($this->image),
+        );
     }
 
 }
