@@ -1,9 +1,10 @@
 <x-guest-layout>
-    <div class="max-w-5xl mx-auto bg-baseText rounded-xl shadow-xl w-full mt-10">
+    <div class="max-w-5xl mx-auto bg-baseText rounded-xl shadow-xl w-full mt-10 pb-10">
         <div class="mx-10">
             <div class="flex justify-between">
                 <div class="flex flex-col justify-center items-center card-gradient rounded-b-xl px-6">
-                    <div class="flex flex-col justify-center items-center p-4 bg-opacity-25 bg-base3 rounded-xl space-y-4">
+                    <div
+                        class="flex flex-col justify-center items-center p-4 bg-opacity-25 bg-base3 rounded-xl space-y-4">
 
                         <div class="rounded-full w-32 bg-green-300">
                             <img src="{{ asset($user->image_url) }}" alt="imagen de perfil"
@@ -42,16 +43,38 @@
                     </div>
 
                 </div>
-                <div>
+                <div class="mt-4">
                     <livewire:followed-players />
                 </div>
             </div>
-            <div>
-                <h2>Valoraciones</h2>
-                
-                <div>
-                    <x-rating-card :rating="$ratings->first()"/>
+            <div class="mt-6">
+
+                <h2 class="ml-4 italic text-xl">Mis Valoraciones</h2>
+
+                <div class="relative mx-auto z-20">
+                    <button type="button" id="prev-button" class="absolute top-14 w-16 -left-12 cursor-pointer">
+                        <x-icons.arrow class="rotate-180 w-full h-fit text-base2" />
+                    </button>
+                    <button type="button" id="next-button" class="absolute top-14 w-16 -right-12">
+                        <x-icons.arrow class="w-full h-fit text-base2" />
+                    </button>
+
+                    <div class="ratingSlider select-none">
+                        @foreach ($ratings as $rating)
+                            <div class="h-32">
+                                <x-rating-card :rating="$rating" class="h-full"/>
+                            </div>
+                        @endforeach
+
+                    </div>
+
                 </div>
+
+                {{-- @foreach ($ratings as $rating)
+                    <div>
+                        <x-rating-card :rating="$rating" />
+                    </div>
+                @endforeach --}}
             </div>
         </div>
     </div>

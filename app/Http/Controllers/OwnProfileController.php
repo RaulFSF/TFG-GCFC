@@ -32,7 +32,7 @@ class OwnProfileController extends Controller
 
         if(auth()->user()->role === 'scout'){
             $this->follows = DB::table('player_follow')->where('scout_id', $this->scout->id)->count();
-            $this->ratings = DB::table('player_scout')->where('scout_id', $this->scout->id)->get();
+            $this->ratings = DB::table('player_scout')->where('scout_id', $this->scout->id)->orderByDesc('date')->get();
         }
         return view('profile', [
             'user' => auth()->user(),

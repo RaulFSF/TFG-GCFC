@@ -1,5 +1,5 @@
 <div {{$attributes}}>
-    <div class="bg-white rounded-xl p-4 text-base2 space-y-2">
+    <div class="bg-white rounded-xl p-4 text-base2 space-y-2 h-full flex flex-col justify-between">
         <div class="flex justify-between items-center ">
             <div class="flex items-center justify-center space-x-2">
                 <div>
@@ -20,11 +20,11 @@
             </div>
         </div>
         <div>
-            <p class="line-clamp-3">
+            <p class="line-clamp-2 text-xs">
                 {{ $rating->comment }}
             </p>
         </div>
-        <div class="text-right">
+        <div class="text-right text-xs">
             {{ $humanDate }}
         </div>
     </div>
