@@ -26,13 +26,13 @@ Route::get('/league/{league}', [LeagueController::class, 'showLeague'])->name('l
 
 Route::get('/players', [PlayersController::class, 'show'])->name('players');
 
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/own/profile', [OwnProfileController::class, 'show'])->name('own.profile.view');
+    Route::get('/player/profile/{id}', [OwnProfileController::class, 'showPlayer'])->name('player.profile.view');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

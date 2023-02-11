@@ -47,7 +47,7 @@
                             {{ $history->player->category->categoryType->name }}
                         </td>
                         <td class="px-6 py-4 font-medium text-gray-900 hover:scale-105 duration-200 ease-in-out ">
-                            <a href="/" class="">{{ $history->player->name }}</a>
+                            <a href="{{route('player.profile.view', ['id' => $history->player_id])}}" class="">{{ $history->player->name }}</a>
                         </td>
                         <td class="text-center">
                             {{ $history->player->age }}

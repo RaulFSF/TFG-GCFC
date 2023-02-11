@@ -2,7 +2,7 @@
     <div class="max-w-5xl mx-auto bg-baseText rounded-xl shadow-xl w-full mt-10 pb-10">
         <div class="mx-10">
             <div class="flex justify-between">
-                <div class="flex flex-col justify-center items-center card-gradient rounded-b-xl px-6">
+                <div class="flex flex-col justify-center items-center max-h-[90vh] card-gradient rounded-b-xl px-6">
                     <div
                         class="flex flex-col justify-center items-center p-4 bg-opacity-25 bg-base3 rounded-xl space-y-4">
 
@@ -47,7 +47,7 @@
                     <livewire:followed-players />
                 </div>
             </div>
-            <div class="mt-6">
+            <div class="mt-6 space-y-2">
 
                 <h2 class="ml-4 italic text-xl">Mis Valoraciones</h2>
 
@@ -69,12 +69,6 @@
                     </div>
 
                 </div>
-
-                {{-- @foreach ($ratings as $rating)
-                    <div>
-                        <x-rating-card :rating="$rating" />
-                    </div>
-                @endforeach --}}
             </div>
         </div>
     </div>

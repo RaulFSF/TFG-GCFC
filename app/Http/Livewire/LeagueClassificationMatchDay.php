@@ -45,7 +45,7 @@ class LeagueClassificationMatchDay extends Component
 
     public function searchLeague()
     {
-        sleep(1);
+        sleep(0.5);
         if ($this->search != -1) {
             $this->league_teams = Classification::where('league_id', $this->search)->orderByDesc('points')->orderByDesc('wins')->orderByDesc('goals_scored')->orderBy('goals_against')->get();
             $this->options_matchDays = MatchDay::where('league_id', $this->search)->with('categoryMatches')->orderBy('number')->get();
@@ -59,7 +59,7 @@ class LeagueClassificationMatchDay extends Component
 
     public function searchMatchDay()
     {
-        sleep(1);
+        sleep(0.5);
         $this->category_matches = $this->options_matchDays->where('id', $this->searchMatchDay)->first();
     }
 }

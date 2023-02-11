@@ -13,14 +13,18 @@
 
             <div>
                 <a href="{{ route('players') }}"
-                    class="{{ request()->route()->getName() == 'players'? 'bg-baseText text-base1': 'bg-gradient-to-b' }} text-baseText text-lg duration-1000  to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Buscar jugadores</a>
+                    class="{{ request()->route()->getName() == 'players'? 'bg-baseText text-base1': 'bg-gradient-to-b' }} text-baseText text-lg duration-1000  to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Buscar
+                    jugadores</a>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6 pb-4">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            class="inline-flex space-x-2 items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            <div>
+                                <img src="{{ asset(Auth::user()->image_url) }}" alt="" class="rounded-full w-8">
+                            </div>
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ml-1">
@@ -58,7 +62,7 @@
             </div>
         @else
             <a href="{{ route('login') }}"
-                class="bg-black px-3 py-2 rounded-md hover:scale-105 duration-200 ease-in-out text-white text-md">Iniciar
+                class="active:scale-100 bg-gradient-to-b text-baseText text-lg duration-1000 to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 px-3 py-2 rounded-md hover:scale-105 ease-in-out">Iniciar
                 sesión</a>
         @endauth
     </div>
