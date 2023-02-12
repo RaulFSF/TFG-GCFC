@@ -33,6 +33,8 @@ class MatchDaySeeder extends Seeder
                 array_push($teams, $record->category_id);
             }
 
+            shuffle($teams);
+            
             $teamNum = DB::table('category_league')->where('league_id', $league->id)->get()->count();
 
             if ($teamNum % 2 == 0) {
