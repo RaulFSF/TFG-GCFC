@@ -28,7 +28,7 @@
                     <th scope="col" class="px-2 py-3">
                         Rojas
                     </th>
-                    <th scope="col" class="px-2 py-3 text-center">
+                    <th scope="col" class="px-10 py-3 text-center">
 
                     </th>
                 </tr>
@@ -54,11 +54,11 @@
                         <td class="text-center px-2">
                             @if ($this->isFollowed($history))
                                 <button
-                                    class="w-full text-xs px-3 py-2 unfollow-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
+                                    class="w-full text-xs px-1 py-2 unfollow-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
                                     wire:click="unfollow({{ $history }})">- Dejar de seguir</button>
                             @else
                                 <button
-                                    class="w-full text-xs px-3 py-2 select-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
+                                    class="w-full text-xs px-1 py-2 select-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
                                     wire:click="follow({{ $history }})">+ Seguir</button>
                             @endif
                         </td>

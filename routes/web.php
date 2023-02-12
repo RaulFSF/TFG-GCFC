@@ -26,6 +26,8 @@ Route::get('/league/{league}', [LeagueController::class, 'showLeague'])->name('l
 
 Route::get('/players', [PlayersController::class, 'show'])->name('players');
 
+Route::get('/team-profile/{id}', [OwnProfileController::class, 'showTeam'])->name('team.profile.view');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

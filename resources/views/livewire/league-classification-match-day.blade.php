@@ -35,28 +35,28 @@
                             <th scope="col" class="px-6 py-3">
                                 Club
                             </th>
-                            <th scope="col" class="py-3">
+                            <th scope="col" class="py-3 text-center">
                                 PTS
                             </th>
-                            <th scope="col" class="px-2 py-3">
+                            <th scope="col" class="px-2 py-3 text-center">
                                 J
                             </th>
-                            <th scope="col" class="px-2 py-3">
+                            <th scope="col" class="px-2 py-3 text-center">
                                 G
                             </th>
-                            <th scope="col" class="px-2 py-3">
+                            <th scope="col" class="px-2 py-3 text-center">
                                 E
                             </th>
-                            <th scope="col" class="px-2 py-3">
+                            <th scope="col" class="px-2 py-3 text-center">
                                 P
                             </th>
-                            <th scope="col" class="px-2 py-3">
+                            <th scope="col" class="px-2 py-3 text-center">
                                 GF
                             </th>
-                            <th scope="col" class="px-2 py-3">
+                            <th scope="col" class="px-2 py-3 text-center">
                                 GC
                             </th>
-                            <th scope="col" class="px-2 py-3">
+                            <th scope="col" class="px-2 py-3 text-center">
                                 DF
                             </th>
                         </tr>
@@ -69,7 +69,7 @@
                                 </td>
                                 <td
                                     class="px-6 py-4 font-medium text-gray-900 hover:scale-105 duration-200 ease-in-out">
-                                    <a href="/" class="w-full">
+                                    <a href="{{ route('team.profile.view', ['id' => $team->category->team->id]) }}" class="w-full">
                                         <div class="flex items-center justify-start space-x-5 ">
                                             <img src="{{ asset($team->category->team->shield_url) }}"
                                                 alt="escudo de {{ $team->category->team->name }}" class="w-10 h-full group-hover:animate-bounce">
@@ -77,28 +77,28 @@
                                         </div>
                                     </a>
                                 </td>
-                                <td class="">
+                                <td class="text-center">
                                     {{ $team->points }}
                                 </td>
-                                <td class="">
+                                <td class="text-center">
                                     {{ $team->played }}
                                 </td>
-                                <td class="">
+                                <td class="text-center">
                                     {{ $team->wins }}
                                 </td>
-                                <td class="">
+                                <td class="text-center">
                                     {{ $team->draws }}
                                 </td>
-                                <td class="">
+                                <td class="text-center">
                                     {{ $team->losts }}
                                 </td>
-                                <td class="">
+                                <td class="text-center">
                                     {{ $team->goals_scored }}
                                 </td>
-                                <td class="">
+                                <td class="text-center">
                                     {{ $team->goals_against }}
                                 </td>
-                                <td class="">
+                                <td class="text-center">
                                     {{ $team->goals_scored - $team->goals_against }}
                                 </td>
                             </tr>
@@ -110,7 +110,7 @@
     </div>
 
     <div class="w-2/3">
-        <div class="w-full mx-auto text-center bg-base3 p-5 rounded-lg shadow-lg">
+        <div class="w-full mx-auto text-center card-gradient p-5 rounded-lg shadow-lg">
             <div class="mb-4">
                 <select wire:model="searchMatchDay" wire:change="searchMatchDay"
                     class="w-3/4 border-2 shadow-lg select-gradient border-base1 italic font-light rounded-lg text-baseText">
@@ -137,10 +137,10 @@
 
             <div wire:loading.remove>
                 <div class="mb-4 w-full">
-                    <div class="rounded-b-lg ">
+                    <div class="rounded-lg bg-baseText p-1  ">
                         @foreach ($category_matches['categoryMatches'] as $match)
                             <div
-                                class="grid grid-cols-3 pb-2 px-2 hover:scale-[1.01] duration-200 ease-in-out bg-baseText group">
+                                class="grid grid-cols-3 pb-2 px-2 hover:scale-[1.01] duration-200 ease-in-out group">
                                 <div class="col-span-3 pt-4 pb-1">
                                     <a href="{{ $match->local->team->field[0]['address'] }}" target="blank"
                                         class="w-fit bg-base3 rounded-lg text-gray-600 py-1 px-2 flex space-x-1 justify-center items-center mx-auto hover:scale-[1.02] duration-200 ease-in-out">

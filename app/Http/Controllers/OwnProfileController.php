@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Player;
 use App\Models\PlayerHistory;
 use App\Models\Scout;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -51,10 +52,18 @@ class OwnProfileController extends Controller
         $histories = PlayerHistory::where('player_id', $id)->orderByDesc('updated_at')->get();
         $ratings = DB::table('player_scout')->where('player_id', $this->player->id)->orderByDesc('date')->get();
 
-        return view('player-profile',[
+        return view('player-profile', [
             'player' => $this->player,
             'histories' => $histories,
             'ratings' => $ratings,
+        ]);
+    }
+
+    public function showTeam($id)
+    {
+        $team = Team::where('id', $id)->first();
+        return view('team-profile', [
+            'team' => $team,
         ]);
     }
 }

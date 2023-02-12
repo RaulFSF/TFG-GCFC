@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Category;
 use App\Models\PlayerHistory;
 use App\Models\Scout;
 use App\Models\Season;
+use App\Models\Team;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -16,6 +18,8 @@ class SearchPlayer extends Component
     public $scout;
     public $activeLeagues;
     public $search;
+    public $team_id;
+    public $is_team_profile = false;
 
     protected $listeners = ['refresh' => '$refresh'];
 
@@ -27,11 +31,21 @@ class SearchPlayer extends Component
 
     public function render()
     {
-        return view('livewire.search-player', [
-            'players' =>  PlayerHistory::whereIn('league_id', $this->activeLeagues)->whereHas('player', function ($query) {
-                $query->where('name', 'like', '%' . $this->search . '%');
-            })->paginate(10),
-        ]);
+        if ($this->team_id) {
+            $this->is_team_profile = true;
+            $categories = Category::where('team_id', $this->team_id)->get()->pluck('id')->toArray();
+            return view('livewire.search-player', [
+                'players' =>  PlayerHistory::whereIn('league_id', $this->activeLeagues)->whereIn('category_id', $categories)->whereHas('player', function ($query) {
+                    $query->where('name', 'like', '%' . $this->search . '%');
+                })->paginate(10),
+            ]);
+        } else {
+            return view('livewire.search-player', [
+                'players' =>  PlayerHistory::whereIn('league_id', $this->activeLeagues)->whereHas('player', function ($query) {
+                    $query->where('name', 'like', '%' . $this->search . '%');
+                })->paginate(10),
+            ]);
+        }
     }
 
     public function updatingSearch()
@@ -64,7 +78,7 @@ class SearchPlayer extends Component
     public function isFollowed($history)
     {
         $record = DB::table('player_follow')->where('scout_id', $this->scout->id)->where('player_id', $history['player_id'])->first();
-        if($record){
+        if ($record) {
             return true;
         }
         return false;

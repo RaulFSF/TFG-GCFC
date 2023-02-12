@@ -8,9 +8,11 @@
         <table class="w-full table-auto text-sm text-left text-gray-500">
             <thead class="text-xs text-baseText uppercase bg-gradient-to-b from-base2 to-base1">
                 <tr>
-                    <th scope="col" class="px-6 py-3 text-center">
-                        Equipo
-                    </th>
+                    @if (!$is_team_profile)
+                        <th scope="col" class="px-6 py-3 text-center">
+                            Equipo
+                        </th>
+                    @endif
                     <th scope="col" class="px-6 py-3 text-center">
                         Categoría
                     </th>
@@ -40,14 +42,19 @@
             <tbody>
                 @foreach ($players as $history)
                     <tr class="bg-baseText border-b hover:scale-[1.01] duration-200 ease-in-out">
-                        <td class="text-center text-gray-900">
-                            {{ $history->player->category->team->name }}
-                        </td>
+                        @if (!$is_team_profile)
+                            <td class="text-center text-gray-900">
+                                <a href="{{ route('team.profile.view', ['id' => $history->player->category->team->id]) }}">
+                                    {{ $history->player->category->team->name }}
+                                </a>
+                            </td>
+                        @endif
                         <td class="text-center text-gray-900">
                             {{ $history->player->category->categoryType->name }}
                         </td>
                         <td class="px-6 py-4 font-medium text-gray-900 hover:scale-105 duration-200 ease-in-out ">
-                            <a href="{{route('player.profile.view', ['id' => $history->player_id])}}" class="">{{ $history->player->name }}</a>
+                            <a href="{{ route('player.profile.view', ['id' => $history->player_id]) }}"
+                                class="">{{ $history->player->name }}</a>
                         </td>
                         <td class="text-center">
                             {{ $history->player->age }}
@@ -66,10 +73,12 @@
                         </td>
                         <td class="text-center px-2">
                             @if ($this->isFollowed($history))
-                                <button class="w-full px-3 py-2 unfollow-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
+                                <button
+                                    class="w-full px-3 py-2 unfollow-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
                                     wire:click="unfollow({{ $history }})">- Dejar de seguir</button>
                             @else
-                                <button class="w-full px-3 py-2 select-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
+                                <button
+                                    class="w-full px-3 py-2 select-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
                                     wire:click="follow({{ $history }})">+ Seguir</button>
                             @endif
                         </td>

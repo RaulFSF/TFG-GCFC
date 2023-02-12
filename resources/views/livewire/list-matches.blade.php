@@ -39,7 +39,7 @@
                     </div>
                     <div class="rounded-b-lg ">
                         @foreach ($matchDay->categoryMatches as $match)
-                        <div class="grid grid-cols-3 pb-2 px-2 hover:scale-[1.01] duration-200 ease-in-out bg-baseText">
+                        <div class="grid grid-cols-3 pb-2 px-2 hover:scale-[1.01] duration-200 ease-in-out bg-baseText group">
                             <div class="col-span-3 pt-4 pb-1">
                                 <a href="{{ $match->local->team->field[0]['address'] }}" target="blank"
                                     class="w-fit bg-base3 rounded-lg text-gray-600 py-1 px-2 flex space-x-1 justify-center items-center mx-auto hover:scale-[1.02] duration-200 ease-in-out">
@@ -56,7 +56,7 @@
                                 </div>
                                 <div>
                                     <img src="{{ asset($match->local->team->shield_url) }}" alt="escudo del equipo"
-                                        class="w-10 h-fit">
+                                        class="w-10 h-fit group-hover:animate-bounce">
                                 </div>
                             </div>
                             <div class="flex-col justify-center items-center mx-2">
@@ -80,7 +80,7 @@
                             <div class="flex items-center justify-start space-x-2">
                                 <div>
                                     <img src="{{ asset($match->visitor->team->shield_url) }}" alt="escudo del equipo"
-                                        class="w-10 h-fit">
+                                        class="w-10 h-fit group-hover:animate-bounce">
                                 </div>
                                 <div>
                                     {{ $match->visitor->team->name }}
