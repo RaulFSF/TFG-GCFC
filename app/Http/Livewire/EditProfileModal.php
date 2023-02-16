@@ -64,8 +64,5 @@ class EditProfileModal extends ModalComponent
         }
         sleep(1);
         $this->closeModal();
-        $this->closeModalWithEvents([
-            UserOverview::getName() => 'userModified',
-        ]);
     }
 }

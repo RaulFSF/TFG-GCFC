@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="max-w-5xl mx-auto bg-baseText rounded-xl shadow-xl w-full mt-10 pb-10">
         <div class="mx-10">
-            <div class="flex justify-between">
+            <div class="flex justify-between space-x-4">
                 <div class="flex flex-col justify-center items-center max-h-[90vh] card-gradient rounded-b-xl px-6">
                     <div
                         class="flex flex-col justify-center items-center p-4 bg-opacity-25 bg-base3 rounded-xl space-y-4 my-6">
@@ -99,18 +99,15 @@
                     </table>
                 </div>
             </div>
-            <div class="mt-6 space-y-2">
+            <div class="mt-6">
+                <div class="flex justify-between items-end mb-4">
+                    <h2 class="ml-4 italic text-xl">Mis Valoraciones</h2>
+                    <button onclick="Livewire.emit('openModal', 'add-rating-modal', {{ json_encode(['player' => $player->id]) }})"
+                    class="active:scale-100 bg-gradient-to-b text-baseText text-lg duration-500 to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 px-3 py-2 rounded-xl hover:scale-[1.02] ease-in-out">
+                    Agregar valoración</button>
+                </div>
 
-                <h2 class="ml-4 italic text-xl">Mis Valoraciones</h2>
-
-                <div class="relative mx-auto z-20">
-                    <button type="button" id="prev-button" class="absolute top-14 w-16 -left-12 cursor-pointer">
-                        <x-icons.arrow class="rotate-180 w-full h-fit text-base2" />
-                    </button>
-                    <button type="button" id="next-button" class="absolute top-14 w-16 -right-12">
-                        <x-icons.arrow class="w-full h-fit text-base2" />
-                    </button>
-
+                <div class="mx-auto z-20">
                     <div class="ratingSlider select-none">
                         @foreach ($ratings as $rating)
                             <div class="h-32">
