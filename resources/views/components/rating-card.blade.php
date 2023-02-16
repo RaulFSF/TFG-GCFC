@@ -4,7 +4,7 @@
             <div class="flex items-center justify-center space-x-2">
                 <div>
                     <img src="{{ asset($scout->user->image_url) }}" alt="imagen de {{ $scout->user->name }}"
-                        class="w-8 h-full rounded-full">
+                        class="w-8 h-8 object-cover rounded-full">
                 </div>
                 <div class="text-sm">
                     <h3>{{ $scout->user->name }}</h3>

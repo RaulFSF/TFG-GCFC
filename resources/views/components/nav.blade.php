@@ -23,7 +23,7 @@
                         <button
                             class="inline-flex space-x-2 items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <div>
-                                <img src="{{ asset(Auth::user()->image_url) }}" alt="" class="rounded-full w-8">
+                                <img src="{{ asset(Auth::user()->image_url) }}" alt="" class="rounded-full w-8 h-8 object-cover">
                             </div>
                             <div>{{ Auth::user()->name }}</div>
 

@@ -2,13 +2,13 @@
     <div class="max-w-5xl mx-auto bg-baseText rounded-xl shadow-xl w-full mt-10 pb-10">
         <div class="mx-10">
             <div class="flex justify-between space-x-4">
-                <div class="flex flex-col justify-center items-center max-h-[90vh] card-gradient rounded-b-xl px-6">
+                <div class="flex flex-col justify-center items-center max-h-[90vh] card-gradient rounded-b-xl px-6 space-y-6">
                     <div
                         class="flex flex-col justify-center items-center p-4 bg-opacity-25 bg-base3 rounded-xl space-y-4">
 
-                        <div class="rounded-full w-32 bg-green-300">
+                        <div class="rounded-full w-32 h-32 bg-green-300">
                             <img src="{{ asset($user->image_url) }}" alt="imagen de perfil"
-                                class="w-full h-full rounded-full">
+                                class="w-full h-full object-cover rounded-full">
                         </div>
 
                         <div class="flex-col justify-center text-gray-900">
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <button onclick="Livewire.emit('openModal', 'edit-profile-modal')" class="hover:scale-[1.02] duration-200 ease-in-out border-2 border-white bg-base3 text-base2 text-sm px-4 py-2 rounded-xl">Editar perfil</button>
                 </div>
                 <div class="mt-4">
                     <livewire:followed-players />
