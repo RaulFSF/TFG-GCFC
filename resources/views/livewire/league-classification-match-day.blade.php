@@ -127,8 +127,15 @@
                 <select wire:model="searchMatchDay" wire:change="searchMatchDay"
                     class="w-3/4 border-2 shadow-lg select-gradient border-base1 italic font-light rounded-lg text-baseText">
                     @foreach ($options_matchDays as $option)
-                        <option value="{{ $option->id }}" class="text-baseText text-sm bg-base1">{{ $option->name }}
-                        </option>
+                        @if ($loop->first)
+                            <option value="{{ $option->id }}" class="text-baseText text-sm bg-base1">
+                                {{ $option->name }} - Actual
+                            </option>
+                        @else
+                            <option value="{{ $option->id }}" class="text-baseText text-sm bg-base1">
+                                {{ $option->name }}
+                            </option>
+                        @endif
                     @endforeach
                 </select>
             </div>
