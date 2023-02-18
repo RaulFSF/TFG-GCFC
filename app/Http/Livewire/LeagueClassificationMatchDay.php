@@ -23,7 +23,7 @@ class LeagueClassificationMatchDay extends Component
 
     public function mount($league_id)
     {
-        $this->options = League::whereIn('season_id', Season::where('end_date', '>', Carbon::now())->select('id')->first()->toArray())->get();
+        $this->options = League::whereIn('season_id', Season::where('end_date', '>', Carbon::now())->select('id')->first()->toArray())->orderByDesc('id')->get();
 
         if ($this->league_id != -1) {
             $this->search = $this->league_id;
