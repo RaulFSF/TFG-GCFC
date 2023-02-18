@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Player;
 use App\Models\Scout;
 use Carbon\Carbon;
 use Illuminate\View\Component;
@@ -9,6 +10,7 @@ use Illuminate\View\Component;
 class RatingCard extends Component
 {
     public $rating;
+    public $player;
     public $scout;
     public $humanDate;
     /**
@@ -19,6 +21,7 @@ class RatingCard extends Component
     public function __construct($rating)
     {
         $this->rating = $rating;
+        $this->player = Player::where('id', $rating->player_id)->first();
         $this->scout = Scout::where('id', $rating->scout_id)->first();
         $this->humanDate = Carbon::parse($this->rating->date)->format('h:i:s d/m/Y');
     }

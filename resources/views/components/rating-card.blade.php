@@ -1,14 +1,24 @@
-<div {{$attributes}}>
+<div {{ $attributes }}>
     <div class="bg-white rounded-xl p-4 text-base2 space-y-2 h-full flex flex-col justify-between">
-        <div class="flex justify-between items-center ">
-            <div class="flex items-center justify-center space-x-2">
-                <div>
-                    <img src="{{ asset($scout->user->image_url) }}" alt="imagen de {{ $scout->user->name }}"
-                        class="w-8 h-8 object-cover rounded-full">
-                </div>
-                <div class="text-sm">
-                    <h3>{{ $scout->user->name }}</h3>
-                </div>
+        <div class="flex justify-between items-center space-x-2">
+            <div class="flex items-start justify-center space-x-2">
+                @if (auth()->user()->role === 'scout')
+                    <div class="min-w-fit">
+                        <img src="{{ asset($player->image_url) }}" alt="imagen de {{ $player->name }}"
+                            class="w-8 h-8 object-cover rounded-full">
+                    </div>
+                    <div class="text-xs font-medium">
+                        <h3>{{ $player->name }}</h3>
+                    </div>
+                @elseif (auth()->user()->role === 'player')
+                    <div>
+                        <img src="{{ asset($scout->user->image_url) }}" alt="imagen de {{ $scout->user->name }}"
+                            class="w-8 h-8 object-cover rounded-full">
+                    </div>
+                    <div class="text-xs font-medium">
+                        <h3>{{ $scout->user->name }}</h3>
+                    </div>
+                @endif
             </div>
             <div class="flex justify-center items-center space-x-1">
                 <div>
