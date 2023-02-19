@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Category;
+use App\Models\CategoryType;
 use App\Models\PlayerHistory;
 use App\Models\Scout;
 use App\Models\Season;
@@ -20,11 +21,19 @@ class SearchPlayer extends Component
     public $search;
     public $team_id;
     public $is_team_profile = false;
+    public $categoryOptions;
+    public $teamOptions;
+    public $categoryFilter;
+    public $teamFilter;
 
     protected $listeners = ['refresh' => '$refresh'];
 
     public function mount()
     {
+        $this->categoryFilter = -1;
+        $this->teamFilter = -1;
+        $this->categoryOptions = CategoryType::orderByDesc('id')->get();
+        $this->teamOptions = Team::all();
         $this->scout = Scout::where('user_id', auth()->id())->first();
         $this->activeLeagues = Season::orderByDesc('start_date')->first()->leagues()->pluck('id');
     }
@@ -34,14 +43,39 @@ class SearchPlayer extends Component
         if ($this->team_id) {
             $this->is_team_profile = true;
             $categories = Category::where('team_id', $this->team_id)->get()->pluck('id')->toArray();
+
+            if($this->categoryFilter != -1){
+                $actual_query = PlayerHistory::whereIn('league_id', $this->activeLeagues)->whereIn('category_id', $categories)->whereHas('player.category.categoryType', function ($query) {
+                    $query->where('id', $this->categoryFilter);
+                });
+            } else{
+                $actual_query = PlayerHistory::whereIn('league_id', $this->activeLeagues)->whereIn('category_id', $categories);
+            }
             return view('livewire.search-player', [
-                'players' =>  PlayerHistory::whereIn('league_id', $this->activeLeagues)->whereIn('category_id', $categories)->whereHas('player', function ($query) {
+                'players' =>  $actual_query->whereHas('player', function ($query) {
                     $query->where('name', 'like', '%' . $this->search . '%');
                 })->paginate(10),
             ]);
         } else {
+            if ($this->categoryFilter != -1 && $this->teamFilter != -1) {
+                $actual_query = PlayerHistory::whereIn('league_id', $this->activeLeagues)->whereHas('player.category.categoryType', function ($query) {
+                    $query->where('id', $this->categoryFilter);
+                })->whereHas('player.category.team', function ($query) {
+                    $query->where('id', $this->teamFilter);
+                });
+            } else if ($this->categoryFilter != -1 && $this->teamFilter == -1) {
+                $actual_query = PlayerHistory::whereIn('league_id', $this->activeLeagues)->whereHas('player.category.categoryType', function ($query) {
+                    $query->where('id', $this->categoryFilter);
+                });
+            } else if($this->categoryFilter == -1 && $this->teamFilter != -1){
+                $actual_query = PlayerHistory::whereIn('league_id', $this->activeLeagues)->whereHas('player.category.team', function ($query) {
+                    $query->where('id', $this->teamFilter);
+                });
+            } else{
+                $actual_query = PlayerHistory::whereIn('league_id', $this->activeLeagues);
+            }
             return view('livewire.search-player', [
-                'players' =>  PlayerHistory::whereIn('league_id', $this->activeLeagues)->whereHas('player', function ($query) {
+                'players' =>  $actual_query->whereHas('player', function ($query) {
                     $query->where('name', 'like', '%' . $this->search . '%');
                 })->paginate(10),
             ]);
@@ -51,6 +85,16 @@ class SearchPlayer extends Component
     public function updatingSearch()
     {
         $this->resetPage();
+    }
+
+    public function filterByCategory()
+    {
+        sleep(0.5);
+    }
+
+    public function filterByTeam()
+    {
+        sleep(0.5);
     }
 
     public function follow($history)
