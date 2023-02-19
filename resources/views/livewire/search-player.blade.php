@@ -1,4 +1,11 @@
 <div class="max-w-5xl mx-auto text-baseText card-gradient shadow-lg py-6 px-6 rounded-lg h-full">
+    <div class="flex justify-start items-center space-x-2 text-black mb-4">
+        <p>
+            Ver por:
+        </p>
+        <input type="radio" value="history" wire:model="tableType"> <label for="history">Historial</label>
+        <input type="radio" value="ratings" wire:model="tableType"> <label for="ratings">Valoraciones</label>
+    </div>
     <div class="flex justify-between space-x-4 items-center mb-8">
 
         <div class="w-full">
@@ -73,18 +80,30 @@
                     <th scope="col" class="px-2 py-3 text-center">
                         Edad
                     </th>
-                    <th scope="col" class="px-2 py-3 text-center">
-                        Goles
-                    </th>
-                    <th scope="col" class="px-2 py-3 text-center">
-                        Asistencias
-                    </th>
-                    <th scope="col" class="px-2 py-3 text-center">
-                        Amarillas
-                    </th>
-                    <th scope="col" class="px-2 py-3 text-center">
-                        Rojas
-                    </th>
+                    @if ($tableType === 'history')
+                        <th sortable wire:click="sortBy('goals')" :direction="$sortField === 'goals' ? $sortDirection : null" scope="col" class="px-2 py-3 text-center cursor-pointer">
+                            Goles
+                        </th>
+                        <th sortable wire:click="sortBy('assits')" :direction="$sortField === 'assits' ? $sortDirection : null" scope="col" class="px-2 py-3 text-center cursor-pointer">
+                            Asistencias
+                        </th>
+                        <th sortable wire:click="sortBy('yellow_cards')" :direction="$sortField === 'yellow_cards' ? $sortDirection : null" scope="col" class="px-2 py-3 text-center cursor-pointer">
+                            Amarillas
+                        </th>
+                        <th sortable wire:click="sortBy('red_cards')" :direction="$sortField === 'red_cards' ? $sortDirection : null" scope="col" class="px-2 py-3 text-center cursor-pointer">
+                            Rojas
+                        </th>
+                    @elseif ($tableType === 'ratings')
+                        <th scope="col" class="px-2 py-3 text-center">
+                            Media
+                        </th>
+                        <th scope="col" class="px-2 py-3 text-center">
+                            Valoraciones
+                        </th>
+                        <th scope="col" class="px-2 py-3 text-center">
+                            Seguidores
+                        </th>
+                    @endif
                     <th scope="col" class="px-2 py-3 text-center">
 
                     </th>
@@ -111,18 +130,33 @@
                         <td class="text-center">
                             {{ $history->player->age }}
                         </td>
-                        <td class="text-center">
-                            {{ $history->goals }}
-                        </td>
-                        <td class="text-center">
-                            {{ $history->assits }}
-                        </td>
-                        <td class="text-center">
-                            {{ $history->yellow_cards }}
-                        </td>
-                        <td class="text-center">
-                            {{ $history->red_cards }}
-                        </td>
+                        @if ($tableType === 'history')
+                            <td class="text-center">
+                                {{ $history->goals }}
+                            </td>
+                            <td class="text-center">
+                                {{ $history->assits }}
+                            </td>
+                            <td class="text-center">
+                                {{ $history->yellow_cards }}
+                            </td>
+                            <td class="text-center">
+                                {{ $history->red_cards }}
+                            </td>
+                        @elseif ($tableType === 'ratings')
+                            <td class="text-center">
+                                {{-- Media valoraciones --}}
+                                {{$history->player->scouts->sum('pivot.stars') / $history->player->scouts->count()  }}
+                            </td>
+                            <td class="text-center">
+                                {{-- Cantidad de valoraciones --}}
+                                {{$history->player->scouts->count()}}
+                            </td>
+                            <td class="text-center">
+                                {{-- Cantidad de seguidores --}}
+                                {{ $history->player->follows->count() }}
+                            </td>
+                        @endif
                         <td class="text-center px-2">
                             @if ($this->isFollowed($history))
                                 <button
