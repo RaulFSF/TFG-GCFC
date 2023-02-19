@@ -10,10 +10,8 @@
         <div class="flex w-fit space-x-4 justify-end items-center px-4 bg-baseText py-2 rounded-xl">
 
             <div class="text-base1 italic">
-                {{-- <x-icons.filter class="w-8 h-8 text-base1" />   --}}
                 Filtrar:
             </div>
-
             <div>
                 <select wire:model="categoryFilter" wire:change="filterByCategory"
                     class="border-2 shadow-lg select-gradient border-base1 italic font-light rounded-lg text-baseText text-xs">
