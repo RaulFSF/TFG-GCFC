@@ -9,7 +9,12 @@
                 <!-- Session Status -->
                 <x-auth-session-status class="mb-4" :status="session('status')" />
 
-                <h2 class="text-center text-2xl text-gray-900 mb-6">Iniciar sesión</h2>
+                <h2 class="text-center text-2xl text-gray-900 mb-2">Iniciar sesión</h2>
+
+                <div class="text-right text-sm underline italic mt-4">
+                    <a href="/register">Eres un jugador registrado</a>
+                </div>
+
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 

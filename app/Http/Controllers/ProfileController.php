@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Player;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,8 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        $player = Player::where('email', $request->user()->email)->first();
+
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
@@ -33,6 +36,10 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+        $player->email = $request->validated()['email'];
+        $player->name = $request->validated()['name'];
+        $player->save();
+
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
