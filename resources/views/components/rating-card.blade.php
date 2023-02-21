@@ -11,12 +11,8 @@
                         <h3>{{ $player->name }}</h3>
                     </div>
                 @elseif (auth()->user()->role === 'player')
-                    <div>
-                        <img src="{{ asset($scout->user->image_url) }}" alt="imagen de {{ $scout->user->name }}"
-                            class="w-8 h-8 object-cover rounded-full">
-                    </div>
                     <div class="text-xs font-medium">
-                        <h3>{{ $scout->user->name }}</h3>
+                        <h3>Anónimo</h3>
                     </div>
                 @endif
             </div>

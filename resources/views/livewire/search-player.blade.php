@@ -81,16 +81,24 @@
                         Edad
                     </th>
                     @if ($tableType === 'history')
-                        <th sortable wire:click="sortBy('goals')" :direction="$sortField === 'goals' ? $sortDirection : null" scope="col" class="px-2 py-3 text-center cursor-pointer">
+                        <th sortable wire:click="sortBy('goals')"
+                            :direction="$sortField === 'goals' ? $sortDirection : null" scope="col"
+                            class="px-2 py-3 text-center cursor-pointer">
                             Goles
                         </th>
-                        <th sortable wire:click="sortBy('assits')" :direction="$sortField === 'assits' ? $sortDirection : null" scope="col" class="px-2 py-3 text-center cursor-pointer">
+                        <th sortable wire:click="sortBy('assits')"
+                            :direction="$sortField === 'assits' ? $sortDirection : null" scope="col"
+                            class="px-2 py-3 text-center cursor-pointer">
                             Asistencias
                         </th>
-                        <th sortable wire:click="sortBy('yellow_cards')" :direction="$sortField === 'yellow_cards' ? $sortDirection : null" scope="col" class="px-2 py-3 text-center cursor-pointer">
+                        <th sortable wire:click="sortBy('yellow_cards')"
+                            :direction="$sortField === 'yellow_cards' ? $sortDirection : null" scope="col"
+                            class="px-2 py-3 text-center cursor-pointer">
                             Amarillas
                         </th>
-                        <th sortable wire:click="sortBy('red_cards')" :direction="$sortField === 'red_cards' ? $sortDirection : null" scope="col" class="px-2 py-3 text-center cursor-pointer">
+                        <th sortable wire:click="sortBy('red_cards')"
+                            :direction="$sortField === 'red_cards' ? $sortDirection : null" scope="col"
+                            class="px-2 py-3 text-center cursor-pointer">
                             Rojas
                         </th>
                     @elseif ($tableType === 'ratings')
@@ -104,9 +112,11 @@
                             Seguidores
                         </th>
                     @endif
-                    <th scope="col" class="px-2 py-3 text-center">
+                    @if (Auth::user()->role != 'player')
+                        <th scope="col" class="px-2 py-3 text-center">
 
-                    </th>
+                        </th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -146,28 +156,31 @@
                         @elseif ($tableType === 'ratings')
                             <td class="text-center">
                                 {{-- Media valoraciones --}}
-                                {{$history->player->scouts->sum('pivot.stars') / $history->player->scouts->count()  }}
+                                {{ $history->player->scouts->sum('pivot.stars') / $history->player->scouts->count() }}
                             </td>
                             <td class="text-center">
                                 {{-- Cantidad de valoraciones --}}
-                                {{$history->player->scouts->count()}}
+                                {{ $history->player->scouts->count() }}
                             </td>
                             <td class="text-center">
                                 {{-- Cantidad de seguidores --}}
                                 {{ $history->player->follows->count() }}
                             </td>
                         @endif
-                        <td class="text-center px-2">
-                            @if ($this->isFollowed($history))
-                                <button
-                                    class="w-full px-3 py-2 unfollow-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
-                                    wire:click="unfollow({{ $history }})">- Dejar de seguir</button>
-                            @else
-                                <button
-                                    class="w-full px-3 py-2 select-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
-                                    wire:click="follow({{ $history }})">+ Seguir</button>
-                            @endif
-                        </td>
+                        @if (Auth::user()->role != 'player')
+                            <td class="text-center px-2">
+                                @if ($this->isFollowed($history))
+                                    <button
+                                        class="w-full px-3 py-2 unfollow-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
+                                        wire:click="unfollow({{ $history }})">- Dejar de seguir</button>
+                                @else
+                                    <button
+                                        class="w-full px-3 py-2 select-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
+                                        wire:click="follow({{ $history }})">+ Seguir</button>
+                                @endif
+                            </td>
+                        @endif
+
                     </tr>
                 @endforeach
             </tbody>

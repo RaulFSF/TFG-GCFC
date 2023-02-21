@@ -26,9 +26,15 @@
                                 </p>
                             </div>
                         </div>
-                        <div>
-                            <livewire:follow player_id="{{ $player->id }}" />
-                        </div>
+                        @if (Auth::user()->role != 'player')
+                            <div>
+                                <livewire:follow player_id="{{ $player->id }}" />
+                            </div>
+                        @elseif (Auth::user()->role === 'player' && Auth::user()->id === $player->user_id)
+                            <button onclick="Livewire.emit('openModal', 'edit-profile-modal')"
+                                class="hover:scale-[1.02] duration-200 ease-in-out border-2 border-white bg-base3 text-base2 text-sm px-4 py-2 rounded-xl">Editar
+                                perfil</button>
+                        @endif
                     </div>
 
                 </div>
@@ -102,9 +108,12 @@
             <div class="mt-6">
                 <div class="flex justify-between items-end mb-4">
                     <h2 class="ml-4 italic text-xl">Mis Valoraciones</h2>
-                    <button onclick="Livewire.emit('openModal', 'add-rating-modal', {{ json_encode(['player' => $player->id]) }})"
-                    class="active:scale-100 bg-gradient-to-b text-baseText text-lg duration-500 to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 px-3 py-2 rounded-xl hover:scale-[1.02] ease-in-out">
-                    Agregar valoración</button>
+                    @if (Auth::user()->role != 'player')
+                        <button
+                            onclick="Livewire.emit('openModal', 'add-rating-modal', {{ json_encode(['player' => $player->id]) }})"
+                            class="active:scale-100 bg-gradient-to-b text-baseText text-lg duration-500 to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 px-3 py-2 rounded-xl hover:scale-[1.02] ease-in-out">
+                            Agregar valoración</button>
+                    @endif
                 </div>
 
                 <div class="mx-auto z-20">

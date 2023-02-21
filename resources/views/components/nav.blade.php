@@ -11,10 +11,12 @@
         </div>
         @auth
 
-            <div>
-                <a href="{{ route('players') }}"
-                    class="{{ request()->route()->getName() == 'players'? 'bg-baseText text-base1': 'bg-gradient-to-b' }} text-baseText text-lg duration-1000  to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Jugadores</a>
-            </div>
+            @if (!Auth::user()->role === 'player')
+                <div>
+                    <a href="{{ route('players') }}"
+                        class="{{ request()->route()->getName() == 'players'? 'bg-baseText text-base1': 'bg-gradient-to-b' }} text-baseText text-lg duration-1000  to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Jugadores</a>
+                </div>
+            @endif
 
             <div class="hidden sm:flex sm:items-center sm:ml-6 pb-4">
                 <x-dropdown align="right" width="48">
@@ -39,12 +41,18 @@
 
                     <x-slot name="content">
 
-                        <x-dropdown-link :href="route('own.profile.view')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+                        @if (Auth::user()->role === 'player')
+                            <x-dropdown-link :href="route('player.profile.view', ['id' => auth()->user()->player->id])">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
+                        @else
+                            <x-dropdown-link :href="route('own.profile.view')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
+                        @endif
 
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Edit profile') }}
+                            {{ __('Editar contraseña') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->

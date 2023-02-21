@@ -62,7 +62,7 @@
                 </div>
             @endif
 
-            <button class="px-4 py-2 select-gradient text-baseText text-sm mt-4 rounded-xl">Guardar</button>
+            <button class="hover:scale-[1.02] duration-200 ease-in-out border-2 border-white bg-base3 text-base2 text-sm px-4 py-2 rounded-xl mt-5">Guardar</button>
         </form>
     </div>
 </div>
