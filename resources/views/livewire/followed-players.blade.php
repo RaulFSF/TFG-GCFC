@@ -13,20 +13,20 @@
         <table class="w-full table-auto text-sm text-left text-gray-500">
             <thead class="text-xs text-baseText uppercase bg-gradient-to-b from-base2 to-base1">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 text-center">
                         Nombre
                     </th>
-                    <th scope="col" class="px-2 py-3">
-                        Goles
+                    <th scope="col" class="px-2 py-3 text-center">
+                        G
                     </th>
-                    <th scope="col" class="px-2 py-3">
-                        Asistencias
+                    <th scope="col" class="px-2 py-3 text-center">
+                        A
                     </th>
-                    <th scope="col" class="px-2 py-3">
-                        Amarillas
+                    <th scope="col" class="px-2 py-3 text-center">
+                        TA
                     </th>
-                    <th scope="col" class="px-2 py-3">
-                        Rojas
+                    <th scope="col" class="px-2 py-3 text-center">
+                        TR
                     </th>
                     <th scope="col" class="px-10 py-3 text-center">
 
@@ -66,7 +66,7 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="select-gradient py-4 px-2 rounded-b-lg">
+        <div class="select-gradient py-4 sm:px-2 rounded-b-lg w-full">
             {{ $players->links() }}
         </div>
     </div>

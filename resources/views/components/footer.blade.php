@@ -1,5 +1,5 @@
 <div class="w-full bg-gradient-to-b from-base2 to-base1 text-baseText mt-10">
-    <div class="max-w-5xl mx-auto flex justify-between py-4">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:justify-between  py-4">
         <div>
             <a href="/" class="pb-4 hover:text-white duration-200 ease-in-out">
                 <x-application-logo />
@@ -38,7 +38,7 @@
     </div>
     <hr class="bg-base3 h-[1px]">
     <div class="max-w-5xl mx-auto py-4">
-        <div class="w-full flex justify-between">
+        <div class="w-full flex flex-col md:flex-row justify-center items-center md:justify-between space-y-4 md:space-y-0">
             <div class="hover:text-white duration-200 ease-in-out">
                 <a href="/">Términos y condiciones</a>
             </div>

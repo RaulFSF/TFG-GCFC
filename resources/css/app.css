@@ -113,3 +113,5 @@ table tr:last-child td:last-child {
         transform: rotate(360deg) scale(0.7);
     }
 }
+
+[x-cloack] {display: none !important}

@@ -51,12 +51,12 @@
                                 </a>
                             </div>
                             <div class="flex items-center justify-end space-x-2">
-                                <div>
+                                <div class="hidden sm:block">
                                     {{ $match->local->team->name }}
                                 </div>
                                 <div>
                                     <img src="{{ asset($match->local->team->shield_url) }}" alt="escudo del equipo"
-                                        class="w-10 h-fit group-hover:animate-bounce">
+                                        class="w-10 h-10 group-hover:animate-bounce">
                                 </div>
                             </div>
                             <div class="flex-col justify-center items-center mx-2">
@@ -80,9 +80,9 @@
                             <div class="flex items-center justify-start space-x-2">
                                 <div>
                                     <img src="{{ asset($match->visitor->team->shield_url) }}" alt="escudo del equipo"
-                                        class="w-10 h-fit group-hover:animate-bounce">
+                                        class="w-10 h-10 group-hover:animate-bounce">
                                 </div>
-                                <div>
+                                <div class="hidden sm:block">
                                     {{ $match->visitor->team->name }}
                                 </div>
                             </div>
