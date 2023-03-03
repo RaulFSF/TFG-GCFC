@@ -9,7 +9,9 @@ use App\Models\PlayerHistory;
 use App\Models\Scout;
 use App\Models\Season;
 use App\Models\Team;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -36,6 +38,7 @@ class SearchPlayer extends Component
 
     public function mount()
     {
+        $this->is_team_profile = Route::currentRouteName() == 'players' ? false : true;
         $this->categoryFilter = -1;
         $this->teamFilter = -1;
         $this->categoryOptions = CategoryType::orderByDesc('id')->get();

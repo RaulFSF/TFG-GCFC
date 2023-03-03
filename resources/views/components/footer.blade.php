@@ -1,11 +1,11 @@
-<div class="w-full bg-gradient-to-b from-base2 to-base1 text-baseText mt-10">
+<div class="w-full bg-gradient-to-b from-base2 to-base1 text-baseText mt-10 px-4">
     <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:justify-between  py-4">
         <div>
             <a href="/" class="pb-4 hover:text-white duration-200 ease-in-out">
                 <x-application-logo />
             </a>
         </div>
-        <div class="flex-col font-light">
+        <div class="flex-col font-light sm:px-0 px-4">
             <h2 class="text-lg font-normal pb-4">
                 Contacta con nosotros
             </h2>

@@ -1,4 +1,4 @@
-<div class="mt-10 max-w-6xl mx-auto flex space-x-6 items-start">
+<div class="mt-10 max-w-6xl mx-auto lg:w-2/3 xl:w-full xl:flex xl:space-x-6 items-start px-4">
     <div class="w-full">
 
         <div class="mb-4 w-3/4 mx-auto">
@@ -30,7 +30,7 @@
                 <table class="w-full table-auto text-sm text-left text-gray-500">
                     <thead class="text-xs text-baseText uppercase select-gradient">
                         <tr>
-                            <th scope="col" class="pl-4 py-3 w-20">
+                            <th scope="col" class="text-center px-2 py-3">
                                 Puesto
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -65,19 +65,19 @@
                     <tbody>
                         @foreach ($league_teams as $team)
                             <tr class="bg-baseText border-b hover:scale-[1.01] duration-200 ease-in-out group">
-                                <td class="text-left pl-4">
+                                <td class="text-center">
                                     {{ $team->position }}
                                 </td>
                                 <td
-                                    class="px-6 py-4 font-medium text-gray-900 hover:scale-105 duration-200 ease-in-out">
+                                    class="px-2 xl:px-6 py-4 font-medium text-gray-900 hover:scale-105 duration-200 ease-in-out">
                                     @if (Auth::user())
                                         <a href="{{ route('team.profile.view', ['id' => $team->category->team->id]) }}"
-                                            class="w-full">
-                                            <div class="flex items-center justify-start space-x-5 ">
+                                            class="w-fit">
+                                            <div class="flex items-center justify-center md:justify-start space-x-5 ">
                                                 <img src="{{ asset($team->category->team->shield_url) }}"
                                                     alt="escudo de {{ $team->category->team->name }}"
                                                     class="w-10 h-full group-hover:animate-bounce">
-                                                <p>{{ $team->category->team->name }}</p>
+                                                <p class="md:block hidden">{{ $team->category->team->name }}</p>
                                             </div>
                                         </a>
                                     @else
@@ -121,7 +121,7 @@
         </div>
     </div>
 
-    <div class="w-2/3">
+    <div class="xl:w-2/3 w-full mt-4 xl:mt-0 mx-auto">
         <div class="w-full mx-auto text-center card-gradient p-5 rounded-lg shadow-lg">
             <div class="mb-4">
                 <select wire:model="searchMatchDay" wire:change="searchMatchDay"
@@ -170,7 +170,7 @@
                                     </a>
                                 </div>
                                 <div class="flex items-center justify-end space-x-2">
-                                    <div>
+                                    <div class="hidden sm:block">
                                         {{ $match->local->team->name }}
                                     </div>
                                     <div class="group-hover:animate-bounce">
@@ -201,7 +201,7 @@
                                         <img src="{{ asset($match->visitor->team->shield_url) }}"
                                             alt="escudo del equipo" class="w-10 h-fit">
                                     </div>
-                                    <div>
+                                    <div  class="hidden sm:block">
                                         {{ $match->visitor->team->name }}
                                     </div>
                                 </div>

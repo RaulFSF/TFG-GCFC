@@ -1,4 +1,6 @@
-<div class="max-w-5xl mx-auto text-baseText card-gradient shadow-lg py-6 px-6 rounded-lg h-full">
+<div x-data="{ showInfo: false }"
+    class="max-w-5xl  mx-auto text-baseText card-gradient shadow-lg py-6 px-4 md:px-6 rounded-lg h-full">
+    {{-- x-data="{ showInfo: false }" x-bind:class="{'blur-xl' : showInfo}" --}}
     <div class="flex justify-start items-center space-x-2 text-black mb-4">
         <p>
             Ver por:
@@ -6,15 +8,16 @@
         <input type="radio" value="history" wire:model="tableType"> <label for="history">Historial</label>
         <input type="radio" value="ratings" wire:model="tableType"> <label for="ratings">Valoraciones</label>
     </div>
-    <div class="flex justify-between space-x-4 items-center mb-8">
+    <div class="md:flex justify-between md:space-x-4 items-center mb-8">
 
-        <div class="w-full">
+        <div class="w-full mb-4 md:mb-0">
             <input type="text" wire:model="search"
                 class="rounded h-10 w-full bg-gradient-to-b from-base2 to-base1 border-base1 shadow-lg text-baseText placeholder:text-white placeholder:italic placeholder:font-light"
                 placeholder="Buscar jugador...">
         </div>
 
-        <div class="flex w-fit space-x-4 justify-end items-center px-4 bg-baseText py-2 rounded-xl">
+        <div
+            class="flex sm:w-2/3 md:w-fit space-x-4 justify-center md:justify-end items-center px-4 bg-baseText py-2 rounded-xl">
 
             <div class="text-base1 italic">
                 Filtrar:
@@ -31,7 +34,7 @@
                     @endforeach
                 </select>
             </div>
-            @if (Request::route()->getName() != 'team.profile.view')
+            @if ($is_team_profile == false)
                 <div>
                     <select wire:model="teamFilter" wire:change="filterByTeam"
                         class="border-2 shadow-lg select-gradient border-base1 italic font-light rounded-lg text-baseText text-xs">
@@ -71,35 +74,55 @@
                             Equipo
                         </th>
                     @endif
-                    <th scope="col" class="px-6 py-3 text-center">
+                    <th scope="col" class="px-2 md:px-6 py-3 text-center">
                         Categoría
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 md:text-left text-center">
                         Nombre
                     </th>
-                    <th scope="col" class="px-2 py-3 text-center">
+                    <th scope="col" class="px-2 py-3 text-center md:table-cell hidden">
                         Edad
                     </th>
                     @if ($tableType === 'history')
                         <th sortable wire:click="sortBy('goals')"
                             :direction="$sortField === 'goals' ? $sortDirection : null" scope="col"
-                            class="px-2 py-3 text-center cursor-pointer">
-                            Goles
+                            class="px-2 py-3 text-center cursor-pointer md:table-cell hidden">
+                            <span class="md:block hidden">
+                                Goles
+                            </span>
+                            <span class="md:hidden block">
+                                G
+                            </span>
                         </th>
                         <th sortable wire:click="sortBy('assits')"
                             :direction="$sortField === 'assits' ? $sortDirection : null" scope="col"
-                            class="px-2 py-3 text-center cursor-pointer">
-                            Asistencias
+                            class="px-2 py-3 text-center cursor-pointer md:table-cell hidden">
+                            <span class="md:block hidden">
+                                Asistencias
+                            </span>
+                            <span class="md:hidden block">
+                                A
+                            </span>
                         </th>
                         <th sortable wire:click="sortBy('yellow_cards')"
                             :direction="$sortField === 'yellow_cards' ? $sortDirection : null" scope="col"
-                            class="px-2 py-3 text-center cursor-pointer">
-                            Amarillas
+                            class="px-2 py-3 text-center cursor-pointer md:table-cell hidden">
+                            <span class="md:block hidden">
+                                Amarillas
+                            </span>
+                            <span class="md:hidden block">
+                                TA
+                            </span>
                         </th>
                         <th sortable wire:click="sortBy('red_cards')"
                             :direction="$sortField === 'red_cards' ? $sortDirection : null" scope="col"
-                            class="px-2 py-3 text-center cursor-pointer">
-                            Rojas
+                            class="px-2 py-3 text-center cursor-pointer md:table-cell hidden">
+                            <span class="md:block hidden">
+                                Rojas
+                            </span>
+                            <span class="md:hidden block">
+                                TR
+                            </span>
                         </th>
                     @elseif ($tableType === 'ratings')
                         <th scope="col" class="px-2 py-3 text-center">
@@ -120,69 +143,79 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($players as $history)
-                    <tr class="bg-baseText border-b hover:scale-[1.01] duration-200 ease-in-out">
-                        @if (!$is_team_profile)
+                    @foreach ($players as $key => $history)
+                        <tr
+                            class="bg-baseText border-b hover:scale-[1.01] duration-200 ease-in-out">
+                            @if (!$is_team_profile)
+                                <td class="text-center text-gray-900">
+                                    <a
+                                        href="{{ route('team.profile.view', ['id' => $history->player->category->team->id]) }}">
+                                        {{ $history->player->category->team->name }}
+                                    </a>
+                                </td>
+                            @endif
                             <td class="text-center text-gray-900">
-                                <a
-                                    href="{{ route('team.profile.view', ['id' => $history->player->category->team->id]) }}">
-                                    {{ $history->player->category->team->name }}
-                                </a>
+                                {{ $history->player->category->categoryType->name }}
                             </td>
-                        @endif
-                        <td class="text-center text-gray-900">
-                            {{ $history->player->category->categoryType->name }}
-                        </td>
-                        <td class="px-6 py-4 font-medium text-gray-900 hover:scale-105 duration-200 ease-in-out ">
-                            <a href="{{ route('player.profile.view', ['id' => $history->player_id]) }}"
-                                class="">{{ $history->player->name }}</a>
-                        </td>
-                        <td class="text-center">
-                            {{ $history->player->age }}
-                        </td>
-                        @if ($tableType === 'history')
-                            <td class="text-center">
-                                {{ $history->goals }}
+                            <td
+                                class="px-2 md:px-6 py-4  font-medium text-gray-900 hover:scale-105 duration-200 ease-in-out ">
+                                <a href="{{ route('player.profile.view', ['id' => $history->player_id]) }}"
+                                    class="">{{ $history->player->name }}</a>
                             </td>
-                            <td class="text-center">
-                                {{ $history->assits }}
+                            <td class="text-center md:table-cell hidden">
+                                {{ $history->player->age }}
                             </td>
-                            <td class="text-center">
-                                {{ $history->yellow_cards }}
-                            </td>
-                            <td class="text-center">
-                                {{ $history->red_cards }}
-                            </td>
-                        @elseif ($tableType === 'ratings')
-                            <td class="text-center">
-                                {{-- Media valoraciones --}}
-                                {{ $history->player->scouts->sum('pivot.stars') / $history->player->scouts->count() }}
-                            </td>
-                            <td class="text-center">
-                                {{-- Cantidad de valoraciones --}}
-                                {{ $history->player->scouts->count() }}
-                            </td>
-                            <td class="text-center">
-                                {{-- Cantidad de seguidores --}}
-                                {{ $history->player->follows->count() }}
-                            </td>
-                        @endif
-                        @if (Auth::user()->role != 'player')
-                            <td class="text-center px-2">
-                                @if ($this->isFollowed($history))
-                                    <button
-                                        class="w-full px-3 py-2 unfollow-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
-                                        wire:click="unfollow({{ $history }})">- Dejar de seguir</button>
-                                @else
-                                    <button
-                                        class="w-full px-3 py-2 select-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
-                                        wire:click="follow({{ $history }})">+ Seguir</button>
-                                @endif
-                            </td>
-                        @endif
+                            @if ($tableType === 'history')
+                                <td class="text-center md:table-cell hidden">
+                                    {{ $history->goals }}
+                                </td>
+                                <td class="text-center md:table-cell hidden">
+                                    {{ $history->assits }}
+                                </td>
+                                <td class="text-center md:table-cell hidden">
+                                    {{ $history->yellow_cards }}
+                                </td>
+                                <td class="text-center md:table-cell hidden">
+                                    {{ $history->red_cards }}
+                                </td>
+                            @elseif ($tableType === 'ratings')
+                                <td class="text-center">
+                                    {{-- Media valoraciones --}}
+                                    {{ $history->player->scouts->sum('pivot.stars') / $history->player->scouts->count() }}
+                                </td>
+                                <td class="text-center">
+                                    {{-- Cantidad de valoraciones --}}
+                                    {{ $history->player->scouts->count() }}
+                                </td>
+                                <td class="text-center">
+                                    {{-- Cantidad de seguidores --}}
+                                    {{ $history->player->follows->count() }}
+                                </td>
+                            @endif
+                            @if (Auth::user()->role != 'player')
+                                <td class="text-center px-2 flex flex-col justify-center items-center space-y-2 my-2">
+                                    <div class="w-full">
+                                        @if ($this->isFollowed($history))
+                                            <button
+                                                class="w-full px-3 py-2 unfollow-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
+                                                wire:click="unfollow({{ $history }})">Dejar de seguir</button>
+                                        @else
+                                            <button
+                                                class="w-full px-3 py-2 select-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
+                                                wire:click="follow({{ $history }})">Seguir</button>
+                                        @endif
+                                    </div>
+                                    <div class="md:hidden block w-full">
+                                        <button wire:click="$emit('openModal', 'show-player-history-info', {{ json_encode(["history" => $history]) }})"
+                                            class="w-full px-3 py-2 bg-gray-400 text-black transform active:scale-95 duration-200 ease-in-out transition-transform rounded-lg">
+                                            Ver</button>
+                                    </div>
+                                </td>
+                            @endif
 
-                    </tr>
-                @endforeach
+                        </tr>
+                    @endforeach
+                </div>
             </tbody>
         </table>
         <div>

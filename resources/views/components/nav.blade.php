@@ -1,5 +1,5 @@
 <div x-data="{ openMenu: false }" :class="openMenu ? 'overflow-hidden' : 'overflow-visible'"
-    class="bg-gradient-to-b from-base2 to-base1 shadow-xl pt-4 px-4 sm:px-0">
+    class="bg-gradient-to-b from-base2 to-base1 shadow-xl pt-4 px-4 ">
     <div class="max-w-5xl mx-auto flex justify-between items-center">
 
         <a href="/" class="pb-4 text-baseText hover:text-white duration-200 ease-in-out">
@@ -12,7 +12,7 @@
         </div>
         @auth
 
-            @if (!Auth::user()->role === 'player')
+            @if (Auth::user()->role != 'player')
                 <div class="hidden md:block">
                     <a href="{{ route('players') }}"
                         class="{{ request()->route()->getName() == 'players'? 'bg-baseText text-base1': 'bg-gradient-to-b' }} text-baseText text-lg duration-1000  to-baseText via-base1 from-base1 bg-size-200 bg-pos-0 hover:bg-pos-100 hover:text-base1 ease-in-out px-4 pt-4 pb-5 rounded-t-lg shadow-xl">Jugadores</a>
