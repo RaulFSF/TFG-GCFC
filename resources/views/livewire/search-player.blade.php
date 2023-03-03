@@ -1,7 +1,6 @@
 <div x-data="{ showInfo: false }"
     class="max-w-5xl  mx-auto text-baseText card-gradient shadow-lg py-6 px-4 md:px-6 rounded-lg h-full">
-    {{-- x-data="{ showInfo: false }" x-bind:class="{'blur-xl' : showInfo}" --}}
-    <div class="flex justify-start items-center space-x-2 text-black mb-4">
+    <div class=" hidden md:flex justify-start items-center space-x-2 text-black mb-4">
         <p>
             Ver por:
         </p>
