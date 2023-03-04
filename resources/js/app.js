@@ -35,4 +35,22 @@ document.addEventListener('DOMContentLoaded', function () {
             edgePadding: 10,
         });
     }
+
+    if (document.querySelector('.ratingSliderMobile')) {
+        var slider = tns({
+            container: '.ratingSliderMobile',
+            slideBy: "page",
+            items: 1,
+            mouseDrag: true,
+            swipeAngle: false,
+            speed: 400,
+            arrowKeys: true,
+            autoHeight: true,
+            controls: false,
+            loop: false,
+            gutter: 30,
+            nav: false,
+            edgePadding: 10,
+        });
+    }
 });

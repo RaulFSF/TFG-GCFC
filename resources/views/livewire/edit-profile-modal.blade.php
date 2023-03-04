@@ -1,5 +1,5 @@
-<div>
-    <div class="p-4 w-full card-gradient">
+<div class="card-gradient">
+    <div class="p-4 w-fit mx-auto card-gradient">
         <div wire:loading.block wire:target="save"
             class="w-full h-full py-20 flex justify-center items-center space-x-2 bg-baseText rounded-lg shadow-lg">
             <div class="text-center semipolar-spinner w-full mx-auto" :style="spinnerStyle">

@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="max-w-5xl mx-auto bg-baseText rounded-xl shadow-xl w-full mt-10 pb-10">
-        <div class="mx-10">
-            <div class="flex justify-between space-x-4">
+        <div class="mx-4 md:mx-10">
+            <div class="flex flex-col md:flex-row justify-between md:space-x-4">
                 <div class="flex flex-col justify-center items-center max-h-[90vh] card-gradient rounded-b-xl px-6">
                     <div
                         class="flex flex-col justify-center items-center p-4 bg-opacity-25 bg-base3 rounded-xl space-y-4 my-6">
@@ -106,7 +106,7 @@
                 </div>
             </div>
             <div class="mt-6">
-                <div class="flex justify-between items-end mb-4">
+                <div class="flex justify-between items-center md:items-end mb-4">
                     <h2 class="ml-4 italic text-xl">Mis Valoraciones</h2>
                     @if (Auth::user()->role != 'player')
                         <button
@@ -117,14 +117,20 @@
                 </div>
 
                 <div class="mx-auto z-20">
-                    <div class="ratingSlider select-none">
+                    <div class="ratingSlider select-none md:block hidden">
                         @foreach ($ratings as $rating)
                             <div class="h-32">
                                 <x-rating-card :rating="$rating" class="h-full" />
                             </div>
                         @endforeach
                     </div>
-
+                    <div class="ratingSliderMobile select-none md:hidden">
+                        @foreach ($ratings as $rating)
+                            <div class="h-32">
+                                <x-rating-card :rating="$rating" class="h-full" />
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

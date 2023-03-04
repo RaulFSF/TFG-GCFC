@@ -88,7 +88,6 @@
     <nav class="sm:hidden fixed top-0 right-0 bottom-0 left-0 backdrop-blur-sm z-10"
         :class="openMenu ? 'visible' : 'invisible'" x-cloak>
 
-        <!-- UL Links -->
         <ul class="absolute top-0 right-0 bottom-0 w-10/12 py-4 bg-white drop-shadow-2xl z-10 transition-all"
             :class="openMenu ? 'translate-x-0' : 'translate-x-full'">
 
