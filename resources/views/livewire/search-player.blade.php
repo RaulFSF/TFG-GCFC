@@ -16,14 +16,14 @@
         </div>
 
         <div
-            class="flex sm:w-2/3 md:w-fit space-x-4 justify-center md:justify-end items-center px-4 bg-baseText py-2 rounded-xl">
+            class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:w-2/3 md:w-fit sm:space-x-4 justify-center md:justify-end items-center px-4 bg-baseText py-2 rounded-xl">
 
             <div class="text-base1 italic">
                 Filtrar:
             </div>
-            <div>
+            <div class="w-full">
                 <select wire:model="categoryFilter" wire:change="filterByCategory"
-                    class="border-2 shadow-lg select-gradient border-base1 italic font-light rounded-lg text-baseText text-xs">
+                    class="w-full border-2 shadow-lg select-gradient border-base1 italic font-light rounded-lg text-baseText text-xs">
                     <option value="-1" selected class="text-baseText text-xs bg-base1">Todas las categorías
                     </option>
                     @foreach ($categoryOptions as $option)
@@ -34,9 +34,9 @@
                 </select>
             </div>
             @if ($is_team_profile == false)
-                <div>
+                <div class="w-full">
                     <select wire:model="teamFilter" wire:change="filterByTeam"
-                        class="border-2 shadow-lg select-gradient border-base1 italic font-light rounded-lg text-baseText text-xs">
+                        class="w-full border-2 shadow-lg select-gradient border-base1 italic font-light rounded-lg text-baseText text-xs">
                         <option value="-1" selected class="text-baseText text-xs bg-base1">Todas los equipos
                         </option>
                         @foreach ($teamOptions as $option)
@@ -135,7 +135,7 @@
                         </th>
                     @endif
                     @if (Auth::user()->role != 'player')
-                        <th scope="col" class="px-2 py-3 text-center">
+                        <th scope="col" class="px-2 py-3 text-center sm:block hidden">
 
                         </th>
                     @endif
@@ -144,7 +144,7 @@
             <tbody>
                     @foreach ($players as $key => $history)
                         <tr
-                            class="bg-baseText border-b hover:scale-[1.01] duration-200 ease-in-out">
+                            class="bg-baseText border-b hover:scale-[1.01] duration-200 ease-in-out text-xs sm:text-base" wire:click="$emit('openModal', 'show-player-history-info', {{ json_encode(["history" => $history]) }})">
                             @if (!$is_team_profile)
                                 <td class="text-center text-gray-900">
                                     <a
@@ -191,8 +191,8 @@
                                     {{ $history->player->follows->count() }}
                                 </td>
                             @endif
-                            @if (Auth::user()->role != 'player')
-                                <td class="text-center px-2 flex flex-col justify-center items-center space-y-2 my-2">
+                            @if (Auth::user()->role == 'scout')
+                                <td class="text-center sm:flex hidden px-2 flex-col justify-center items-center space-y-2 my-2">
                                     <div class="w-full">
                                         @if ($this->isFollowed($history))
                                             <button

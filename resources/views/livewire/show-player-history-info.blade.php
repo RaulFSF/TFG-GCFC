@@ -12,5 +12,19 @@
                 <li>Cantidad de seguidores: {{ $history->player->follows->count() }}</li>
             </ul>
         </div>
+
+        <div class="text-center px-2 text-sm flex flex-col justify-center items-center space-y-2 my-2">
+            <div class="w-2/3">
+                @if ($this->isFollowed($history))
+                    <button
+                        class="w-full px-3 py-2 unfollow-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
+                        wire:click="unfollow({{ $history }})">Dejar de seguir</button>
+                @else
+                    <button
+                        class="w-full px-3 py-2 select-gradient transform active:scale-95 duration-200 ease-in-out transition-transform text-baseText rounded-lg"
+                        wire:click="follow({{ $history }})">Seguir</button>
+                @endif
+            </div>
+        </div>
     </div>
 </div>
