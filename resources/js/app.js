@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
             mouseDrag: true,
             swipeAngle: false,
             speed: 400,
+            nav: false,
+            controls:false,
             arrowKeys: true,
             autoHeight: true,
             prevButton: prevButton,

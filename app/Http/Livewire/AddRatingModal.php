@@ -9,7 +9,6 @@ use LivewireUI\Modal\ModalComponent;
 class AddRatingModal extends ModalComponent
 {
     public $user;
-    public $name;
     public $stars;
     public $comment;
     public $player_id;
@@ -18,7 +17,6 @@ class AddRatingModal extends ModalComponent
     {
         $this->player_id = $player;
         $this->user = auth()->user();
-        $this->name = $this->user->name;
     }
 
     public function render()

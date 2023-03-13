@@ -16,13 +16,7 @@
         <form wire:submit.prevent="save" wire:loading.remove wire:target="save">
             @csrf
             <div class="flex justify-between space-x-2 items-center">
-                <div>
-                    <label for="name" class="text-xs">Nombre</label>
-                    <input type="text" wire:model="name" id="name"
-                    class="disabled w-full text-xs text-base2 border border-blue-300 rounded-xl focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm">
-
-                </div>
-                <div class="flex-col items-center justify-center">
+                <div class="flex-col items-center justify-center w-full">
                     <label for="stars" class="text-xs">Estrellas (0-5)</label>
                     <div class="flex justify-center items-center">
                         <input type="number" wire:model="stars" id="stars"

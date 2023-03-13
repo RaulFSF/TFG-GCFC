@@ -31,9 +31,14 @@
                     <thead class="text-xs text-baseText uppercase select-gradient">
                         <tr>
                             <th scope="col" class="text-center px-2 py-3">
-                                Puesto
+                                <span class="sm:block hidden">
+                                    Puesto
+                                </span>
+                                <span class="sm:hidden block">
+                                    P
+                                </span>
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 text-center sm:text-left">
                                 Club
                             </th>
                             <th scope="col" class="py-3 text-center">

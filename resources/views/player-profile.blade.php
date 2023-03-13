@@ -58,16 +58,16 @@
                                 <th scope="col" class="px-6 py-3">
                                     Equipo
                                 </th>
-                                <th scope="col" class="px-2 py-3">
+                                <th scope="col" class="px-2 py-3 hidden sm:block">
                                     Goles
                                 </th>
-                                <th scope="col" class="px-2 py-3">
+                                <th scope="col" class="px-2 py-3 hidden sm:block">
                                     Asistencias
                                 </th>
-                                <th scope="col" class="px-2 py-3">
+                                <th scope="col" class="px-2 py-3 hidden sm:block">
                                     Amarillas
                                 </th>
-                                <th scope="col" class="px-2 py-3">
+                                <th scope="col" class="px-2 py-3 hidden sm:block">
                                     Rojas
                                 </th>
                                 <th scope="col" class="px-2 py-3 text-center">
@@ -87,17 +87,23 @@
                                     <td class="text-center text-gray-900">
                                         {{ $history->category->team->name }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center hidden sm:block">
                                         {{ $history->goals }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center hidden sm:block">
                                         {{ $history->assits }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center hidden sm:block">
                                         {{ $history->yellow_cards }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center hidden sm:block">
                                         {{ $history->red_cards }}
+                                    </td>
+                                    <td class="p-3">
+                                        <button onclick='Livewire.emit("openModal", "show-player-season-info", {{ json_encode(["history" => $history]) }})'
+                                            class="w-full px-3 py-2 bg-gray-400 text-black transform active:scale-95 duration-200 ease-in-out transition-transform rounded-lg">
+                                            Ver
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
