@@ -57,10 +57,10 @@
                 <div class="relative mx-auto z-20 ">
                     <div class="md:block hidden">
 
-                        <button type="button" id="prev-button" class="absolute top-14 w-16 -left-12 cursor-pointer">
+                        <button type="button" id="prev-button" class="absolute top-10 w-16 -left-12 cursor-pointer">
                             <x-icons.arrow class="rotate-180 w-full h-fit text-base2" />
                         </button>
-                        <button type="button" id="next-button" class="absolute top-14 w-16 -right-12">
+                        <button type="button" id="next-button" class="absolute top-10 w-16 -right-12">
                             <x-icons.arrow class="w-full h-fit text-base2" />
                         </button>
                     </div>

@@ -58,16 +58,16 @@
                                 <th scope="col" class="px-6 py-3">
                                     Equipo
                                 </th>
-                                <th scope="col" class="px-2 py-3 hidden sm:block">
+                                <th scope="col" class="px-2 py-3 hidden sm:table-cell">
                                     Goles
                                 </th>
-                                <th scope="col" class="px-2 py-3 hidden sm:block">
+                                <th scope="col" class="px-2 py-3 hidden sm:table-cell">
                                     Asistencias
                                 </th>
-                                <th scope="col" class="px-2 py-3 hidden sm:block">
+                                <th scope="col" class="px-2 py-3 hidden sm:table-cell">
                                     Amarillas
                                 </th>
-                                <th scope="col" class="px-2 py-3 hidden sm:block">
+                                <th scope="col" class="px-2 py-3 hidden sm:table-cell">
                                     Rojas
                                 </th>
                                 <th scope="col" class="px-2 py-3 text-center">
@@ -87,16 +87,16 @@
                                     <td class="text-center text-gray-900">
                                         {{ $history->category->team->name }}
                                     </td>
-                                    <td class="text-center hidden sm:block">
+                                    <td class="text-center hidden sm:table-cell">
                                         {{ $history->goals }}
                                     </td>
-                                    <td class="text-center hidden sm:block">
+                                    <td class="text-center hidden sm:table-cell">
                                         {{ $history->assits }}
                                     </td>
-                                    <td class="text-center hidden sm:block">
+                                    <td class="text-center hidden sm:table-cell">
                                         {{ $history->yellow_cards }}
                                     </td>
-                                    <td class="text-center hidden sm:block">
+                                    <td class="text-center hidden sm:table-cell">
                                         {{ $history->red_cards }}
                                     </td>
                                     <td class="p-3">
