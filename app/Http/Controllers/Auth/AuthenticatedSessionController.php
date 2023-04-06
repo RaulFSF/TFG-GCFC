@@ -29,7 +29,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if(auth()->user()->role === 'scout' || auth()->user()->role === 'player'){
+            return redirect()->intended(RouteServiceProvider::HOME);
+        } else{
+            $this->destroy($request);
+            return redirect('/');
+        }
+
     }
 
     /**
