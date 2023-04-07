@@ -20,14 +20,13 @@ class CategoriesRelationManager extends RelationManager
 {
     protected static string $relationship = 'categories';
 
-    protected static ?string $recordTitleAttribute = 'name';
+    protected static ?string $recordTitleAttribute = 'id';
 
     protected static ?string $inverseRelationship = 'leagues';
 
     protected static ?string $modelLabel = 'Categoría';
 
     protected static ?string $pluralModelLabel = 'Categorías';
-
 
     public static function form(Form $form): Form
     {
@@ -42,15 +41,15 @@ class CategoriesRelationManager extends RelationManager
     public static function table(Table $table): Table
     {
         return $table
-        ->columns([
+            ->columns([
                 Tables\Columns\TextColumn::make('name'),
             ])
             ->filters([
                 //
-                ])
-                ->headerActions([
-                    Tables\Actions\CreateAction::make(),
-                    Tables\Actions\AssociateAction::make()
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
+                Tables\Actions\AttachAction::make()
                     ->recordSelectOptionsQuery(function (Builder $query, RelationManager $livewire) {
                         return $query->where('category_type_id', $livewire->ownerRecord->category_type_id)->whereNull('league_id');
                     })
