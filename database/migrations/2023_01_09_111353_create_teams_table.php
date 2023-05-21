@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('administrator_id');
             $table->string('name');
-            $table->string('description');
+            $table->longText('description');
             $table->string('shield');
             $table->json('field');
             $table->timestamps();

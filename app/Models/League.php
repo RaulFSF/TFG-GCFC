@@ -16,7 +16,9 @@ class League extends Model
     ];
 
     public function season(){
-        return $this->belongsTo(Season::class);
+        return $this->belongsTo(Season::class)->withDefault([
+            'name' => 'Desconocida',
+        ]);
     }
 
     public function categoryType(){

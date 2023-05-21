@@ -47,7 +47,9 @@ class CategoryMatch extends Model
     }
 
     public function local(){
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class)->withDefault([
+            'field' => ['name' => 'Desconocido', 'address' => 'Desconocido' ],
+        ]);
     }
 
     public function visitor(){

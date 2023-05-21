@@ -20,7 +20,7 @@ class TeamSeeder extends Seeder
             'name' => 'Montaña Los Vélez',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/losVelez.png',
-            'field' => json_decode('[{"name" : "Campo de Fútbol Montaña los Velez", "address" : "https://goo.gl/maps/dzYow9C9yVWjYU1N9"}]'),
+            'field' => ["name" => "Campo de Fútbol Montaña los Velez", "address" => "https://goo.gl/maps/dzYow9C9yVWjYU1N9"],
         ]);
 
         Team::create([
@@ -28,7 +28,7 @@ class TeamSeeder extends Seeder
             'name' => 'Doramas',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/doramas.png',
-            'field' => json_decode('[{"name" : "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" : "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"}]'),
+            'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
         Team::create([
@@ -36,7 +36,7 @@ class TeamSeeder extends Seeder
             'name' => 'Street Canarias',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/streetCanarias.png',
-            'field' => json_decode('[{"name" : "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" : "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"}]'),
+            'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
         Team::create([
@@ -44,7 +44,7 @@ class TeamSeeder extends Seeder
             'name' => 'Goleta Sub23',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/goletaSub23.png',
-            'field' => json_decode('[{"name" : "Campo de Fútbol Montaña los Velez", "address" : "https://goo.gl/maps/dzYow9C9yVWjYU1N9"}]'),
+            'field' => ["name" => "Campo de Fútbol Montaña los Velez", "address" => "https://goo.gl/maps/dzYow9C9yVWjYU1N9"]
         ]);
 
         Team::create([
@@ -52,7 +52,7 @@ class TeamSeeder extends Seeder
             'name' => 'Aregranca',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/aregranca.png',
-            'field' => json_decode('[{"name" : "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" : "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"}]'),
+            'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
         Team::create([
@@ -60,7 +60,7 @@ class TeamSeeder extends Seeder
             'name' => 'Talleres Canary',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/talleresCanary.png',
-            'field' => json_decode('[{"name" : "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" : "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"}]'),
+            'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
         Team::create([
@@ -68,7 +68,7 @@ class TeamSeeder extends Seeder
             'name' => 'Siete Palmas',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/sietePalmas.png',
-            'field' => json_decode('[{"name" : "Campo de Fútbol Montaña los Velez", "address" : "https://goo.gl/maps/dzYow9C9yVWjYU1N9"}]'),
+            'field' => ["name" => "Campo de Fútbol Montaña los Velez", "address" => "https://goo.gl/maps/dzYow9C9yVWjYU1N9"]
         ]);
 
         Team::create([
@@ -76,7 +76,7 @@ class TeamSeeder extends Seeder
             'name' => 'Almenara',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/almenara.png',
-            'field' => json_decode('[{"name" : "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" : "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"}]'),
+            'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
         Team::create([
@@ -84,7 +84,7 @@ class TeamSeeder extends Seeder
             'name' => 'Abrisajac',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/abrisajac.png',
-            'field' => json_decode('[{"name" : "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" : "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"}]'),
+            'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
         Team::create([
@@ -92,7 +92,7 @@ class TeamSeeder extends Seeder
             'name' => 'San Pedro',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/sanPedro.png',
-            'field' => json_decode('[{"name" : "Campo de Fútbol Montaña los Velez", "address" : "https://goo.gl/maps/dzYow9C9yVWjYU1N9"}]'),
+            'field' => ["name" => "Campo de Fútbol Montaña los Velez", "address" => "https://goo.gl/maps/dzYow9C9yVWjYU1N9"]
         ]);
 
         Team::create([
@@ -100,7 +100,7 @@ class TeamSeeder extends Seeder
             'name' => 'Sardina',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/sardina.png',
-            'field' => json_decode('[{"name" : "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" : "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"}]'),
+            'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
         Team::create([
@@ -108,7 +108,7 @@ class TeamSeeder extends Seeder
             'name' => 'Barrio Atlántico',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/barrioAtlantico.png',
-            'field' => json_decode('[{"name" : "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" : "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"}]'),
+            'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
         Team::create([
@@ -116,7 +116,7 @@ class TeamSeeder extends Seeder
             'name' => 'Telde',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/telde.png',
-            'field' => json_decode('[{"name" : "Campo de Fútbol Montaña los Velez", "address" : "https://goo.gl/maps/dzYow9C9yVWjYU1N9"}]'),
+            'field' => ["name" => "Campo de Fútbol Montaña los Velez", "address" => "https://goo.gl/maps/dzYow9C9yVWjYU1N9"]
         ]);
 
         Team::create([
@@ -124,7 +124,7 @@ class TeamSeeder extends Seeder
             'name' => 'Mogán',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/mogan.png',
-            'field' => json_decode('[{"name" : "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" : "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"}]'),
+            'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
         Team::create([
@@ -132,7 +132,7 @@ class TeamSeeder extends Seeder
             'name' => 'La Garita',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/laGarita.png',
-            'field' => json_decode('[{"name" : "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" : "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"}]'),
+            'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
         Team::create([
@@ -140,7 +140,7 @@ class TeamSeeder extends Seeder
             'name' => 'Real Sporting',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/realSporting.png',
-            'field' => json_decode('[{"name" : "Campo de Fútbol Montaña los Velez", "address" : "https://goo.gl/maps/dzYow9C9yVWjYU1N9"}]'),
+            'field' => ["name" => "Campo de Fútbol Montaña los Velez", "address" => "https://goo.gl/maps/dzYow9C9yVWjYU1N9"]
         ]);
 
         Team::create([
@@ -148,7 +148,7 @@ class TeamSeeder extends Seeder
             'name' => 'Firgas',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/firgas.png',
-            'field' => json_decode('[{"name" : "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" : "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"}]'),
+            'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
         Team::create([
@@ -156,7 +156,7 @@ class TeamSeeder extends Seeder
             'name' => 'Pedro Hidalgo',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/pedroHidalgo.png',
-            'field' => json_decode('[{"name" : "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" : "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"}]'),
+            'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
         Team::create([
@@ -164,7 +164,7 @@ class TeamSeeder extends Seeder
             'name' => 'Guiniguada',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
             'shield' => 'teams/guiniguada.png',
-            'field' => json_decode('[{"name" : "Campo de Fútbol Montaña los Velez", "address" : "https://goo.gl/maps/dzYow9C9yVWjYU1N9"}]'),
+            'field' => ["name" => "Campo de Fútbol Montaña los Velez", "address" => "https://goo.gl/maps/dzYow9C9yVWjYU1N9"]
         ]);
     }
 }

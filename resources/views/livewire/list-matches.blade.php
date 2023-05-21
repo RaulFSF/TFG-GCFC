@@ -41,12 +41,12 @@
                         @foreach ($matchDay->categoryMatches as $match)
                         <div class="grid grid-cols-3 pb-2 px-2 hover:scale-[1.01] duration-200 ease-in-out bg-baseText group">
                             <div class="col-span-3 pt-4 pb-1">
-                                <a href="{{ $match->local->team->field[0]['address'] }}" target="blank"
+                                <a href="{{ $match->local->team->field['address'] }}" target="blank"
                                     class="w-fit bg-base3 rounded-lg text-gray-600 py-1 px-2 flex space-x-1 justify-center items-center mx-auto hover:scale-[1.02] duration-200 ease-in-out">
 
                                     <x-icons.location class="text-gray-600 w-4 h-4" />
 
-                                    <span class="text-sm">{{ $match->local->team->field[0]['name'] }}</span>
+                                    <span class="text-sm">{{ $match->local->team->field['name'] }}</span>
 
                                 </a>
                             </div>

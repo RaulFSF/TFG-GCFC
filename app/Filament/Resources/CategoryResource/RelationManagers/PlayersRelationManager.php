@@ -22,6 +22,9 @@ class PlayersRelationManager extends RelationManager
 
     protected static ?string $inverseRelationship = 'category'; // Since the inverse related model is `Category`, this is normally `category`, not `section`.
 
+    protected static ?string $modelLabel = 'Jugador';
+
+    protected static ?string $pluralModelLabel = 'Jugadores';
 
     public static function form(Form $form): Form
     {

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Season;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class LeagueController extends Controller
@@ -29,6 +31,7 @@ class LeagueController extends Controller
     {
         return view('league', [
             'league_id' => -1,
+            'showLeague' => Season::where('end_date', '>', Carbon::now())->first() ? true : false,
         ]);
     }
 
@@ -37,6 +40,7 @@ class LeagueController extends Controller
         $this->league = $league;
         return view('league', [
             'league_id' => $this->league,
+            'showLeague' => Season::where('end_date', '>', Carbon::now())->first() ? true : false,
         ]);
     }
 }

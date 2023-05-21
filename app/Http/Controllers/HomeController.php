@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\League;
+use App\Models\Season;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,6 +27,8 @@ class HomeController extends Controller
      */
     public function show()
     {
-        return view('welcome');
+        return view('welcome', [
+            'showLeague' => Season::where('end_date', '>', Carbon::now())->first() ? true : false,
+        ]);
     }
 }

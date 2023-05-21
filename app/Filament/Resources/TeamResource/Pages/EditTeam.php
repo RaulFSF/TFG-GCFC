@@ -19,8 +19,8 @@ class EditTeam extends EditRecord
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
-        $data['fieldName'] = $data['field'][0]['name'];
-        $data['address'] = $data['field'][0]['address'];
+        $data['fieldName'] = $data['field']['name'];
+        $data['address'] = $data['field']['address'];
         return $data;
     }
 

@@ -76,15 +76,26 @@
                                 <td
                                     class="px-2 xl:px-6 py-4 font-medium text-gray-900 hover:scale-105 duration-200 ease-in-out">
                                     @if (Auth::user())
-                                        <a href="{{ route('team.profile.view', ['id' => $team->category->team->id]) }}"
-                                            class="w-fit">
-                                            <div class="flex items-center justify-center md:justify-start space-x-5 ">
+                                        @if ($team->category->team->name != 'Desconocido')
+                                            <a href="{{ route('team.profile.view', ['id' => $team->category->team->id]) }}"
+                                                class="w-fit">
+                                        @endif
+                                        <div class="flex items-center justify-center md:justify-start space-x-5 ">
+                                            @if ($team->category->team->shield === null)
+                                                <img src="{{ asset('assets/images/teams/no_shield.png') }}"
+                                                    alt="escudo de {{ $team->category->team->name }}"
+                                                    class="w-10 h-full group-hover:animate-bounce">
+                                                <p class="md:block hidden">{{ $team->category->team->name }}</p>
+                                            @else
                                                 <img src="{{ asset($team->category->team->shield_url) }}"
                                                     alt="escudo de {{ $team->category->team->name }}"
                                                     class="w-10 h-full group-hover:animate-bounce">
                                                 <p class="md:block hidden">{{ $team->category->team->name }}</p>
-                                            </div>
-                                        </a>
+                                            @endif
+                                        </div>
+                                        @if ($team->category->team)
+                                            </a>
+                                        @endif
                                     @else
                                         <div class="flex items-center justify-start space-x-5 ">
                                             <img src="{{ asset($team->category->team->shield_url) }}"
@@ -165,12 +176,12 @@
                         @foreach ($category_matches['categoryMatches'] as $match)
                             <div class="grid grid-cols-3 pb-2 px-2 hover:scale-[1.01] duration-200 ease-in-out group">
                                 <div class="col-span-3 pt-4 pb-1">
-                                    <a href="{{ $match->local->team->field[0]['address'] }}" target="blank"
+                                    <a href="{{ $match->local->team->field['address'] }}" target="blank"
                                         class="w-fit bg-base3 rounded-lg text-gray-600 py-1 px-2 flex space-x-1 justify-center items-center mx-auto hover:scale-[1.02] duration-200 ease-in-out">
 
                                         <x-icons.location class="text-gray-600 w-4 h-4" />
 
-                                        <span class="text-sm">{{ $match->local->team->field[0]['name'] }}</span>
+                                        <span class="text-sm">{{ $match->local->team->field['name'] }}</span>
 
                                     </a>
                                 </div>
@@ -179,8 +190,8 @@
                                         {{ $match->local->team->name }}
                                     </div>
                                     <div class="group-hover:animate-bounce">
-                                        <img src="{{ asset($match->local->team->shield_url) }}" alt="escudo del equipo"
-                                            class="w-10 h-fit">
+                                        <img src="{{ asset($match->local->team->shield_url) }}"
+                                            alt="escudo del equipo" class="w-10 h-fit">
                                     </div>
                                 </div>
                                 <div class="flex-col justify-center items-center mx-2">
@@ -206,7 +217,7 @@
                                         <img src="{{ asset($match->visitor->team->shield_url) }}"
                                             alt="escudo del equipo" class="w-10 h-fit">
                                     </div>
-                                    <div  class="hidden sm:block">
+                                    <div class="hidden sm:block">
                                         {{ $match->visitor->team->name }}
                                     </div>
                                 </div>

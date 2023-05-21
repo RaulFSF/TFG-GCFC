@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Season;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PlayersController extends Controller
@@ -26,6 +28,7 @@ class PlayersController extends Controller
     public function show()
     {
         return view('players', [
+            'seasonAvailable' => Season::get()->count() > 0,
         ]);
     }
 }

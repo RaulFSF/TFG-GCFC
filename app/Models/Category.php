@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+
 
 class Category extends Model
 {
@@ -35,7 +37,10 @@ class Category extends Model
 
     public function team()
     {
-        return $this->belongsTo(Team::class);
+        return $this->belongsTo(Team::class)->withDefault([
+            'name' => 'Desconocido',
+            'shield' => null,
+        ]);
     }
 
     public function players()
@@ -55,7 +60,10 @@ class Category extends Model
 
     public function leagues()
     {
-        return $this->belongsToMany(League::class, 'category_league', 'category_id', 'league_id')->withPivot('id','points', 'played','wins', 'draws','losts', 'goals_scored','goals_against','created_at', 'updated_at');
+        return $this->belongsToMany(League::class, 'category_league', 'category_id', 'league_id')->withPivot('id','points', 'played','wins', 'draws','losts', 'goals_scored','goals_against','created_at', 'updated_at')
+        ->withDefault([
+            'name' => 'Desconocida',
+        ]);
     }
 
     protected static function booted()

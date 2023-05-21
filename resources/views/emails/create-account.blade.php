@@ -16,7 +16,7 @@
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
-    <div class="text-lg w-full text-center bg-yellow-200 space-x-6">
+    <div class="text-lg w-full text-center space-x-6">
         <h2>Hola, Bienvenido a GCFC</h2>
         <div class="flex justify-center items-center">
            <p>

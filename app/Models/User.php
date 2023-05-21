@@ -62,7 +62,11 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessFilament(): bool
     {
-        return ($this->role === 'admin' || $this->role === 'president' || $this->role === 'prompter');
+        if($this->role==='president' && Team::where('administrator_id', $this->id)->first()){
+            return true;
+        } else{
+            return ($this->role === 'admin' || $this->role === 'prompter');
+        }
     }
 
     public static function coach($count)
