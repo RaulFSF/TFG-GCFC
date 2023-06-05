@@ -2,6 +2,8 @@
 
 ### Hay varios roles tanto para el panel de administración como para la web. Para darle las credenciales de los diferentes roles contacten conmigo por el correo universitario raul.sanchez110@alu.ulpgc.es ###
 
+### Prerequisitos: tener [PHP](https://www.php.net/downloads) ^8.0.2, [Composer](https://desarrolloweb.com/articulos/como-instalar-composer.html) ^2.4.2 y [NodeJS](https://nodejs.org/en/download) instalado. ###
+
 En primer lugar, si desea ver los correos que se envían en la web deberán tener una cuenta en [Mailtrap](https://mailtrap.io/). 
 
 En segundo lugar, deberá descargar el código y generar un archivo con el nombre ".env" fuera de la carpeta "app" donde se encuentra el fichero ".env.example". En el archivo generado copie todo el contenido del ".env.example" y si han creado la cuenta en Mailtrap deberá seguir el tutorial del siguiente enlace para añadir al archivo las líneas necesarias con sus credenciales:  [Tutorial para configurar Mailtrap](https://styde.net/como-enviar-emails-de-prueba-con-mailtrap-io-en-laravel/).
