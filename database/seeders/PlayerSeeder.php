@@ -21,6 +21,29 @@ class PlayerSeeder extends Seeder
     public function run()
     {
         $teams = Team::all();
+        $first = $teams->first();
+        $user = User::create([
+            'name' => 'Raúl Sánchez Falcón',
+            'email' => 'raulPrueba@gmail.com',
+            'role' => 'player',
+            'password' => bcrypt('1234'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'image' => 'no_photo.png',
+        ]);
+
+        Player::create([
+            'user_id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'team_id' => $first->id,
+            'category_id' => $first->categories->first()->id,
+            'birthdate' => fake()->dateTimeBetween('-40 years', '-10 years')->format('Y-m-d'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'image' => 'no_photo.png',
+        ]);
+
         $players = [];
         foreach ($teams as $team) {
             foreach ($team->categories as $category) {
