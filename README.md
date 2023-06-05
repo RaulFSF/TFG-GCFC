@@ -24,5 +24,6 @@ En tercer lugar, para ejecutar el código deberá introducir y ejecutar los sigu
 4. ```npm run dev```
 5. ```php artisan serve```
 6. ```php artisan migrate:fresh --seed```
+7. ```php artisan storage:link ```
 
 Por último, una vez haya configurado el archivo *.env* y ejecutado todos los comandos deberá ir a un navegador e introducir la url <http://localhost:8000/>. Si desea entrar al panel de administración deberá abrir la url <http://localhost:8000/admin/>
