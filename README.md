@@ -2,7 +2,7 @@
 
 ### Hay varios roles tanto para el panel de administración como para la web. Para darle las credenciales de los diferentes roles contacten conmigo por el correo universitario raul.sanchez110@alu.ulpgc.es ###
 
-### Prerequisitos: tener [PHP](https://www.php.net/downloads) ^8.0.2, [Composer](https://desarrolloweb.com/articulos/como-instalar-composer.html) ^2.4.2 y [NodeJS](https://nodejs.org/en/download) instalado. ###
+### Prerequisitos: tener [PHP](https://www.php.net/downloads) ^8.0.2, [Composer](https://desarrolloweb.com/articulos/como-instalar-composer.html) ^2.4.2, [NodeJS](https://nodejs.org/en/download) y [SQLite](https://www.sqlite.org/download.html) instalado. ###
 
 En primer lugar, si desea ver los correos que se envían en la web deberán tener una cuenta en [Mailtrap](https://mailtrap.io/). 
 
