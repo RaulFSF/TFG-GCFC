@@ -1,7 +1,7 @@
 # Trabajo final de grado - Web para gestión de competiciones y clubes de fútbol canarios #
 
 ## Atención
-### Hay varios roles tanto para el panel de administración como para la web. Para darle las credenciales de los diferentes roles contacten conmigo por el correo universitario raul.sanchez110@alu.ulpgc.es ###
+### Hay varios roles tanto para el panel de administración como para la web. Las credenciales se encuentran en el fichero txt con el enlace a este repositorio entregado en el moodle. Si han perdido el fichero txt o por cualquier motivo no funcionan contacten conmigo por el correo universitario raul.sanchez110@alu.ulpgc.es para solucionarlo ###
 
 ## Prerrequisitos
 * [PHP](https://www.php.net/downloads) ^8.0.2
