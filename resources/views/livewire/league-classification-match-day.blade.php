@@ -87,7 +87,7 @@
                                                     class="w-10 h-full group-hover:animate-bounce">
                                                 <p class="md:block hidden">{{ $team->category->team->name }}</p>
                                             @else
-                                                <img src="{{ asset($team->category->team->shield_url) }}"
+                                                <img src="{{ asset($team->category->team->shield) }}"
                                                     alt="escudo de {{ $team->category->team->name }}"
                                                     class="w-10 h-full group-hover:animate-bounce">
                                                 <p class="md:block hidden">{{ $team->category->team->name }}</p>
@@ -98,7 +98,7 @@
                                         @endif
                                     @else
                                         <div class="flex items-center justify-start space-x-5 ">
-                                            <img src="{{ asset($team->category->team->shield_url) }}"
+                                            <img src="{{ asset($team->category->team->shield) }}"
                                                 alt="escudo de {{ $team->category->team->name }}"
                                                 class="w-10 h-full group-hover:animate-bounce">
                                             <p>{{ $team->category->team->name }}</p>
@@ -190,7 +190,7 @@
                                         {{ $match->local->team->name }}
                                     </div>
                                     <div class="group-hover:animate-bounce">
-                                        <img src="{{ asset($match->local->team->shield_url) }}"
+                                        <img src="{{ asset($match->local->team->shield) }}"
                                             alt="escudo del equipo" class="w-10 h-fit">
                                     </div>
                                 </div>
@@ -214,7 +214,7 @@
 
                                 <div class="flex items-center justify-start space-x-2">
                                     <div class="group-hover:animate-bounce">
-                                        <img src="{{ asset($match->visitor->team->shield_url) }}"
+                                        <img src="{{ asset($match->visitor->team->shield) }}"
                                             alt="escudo del equipo" class="w-10 h-fit">
                                     </div>
                                     <div class="hidden sm:block">

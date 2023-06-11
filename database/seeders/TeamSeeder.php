@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Team;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
+
 
 class TeamSeeder extends Seeder
 {
@@ -19,7 +21,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 2,
             'name' => 'Montaña Los Vélez',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/losVelez.png',
+            'shield' => asset('assets/images/teams/losVelez.png'),
             'field' => ["name" => "Campo de Fútbol Montaña los Velez", "address" => "https://goo.gl/maps/dzYow9C9yVWjYU1N9"],
         ]);
 
@@ -27,7 +29,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 3,
             'name' => 'Doramas',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/doramas.png',
+            'shield' => asset('assets/images/teams/doramas.png'),
             'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
@@ -35,7 +37,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 4,
             'name' => 'Street Canarias',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/streetCanarias.png',
+            'shield' => asset('assets/images/teams/streetCanarias.png'),
             'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
@@ -43,7 +45,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 5,
             'name' => 'Goleta Sub23',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/goletaSub23.png',
+            'shield' => asset('assets/images/teams/goletaSub23.png'),
             'field' => ["name" => "Campo de Fútbol Montaña los Velez", "address" => "https://goo.gl/maps/dzYow9C9yVWjYU1N9"]
         ]);
 
@@ -51,7 +53,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 6,
             'name' => 'Aregranca',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/aregranca.png',
+            'shield' => asset('assets/images/teams/aregranca.png'),
             'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
@@ -59,7 +61,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 7,
             'name' => 'Talleres Canary',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/talleresCanary.png',
+            'shield' => asset('assets/images/teams/talleresCanary.png'),
             'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
@@ -67,7 +69,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 8,
             'name' => 'Siete Palmas',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/sietePalmas.png',
+            'shield' => asset('assets/images/teams/sietePalmas.png'),
             'field' => ["name" => "Campo de Fútbol Montaña los Velez", "address" => "https://goo.gl/maps/dzYow9C9yVWjYU1N9"]
         ]);
 
@@ -75,7 +77,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 9,
             'name' => 'Almenara',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/almenara.png',
+            'shield' => asset('assets/images/teams/almenara.png'),
             'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
@@ -83,7 +85,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 10,
             'name' => 'Abrisajac',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/abrisajac.png',
+            'shield' => asset('assets/images/teams/abrisajac.png'),
             'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
@@ -91,7 +93,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 11,
             'name' => 'San Pedro',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/sanPedro.png',
+            'shield' => asset('assets/images/teams/sanPedro.png'),
             'field' => ["name" => "Campo de Fútbol Montaña los Velez", "address" => "https://goo.gl/maps/dzYow9C9yVWjYU1N9"]
         ]);
 
@@ -99,7 +101,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 12,
             'name' => 'Sardina',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/sardina.png',
+            'shield' => asset('assets/images/teams/sardina.png'),
             'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
@@ -107,7 +109,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 13,
             'name' => 'Barrio Atlántico',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/barrioAtlantico.png',
+            'shield' => asset('assets/images/teams/barrioAtlantico.png'),
             'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
@@ -115,7 +117,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 14,
             'name' => 'Telde',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/telde.png',
+            'shield' => asset('assets/images/teams/telde.png'),
             'field' => ["name" => "Campo de Fútbol Montaña los Velez", "address" => "https://goo.gl/maps/dzYow9C9yVWjYU1N9"]
         ]);
 
@@ -123,7 +125,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 15,
             'name' => 'Mogán',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/mogan.png',
+            'shield' => asset('assets/images/teams/mogan.png'),
             'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
@@ -131,7 +133,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 16,
             'name' => 'La Garita',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/laGarita.png',
+            'shield' => asset('assets/images/teams/laGarita.png'),
             'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
@@ -139,7 +141,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 17,
             'name' => 'Real Sporting',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/realSporting.png',
+            'shield' => asset('assets/images/teams/realSporting.png'),
             'field' => ["name" => "Campo de Fútbol Montaña los Velez", "address" => "https://goo.gl/maps/dzYow9C9yVWjYU1N9"]
         ]);
 
@@ -147,7 +149,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 18,
             'name' => 'Firgas',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/firgas.png',
+            'shield' => asset('assets/images/teams/firgas.png'),
             'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
@@ -155,7 +157,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 19,
             'name' => 'Pedro Hidalgo',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/pedroHidalgo.png',
+            'shield' => asset('assets/images/teams/pedroHidalgo.png'),
             'field' => ["name" => "Ciudad Deportiva Municipal del Cruce de Arinaga", "address" => "https://goo.gl/maps/fcy8M5iQpK2ZU8sP8"]
         ]);
 
@@ -163,7 +165,7 @@ class TeamSeeder extends Seeder
             'administrator_id' => 20,
             'name' => 'Guiniguada',
             'description' => fake()->paragraphs($nb = 4, $asText = true),
-            'shield' => 'teams/guiniguada.png',
+            'shield' => asset('assets/images/teams/guiniguada.png'),
             'field' => ["name" => "Campo de Fútbol Montaña los Velez", "address" => "https://goo.gl/maps/dzYow9C9yVWjYU1N9"]
         ]);
     }

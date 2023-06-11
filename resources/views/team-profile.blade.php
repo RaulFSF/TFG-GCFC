@@ -8,7 +8,7 @@
                     <div class="flex flex-col md:flex-row w-full justify-center items-center">
 
                         <div class="w-40 mx-auto">
-                            <img src="{{ asset($team->shield_url) }}" alt="imagen de perfil" class="w-full h-full">
+                            <img src="{{ asset($team->shield) }}" alt="imagen de perfil" class="w-full h-full">
                         </div>
 
                         <div class="flex-col justify-center text-gray-900">
