@@ -1,7 +1,7 @@
 <x-simple>
     <div class="relative w-full h-screen">
         <div class="absolute left-0 bottom-0 saturate-0 bg-cover inset-0 bg-no-repeat w-full h-screen"
-            style="background-image: url('{{ asset('storage/inicio.png') }}')"></div>
+            style="background-image: url('/assets/images/inicio.png')"></div>
         <div class="card-gradient bg-cover absolute inset-0 w-full h-screen opacity-40"></div>
 
         <div class="relative w-fit mx-auto pt-20">

@@ -56,7 +56,7 @@
                         Imagen actual:
                     </p>
                     <div class="rounded-full w-32 h-32 bg-green-300">
-                        <img src="{{ asset($user->image_url) }}" alt="imagen de perfil"
+                        <img src="{{ asset($user->image) }}" alt="imagen de perfil"
                             class="w-full h-full object-cover rounded-full">
                     </div>
                 </div>

@@ -29,7 +29,7 @@ class PlayerSeeder extends Seeder
             'password' => bcrypt('1234'),
             'created_at' => now(),
             'updated_at' => now(),
-            'image' => 'no_photo.png',
+            'image' => asset('assets/images/no_photo.png'),
         ]);
 
         Player::create([
@@ -41,7 +41,7 @@ class PlayerSeeder extends Seeder
             'birthdate' => fake()->dateTimeBetween('-40 years', '-10 years')->format('Y-m-d'),
             'created_at' => now(),
             'updated_at' => now(),
-            'image' => 'no_photo.png',
+            'image' => asset('assets/images/no_photo.png'),
         ]);
 
         $players = [];
@@ -56,7 +56,7 @@ class PlayerSeeder extends Seeder
                         'birthdate' => fake()->dateTimeBetween('-40 years', '-10 years')->format('Y-m-d'),
                         'created_at' => now(),
                         'updated_at' => now(),
-                        'image' => 'no_photo.png',
+                        'image' => asset('assets/images/no_photo.png'),
                     ];
                 }
             }

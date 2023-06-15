@@ -4,7 +4,7 @@
             <div class="flex items-start justify-center space-x-2">
                 @if (auth()->user()->role === 'scout')
                     <div class="min-w-fit">
-                        <img src="{{ asset($player->image_url) }}" alt="imagen de {{ $player->name }}"
+                        <img src="{{ asset($player->image) }}" alt="imagen de {{ $player->name }}"
                             class="w-8 h-8 object-cover rounded-full">
                     </div>
                     <div class="text-xs font-medium">

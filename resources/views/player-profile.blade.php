@@ -7,7 +7,7 @@
                         class="flex flex-col justify-center items-center p-4 bg-opacity-25 bg-base3 rounded-xl space-y-4 my-6">
 
                         <div class="rounded-full w-32 bg-green-300">
-                            <img src="{{ asset($player->image_url) }}" alt="imagen de perfil"
+                            <img src="{{ asset($player->image) }}" alt="imagen de perfil"
                                 class="w-full h-full rounded-full">
                         </div>
 
