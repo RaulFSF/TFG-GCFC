@@ -27,3 +27,6 @@ En tercer lugar, para ejecutar el código deberá introducir y ejecutar los sigu
 7. ```php artisan storage:link ```
 
 Por último, una vez haya configurado el archivo *.env* y ejecutado todos los comandos deberá ir a un navegador e introducir la url <http://localhost:8000/>. Si desea entrar al panel de administración deberá abrir la url <http://localhost:8000/admin/>
+
+## Tests
+Si quiere ejecutar los tests deberá escribir en una tercera consola (deberá tener la ejecución del comando 4 y 5 activos) ``` php artisan test ```. Una vez hayan terminado los test deberá volver a ejecutar el comando 6 (``` php artisan migrate:fresh --seed ```) debido a que los test limpian la base de datos para ejecutarse y no la devuelve a su estado anterior al terminar.
