@@ -19,12 +19,13 @@ En tercer lugar, para ejecutar el código deberá introducir y ejecutar los sigu
 #### Atención: los comandos 4 y 5 son ejecuciones que se deberán quedar activas mientras desee ver la web. Por tanto, deberá tener dos terminales activas una para cada comando. Si desea terminarlas pulsen CRTL+C en ambos terminales. ####
 
 1. ```npm install```
-2. ```npm run build```
-3. ```composer install```
+2. ```composer install```
+3. ```npm run build```
 4. ```npm run dev```
 5. ```php artisan serve```
 6. ```php artisan migrate:fresh --seed```
 7. ```php artisan storage:link ```
+8. ```php artisan key:generate ```
 
 Por último, una vez haya configurado el archivo *.env* y ejecutado todos los comandos deberá ir a un navegador e introducir la url <http://localhost:8000/>. Si desea entrar al panel de administración deberá abrir la url <http://localhost:8000/admin/>
 
